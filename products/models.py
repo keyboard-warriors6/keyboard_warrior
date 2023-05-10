@@ -103,7 +103,7 @@ class Answer(models.Model):
 
 
 class Purchase(models.Model):
-    user = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL)
     products = models.ManyToManyField(Product, through='PurchaseItem')
     purchase_date = models.DateTimeField(auto_now_add=True)
 
