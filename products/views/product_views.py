@@ -2,7 +2,7 @@ from typing import Any, Dict
 from django.shortcuts import render
 from django.views.generic.base import View, TemplateView, RedirectView
 from django.views.generic import ListView, DetailView
-from .models import Category, Product, Review, Review_imgs, Inquiry, Answer, Purchase, PurchaseItem
+from products.models import Category, Product, Review, Review_imgs, Inquiry, Answer, Purchase, PurchaseItem
 
 
 class ProductListView(ListView):
