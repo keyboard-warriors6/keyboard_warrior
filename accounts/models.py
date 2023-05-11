@@ -24,8 +24,8 @@ class CustomUserManager(BaseUserManager):
             del extra_fields['email']
         if 'phone_number' in extra_fields:
             del extra_fields['phone_number']
-        if 'address' in extra_fields:
-            del extra_fields['address']            
+        if 'user_address' in extra_fields:
+            del extra_fields['user_address']            
 
         return self.create_user(None, username, password, **extra_fields)
 
