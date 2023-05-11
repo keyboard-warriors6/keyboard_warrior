@@ -9,7 +9,7 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 # Create your views here.
 
 
-class SingupView(CreateView):
+class SignupView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('accounts:login')
     template_name = 'accounts/signup.html'
