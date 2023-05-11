@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
+from django.contrib import messages
 from django.urls import reverse_lazy
-from django.views.generic import FormView, RedirectView, DetailView, UpdateView
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import FormView, RedirectView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, get_user_model
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 # Create your views here.
@@ -17,7 +19,7 @@ class SignupView(CreateView):
 
 class LoginView(FormView):
     form_class = AuthenticationForm
-    success_url = reverse_lazy('accounts:index')
+    success_url = reverse_lazy('index')
     template_name = 'accounts/login.html'
 
     def form_valid(self, form):
@@ -26,7 +28,7 @@ class LoginView(FormView):
     
 
 class LogoutView(RedirectView):
-    url = reverse_lazy('accounts:index')
+    url = reverse_lazy('index')
 
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -50,4 +52,20 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
-    
+
+
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    model = get_user_model()
+    success_url = reverse_lazy('index')
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        messages.success(request, _('Your account has been deleted.'))
+        request.session.flush()
+        return redirect(self.success_url)
