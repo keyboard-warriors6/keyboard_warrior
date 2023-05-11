@@ -106,6 +106,8 @@ class Purchase(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL)
     products = models.ManyToManyField(Product, through='PurchaseItem')
     purchase_date = models.DateTimeField(auto_now_add=True)
+    address = models.CharField()
+    status = models.CharField()
 
 
     @property
