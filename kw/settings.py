@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'accounts',
     'products',
     'imagekit',
+    'phonenumber_field',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import ugettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
@@ -21,6 +22,10 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_active', True)
         if 'email' in extra_fields:
             del extra_fields['email']
+        if 'phone_number' in extra_fields:
+            del extra_fields['phone_number']
+        if 'user_address' in extra_fields:
+            del extra_fields['user_address']            
 
         return self.create_user(None, username, password, **extra_fields)
 
@@ -30,6 +35,8 @@ class User(AbstractUser):
         return f'accounts/{instance.pk}/{filename}'
     
     profile_img = models.ImageField(upload_to=accounts_image_path, null=True, blank=True)
+    phone_number = PhoneNumberField(default_region='KR', blank=True, null=True)
+    user_address = models.CharField(max_length=255, blank=True)
 
     objects = CustomUserManager()
 
