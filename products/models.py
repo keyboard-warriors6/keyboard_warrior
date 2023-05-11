@@ -11,9 +11,9 @@ class Category(models.Model):
     pressure: 키압
     tenkey: True일 때 텐키리스, False일 때 풀배열
     """
-    brand = models.CharField()
+    brand = models.CharField(max_length=50)
     bluetooth = models.BooleanField(default=False)
-    switch = models.CharField()
+    switch = models.CharField(max_length=10)
     pressure = models.IntegerField()
     tenkey = models.BooleanField(default=False)
 
@@ -37,7 +37,7 @@ class Product(models.Model):
     price: 제품 가격
     discount_rate: 할인률
     """
-    name = models.CharField()
+    name = models.CharField(max_length=100)
     content = models.TextField()
     category = models.OneToOneField(Category, on_delete=models.CASCADE)
     product_img = models.ImageField(blank=True, upload_to=image_path)
@@ -103,11 +103,11 @@ class Answer(models.Model):
 
 
 class Purchase(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     products = models.ManyToManyField(Product, through='PurchaseItem')
     purchase_date = models.DateTimeField(auto_now_add=True)
-    address = models.CharField()
-    status = models.CharField()
+    address = models.CharField(max_length=255)
+    status = models.CharField(max_length=10)
 
 
     @property
@@ -117,8 +117,8 @@ class Purchase(models.Model):
 
 # 구매-상품 중계테이블
 class PurchaseItem(models.Model):
-    purchase = models.ForeignKey(Purchase, on_delete=models.SET_NULL)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL)
+    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     cnt = models.PositiveIntegerField(default=1)
 
 
