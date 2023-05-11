@@ -35,7 +35,7 @@ class User(AbstractUser):
         return f'accounts/{instance.pk}/{filename}'
     
     profile_img = models.ImageField(upload_to=accounts_image_path, null=True, blank=True)
-    phone_number = PhoneNumberField(default_region='KR', blank=True, null=True)
+    phone_number = PhoneNumberField(region='KR', blank=True, null=True)
     user_address = models.CharField(max_length=255, blank=True)
 
     objects = CustomUserManager()
