@@ -1,0 +1,328 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="banner">
+    <div>
+      <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/store/banners/store_home_banners/168353485320486610.png?w=2560" alt="">
+    </div>
+  </div>
+
+  <div class="relative flex mt-4 mb-32">
+
+    <div class="sidebar">
+      <div id="accordion-flush" data-accordion="open" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+        <h2 id="accordion-flush-heading-1">
+          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+            <span class="hover:opacity-70">제조사</span>
+            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </h2>
+        <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+          <div class="category-list">
+            <div class="flex flex-col items-start mb-4 gap-4">
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">로지텍</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">앱코</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">COX</label>
+              </div>
+          </div>
+          </div>
+        </div>
+        <h2 id="accordion-flush-heading-2">
+          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+            <span class="hover:opacity-70">유선/무선</span>
+            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </h2>
+        <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-1">
+          <div class="category-list">
+            <div class="flex flex-col items-start mb-4 gap-4">
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">유선</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">무선</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2 id="accordion-flush-heading-3">
+          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+            <span class="hover:opacity-70">스위치</span>
+            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </h2>
+        <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-1">
+          <div class="category-list">
+            <div class="flex flex-col items-start mb-4 gap-4">
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">저소음 적축</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">적축</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">갈축</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">청축</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">흑축</label>
+              </div>
+          </div>
+          </div>
+        </div>
+        <h2 id="accordion-flush-heading-4">
+          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-4" aria-expanded="false" aria-controls="accordion-flush-body-4">
+            <span class="hover:opacity-70">키압</span>
+            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </h2>
+        <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-1">
+          <div class="category-list">
+            <div class="flex flex-col items-start mb-4 gap-4">
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">30g ~ 39g</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">40g ~ 49g</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">50g ~ 59g</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">60g ~</label>
+              </div>
+          </div>
+          </div>
+        </div>
+        <h2 id="accordion-flush-heading-5">
+          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-5" aria-expanded="false" aria-controls="accordion-flush-body-5">
+            <span class="hover:opacity-70">키배열</span>
+            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </h2>
+        <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-1">
+          <div class="category-list">
+            <div class="flex flex-col items-start mb-4 gap-4">
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">텐키리스</label>
+              </div>
+              <div>
+                <input id="main-checkbox" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">풀배열</label>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="grow pt-5">
+      <div class="flex justify-between text-sm">
+        <p>총 00건</p>
+        <ul class="filter">
+          <li>별점순</li>
+          <li>리뷰순</li>
+          <li>낮은 가격순</li>
+          <li>높은 가격순</li>
+        </ul>
+      </div>
+      <div class="product-list">
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165785282967534914.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">콕스</p>
+              <p class="product-name">COX CK01 TKL 기계식 텐키리스 게이밍 키보드</p>
+              <p class="product-price"><span class="product-discount">2%</span>34,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 15
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/166234055322407296.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">앱코</p>
+              <p class="product-name">앱코 WKM01 무선 키보드 마우스 세트</p>
+              <p class="product-price"><span class="product-discount">10%</span>23,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 140
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/167626019376082265.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">로지텍</p>
+              <p class="product-name">로지텍코리아 G713 오로라 컬렉션 유선게이밍 키보드</p>
+              <p class="product-price">199,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 8
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165785282967534914.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">콕스</p>
+              <p class="product-name">COX CK01 TKL 기계식 텐키리스 게이밍 키보드</p>
+              <p class="product-price"><span class="product-discount">2%</span>34,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 15
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/166234055322407296.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">앱코</p>
+              <p class="product-name">앱코 WKM01 무선 키보드 마우스 세트</p>
+              <p class="product-price"><span class="product-discount">10%</span>23,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 140
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/167626019376082265.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">로지텍</p>
+              <p class="product-name">로지텍코리아 G713 오로라 컬렉션 유선게이밍 키보드</p>
+              <p class="font-extrabold">199,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 8
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165785282967534914.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">콕스</p>
+              <p class="product-name">COX CK01 TKL 기계식 텐키리스 게이밍 키보드</p>
+              <p class="product-price"><span class="product-discount">2%</span>34,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 15
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/166234055322407296.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">앱코</p>
+              <p class="product-name">앱코 WKM01 무선 키보드 마우스 세트</p>
+              <p class="product-price"><span class="product-discount">10%</span>23,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 140
+              </p>
+            </div>
+          </div>
+        </a>
+        <a href="" class="product-item">
+          <div class="product">
+            <div class="product-image">
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/167626019376082265.jpg?gif=1&w=640&h=640&c=c&webp=1" alt="">
+            </div>
+            <div class="product-description">
+              <p class="product-brand">로지텍</p>
+              <p class="product-name">로지텍코리아 G713 오로라 컬렉션 유선게이밍 키보드</p>
+              <p class="product-price">199,000</p>
+              <p class="product-review">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+                  <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
+                </svg>
+                <span class="product-avg">4.8</span>
+                리뷰 8
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

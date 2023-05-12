@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Product, Review, Review_imgs, Inquiry, Answer, Purchase, PurchaseItem, Cart
+from .models import *
 
 
 class CategoryForm(forms.ModelForm):
@@ -50,7 +50,7 @@ class PurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
         fields = ('address',)
-    
+
 
 # PurchaseItemFormSet = forms.models.inlineformset_factory(
 #     Purchase,
