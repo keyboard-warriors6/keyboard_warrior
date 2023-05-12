@@ -11,14 +11,14 @@ class InquiryCreateView(CreateView):
 
 
     def form_valid(self, form):
-        product = Product.objects.get(pk=self.kwargs['pk'])
+        product = Product.objects.get(pk=self.kwargs['product_pk'])
         form.instance.product = product
         form.instance.user = self.request.user
         return super().form_valid(form)
 
 
     def get_success_url(self):
-        return reverse_lazy('products:product_detail', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy('products:product_detail', kwargs={'pk': self.kwargs['product_pk']})
 
 
 class InquiryUpdateView(UpdateView):
@@ -28,13 +28,13 @@ class InquiryUpdateView(UpdateView):
 
 
     def get_object(self, queryset=None):
-        product_pk = self.kwargs.get('pk')
+        product_pk = self.kwargs.get('product_pk')
         inquiry_pk = self.kwargs.get('inquiry_pk')
         return Inquiry.objects.get(pk=inquiry_pk, product__pk=product_pk)
 
 
     def get_success_url(self):
-        product_pk = self.kwargs.get('pk')
+        product_pk = self.kwargs.get('product_pk')
         return reverse_lazy('products:product_detail', args=[product_pk])
 
 
@@ -43,13 +43,13 @@ class InquiryDeleteView(DeleteView):
 
 
     def get_object(self, queryset=None):
-        product_pk = self.kwargs.get('pk')
+        product_pk = self.kwargs.get('product_pk')
         inquiry_pk = self.kwargs.get('inquiry_pk')
         return Inquiry.objects.get(pk=inquiry_pk, product__pk=product_pk)
 
 
     def get_success_url(self):
-        product_pk = self.kwargs.get('pk')
+        product_pk = self.kwargs.get('product_pk')
         return reverse_lazy('products:product_detail', args=[product_pk])
 
 
@@ -70,7 +70,7 @@ class AnswerCreateView(CreateView):
 
 
     def get_success_url(self):
-        return reverse_lazy('products:product_detail', kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy('products:product_detail', kwargs={'pk': self.kwargs['product_pk']})
 
 
 class AnswerUpdateView(UpdateView):
@@ -86,7 +86,7 @@ class AnswerUpdateView(UpdateView):
     
 
     def get_success_url(self):
-        product_pk = self.kwargs.get('pk')
+        product_pk = self.kwargs.get('product_pk')
         return reverse_lazy('products:product_detail', args=[product_pk])
 
 
@@ -101,7 +101,7 @@ class AnswerDeleteView(DeleteView):
 
 
     def get_success_url(self):
-        product_pk = self.kwargs.get('pk')
+        product_pk = self.kwargs.get('product_pk')
         return reverse_lazy('products:product_detail', args=[product_pk])
 
 

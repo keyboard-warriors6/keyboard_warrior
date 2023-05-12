@@ -16,7 +16,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     template_name = 'products/product_detail.html'
 
     def form_valid(self, form):
-        product = get_object_or_404(Product, pk=self.kwargs['pk'])
+        product = get_object_or_404(Product, pk=self.kwargs['product_pk'])
         form.instance.product.add(product)
         form.instance.user = self.request.user
         form.instance.rating = form.cleaned_data['rating']
@@ -30,7 +30,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
                 Review_imgs.objects.create(review=review, img=img)
                 
         messages.success(self.request, _('Review has been created.'))
-        return redirect('products:product_detail', pk=product.pk)
+        return redirect('products:product_detail', product.pk)
     
 
     def get_context_data(self, **kwargs):
@@ -44,7 +44,7 @@ class ReviewDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('products:product_detail')
 
     def get_object(self, queryset=None):
-        product_pk = self.kwargs['pk']
+        product_pk = self.kwargs['product_pk']
         review_pk = self.kwargs['review_pk']
         review = get_object_or_404(Review, pk=review_pk)
         if review.product.filter(pk=product_pk).exists():
