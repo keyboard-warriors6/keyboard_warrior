@@ -106,26 +106,26 @@ class ProductUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductUpdateView, self).get_context_data(**kwargs)
-        pk = self.kwargs.get('pk', 0)
-        product = self.model.objects.get(pk=pk)
+        product_pk = self.kwargs.get('product_pk', 0)
+        product = self.model.objects.get(pk=product_pk)
         if 'product_form' not in context:
             context['product_form'] = self.form_class(instance=product)
         if 'category_form' not in context:
             context['category_form'] = self.second_form_class(instance=product.category)
-        context['pk'] = pk
+        context['product_pk'] = product_pk
         return context
 
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        pk = kwargs['pk']
-        product = self.model.objects.get(pk=pk)
+        product_pk = kwargs['product_pk']
+        product = self.model.objects.get(pk=product_pk)
         product_form = self.form_class(request.POST, request.FILES, instance=product)
         category_form = self.second_form_class(request.POST, instance=product.category)
         if product_form.is_valid() and category_form.is_valid():
             product_form.save()
             category_form.save()
-            return redirect('products:product_detail', pk)
+            return redirect('products:product_detail', product_pk)
         else:
             return self.render_to_response(self.get_context_data(product_form=product_form, category_form=category_form))
 
