@@ -20,6 +20,7 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.get_object()
+
         reviews = product.reviews.all()
         review_data = []
         for review in reviews:
@@ -28,8 +29,23 @@ class ProductDetailView(DetailView):
                 'review': review,
                 'images': review_images,
             })
-        context['reviews'] = review_data
+
+        inquiries = product.inquiries.all()
+        inquiry_data = []
+        for inquiry in inquiries:
+            try:
+                inquiry_data.append({
+                    'inquiry': inquiry,
+                    'answer': inquiry.answer.all(),
+                })
+            except:
+                inquiry_data.append({
+                    'inquiry': inquiry,
+                })
+
         context['category'] = product.category
+        context['reviews'] = review_data
+        context['inquiry'] = inquiry_data
         return context
 
 
