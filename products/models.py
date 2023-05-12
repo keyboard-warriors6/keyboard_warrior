@@ -125,3 +125,9 @@ class PurchaseItem(models.Model):
     @property
     def price(self):
         return self.product.price * self.cnt * (1 - self.product.discount_rate)
+    
+    
+class Cart(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    cnt = models.PositiveIntegerField(default=1)
