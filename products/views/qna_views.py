@@ -76,7 +76,7 @@ class AnswerCreateView(CreateView):
 class AnswerUpdateView(UpdateView):
     model = Answer
     form_class = AnswerForm
-    template_name = 'products/inquiry_update.html'
+    template_name = 'products/answer_update.html'
 
 
     def get_object(self, queryset=None):
