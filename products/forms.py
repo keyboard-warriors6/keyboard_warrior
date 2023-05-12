@@ -52,10 +52,15 @@ class PurchaseForm(forms.ModelForm):
         fields = ('address',)
 
 
-PurchaseItemFormSet = forms.models.inlineformset_factory(
-    Purchase,
-    PurchaseItem,
-    fields = ('cnt',),
-    extra = 1,
-    can_delete=False,
-)
+# PurchaseItemFormSet = forms.models.inlineformset_factory(
+#     Purchase,
+#     PurchaseItem,
+#     fields = ('cnt',),
+#     extra = 1,
+#     can_delete=False,
+# )
+
+class CartForm(forms.ModelForm):
+    class Meta:
+        model = Cart
+        fields = ('cnt',)
