@@ -66,7 +66,7 @@ class ProductCreateView(FormMixin, TemplateView):
 
 
     def get_success_url(self):
-        return reverse('products:product_detail', kwargs={'pk': self.model.objects.last().pk})
+        return reverse('products:product_detail', kwargs={'product_pk': self.model.objects.last().pk})
 
 
     def get_context_data(self, **kwargs):
