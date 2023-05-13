@@ -30,13 +30,13 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         review_form = self.get_form(self.form_class)
         review_image_form = self.get_form(self.second_form_class)
         if review_form.is_valid() and review_image_form.is_valid():
-            product = get_object_or_404(Product, pk=self.kwargs['pk'])
+            product = get_object_or_404(Product, pk=self.kwargs['product_pk'])
             review = review_form.save(commit=False)
             review.product = product
             review.user = request.user
             review.save()
             '''
-            for 루프를 통해 request.FILES에 전달된 이미지 파일을 순회하면서 Review_imgs 객체를 생성하고 review 객체와 이미지 파일을 연결합니다. 
+            for 루프를 통해 request.FILES에 전달된 이미지 파일을 순회하면서 ReviewImages 객체를 생성하고 review 객체와 이미지 파일을 연결합니다. 
             '''
             for img in request.FILES.getlist('img'):
                 review_image_form = self.get_form(self.second_form_class)
@@ -69,8 +69,8 @@ class ReviewDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'products/product_detail.html'
 
     def get_success_url(self):
-        product_pk = self.kwargs['pk']
-        return reverse_lazy('products:product_detail', kwargs={'pk': product_pk})
+        product_pk = self.kwargs['product_pk']
+        return reverse_lazy('products:product_detail', kwargs={'product_pk': product_pk})
 
     def get_object(self, queryset=None):
         product_pk = self.kwargs['product_pk']
@@ -117,13 +117,13 @@ class ReviewUpdateView(LoginRequiredMixin, UpdateView):
         또한, 새로운 이미지를 추가하기 위해서는 파일 업로드 필드를 추가하고, "추가" 버튼을 눌렀을 때 파일들을 서버에 업로드하고 새로운 이미지 인스턴스를 생성합니다. 이때도 이미지 파일들을 img라는 이름의 input에 담아 POST 방식으로 서버에 전송합니다.
         '''
         existing_images = self.request.POST.getlist('existing_images')
-        Review_imgs.objects.filter(review=review, id__in=existing_images).delete()
+        ReviewImages.objects.filter(review=review, id__in=existing_images).delete()
 
         # 새 리뷰 이미지 추가
         review_image_form = ReviewImageUpdateForm(self.request.POST, self.request.FILES)
         if review_image_form.is_valid():
             for img in self.request.FILES.getlist('img'):
-                Review_imgs.objects.create(review=review, img=img)
+                ReviewImages.objects.create(review=review, img=img)
 
         # 추가된 리뷰 이미지 URL 전달(클라이언트 측에서 AJAX 요청을 통해 리뷰 수정 후 즉시 화면에 새로운 이미지를 보여주기 위해 사용)
         data['image_urls'] = []

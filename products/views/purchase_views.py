@@ -45,10 +45,11 @@ class PurchaseCreateView(LoginRequiredMixin, CreateView):
 
     def get_initial(self):
         initial = super().get_initial()
-        product_id = self.request.GET.get('pk')
+        # 이 부분 문제 생길 수 있음
+        product_pk = self.request.GET.get('product')
         cnt = self.request.GET.get('cnt')
-        if product_id:
-            product = get_object_or_404(Product, pk=product_id)
+        if product_pk:
+            product = get_object_or_404(Product, pk=product_pk)
             cnt = cnt if cnt and cnt.isdigit() else 1
             initial['purchase_items'] = [{'product': product, 'cnt': cnt}]
         else:
