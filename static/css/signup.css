@@ -9,16 +9,21 @@ input {
   border-color: #dbdbdb;
 }
 
+.errorlist {
+  margin-bottom: 0.25rem;
+  color: rgb(255, 109, 109);
+}
+
 .title {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 1.25rem;
   font-weight: bold;
 }
 
 .signup-form {
+  margin-bottom: 1.5rem;
   border-radius: 0.25rem;
   border-color: rgb(209 213 219);
-  background-color: rgb(249 250 251);
 }
 
 .signup-form:focus {
