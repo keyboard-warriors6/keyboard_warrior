@@ -9,7 +9,17 @@
   <h1 class="title">회원가입</h1>
   <form action="{% url 'accounts:signup' %}" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% if form.errors %}
+      {% for error in form.errors.values %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    {% endif %}
+    {% for field in form %}
+      <div class="relative">
+        {{ field }}
+        <label for="{{ field.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ field.label }}</label>
+      </div>
+    {% endfor %}
     <input type="submit" value="회원가입하기" class="signup-btn bg-[#99ccff] mt-6">
   </form>
   <p class="mt-6 text-center text-sm">이미 계정이 있으신가요? <a href="" class="font-bold underline underline-offset-2">로그인</a></p>
