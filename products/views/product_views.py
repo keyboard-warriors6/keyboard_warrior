@@ -1,8 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView, View
-from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import FormMixin, UpdateView
 from products.forms import *
 from products.models import *
@@ -57,12 +57,18 @@ class ProductDetailView(DetailView):
         return product
 
 
-class ProductCreateView(FormMixin, TemplateView):
+class ProductCreateView(UserPassesTestMixin, PermissionRequiredMixin, FormMixin, TemplateView):
     model = Product
     second_model = Category
     form_class = ProductForm
     second_form_class = CategoryForm
     template_name = 'products/product_create.html'
+    permission_required = 'products.add_product'
+    raise_exception = True
+
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
     def get_success_url(self):
@@ -104,12 +110,18 @@ class ProductCreateView(FormMixin, TemplateView):
         return super().form_invalid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(UserPassesTestMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     second_model = Category
     template_name = 'products/product_update.html'
     form_class = ProductForm
     second_form_class = CategoryForm
+    permission_required = 'products.add_product'
+    raise_exception = True
+
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
     def get_context_data(self, **kwargs):
@@ -138,15 +150,22 @@ class ProductUpdateView(UpdateView):
             return self.render_to_response(self.get_context_data(product_form=product_form, category_form=category_form))
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(UserPassesTestMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('products:product_list')
+    permission_required = 'products.add_product'
+    raise_exception = True
+
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
 
-class ProductBookmarkView(View):
+class ProductBookmarkView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         product_pk = kwargs['product_pk']
         product = Product.objects.get(pk=product_pk)
