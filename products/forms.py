@@ -23,14 +23,14 @@ class ReviewForm(forms.ModelForm):
 class ReviewImageForm(forms.ModelForm):
     img = forms.ImageField(widget=forms.FileInput(attrs={'multiple': True}))
     class Meta:
-        model = Review_imgs
+        model = ReviewImages
         fields = ('img',)
 
 
 class ReviewImageUpdateForm(forms.ModelForm):
     img = forms.ImageField(widget=forms.ClearableFileInput)
     class Meta:
-        model = Review_imgs
+        model = ReviewImages
         fields = ('img',)
 
 

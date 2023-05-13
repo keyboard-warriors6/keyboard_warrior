@@ -1,5 +1,5 @@
-from django.http import JsonResponse, Http404
-from django.urls import reverse_lazy
+from django.http import JsonResponse, Http404, HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import gettext_lazy as _
@@ -12,46 +12,72 @@ from products.forms import *
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
+    second_model = ReviewImages
     form_class = ReviewForm
+    second_form_class = ReviewImageForm
     template_name = 'products/product_detail.html'
 
-    def form_valid(self, form):
-        product = get_object_or_404(Product, pk=self.kwargs['pk'])
-        form.instance.product.add(product)
-        form.instance.user = self.request.user
-        form.instance.rating = form.cleaned_data['rating']
-        form.instance.content = form.cleaned_data['content']
-        review = form.save()
-
-        # 리뷰 이미지 생성
-        review_image_form = ReviewImageForm(self.request.POST, self.request.FILES)
-        if review_image_form.is_valid():
-            for img in self.request.FILES.getlist('img'):
-                Review_imgs.objects.create(review=review, img=img)
-                
-        messages.success(self.request, _('Review has been created.'))
-        return redirect('products:product_detail', pk=product.pk)
+    def get_success_url(self):
+        return reverse('products:product_detail', args=(self.object.product.pk,))
     
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['review_image_form'] = ReviewImageForm()
+        context['review_form'] = self.get_form(self.form_class)
+        context['review_image_form'] = self.get_form(self.second_form_class)
         return context
+    
+    def post(self, request, *args, **kwargs):
+        review_form = self.get_form(self.form_class)
+        review_image_form = self.get_form(self.second_form_class)
+        if review_form.is_valid() and review_image_form.is_valid():
+            product = get_object_or_404(Product, pk=self.kwargs['pk'])
+            review = review_form.save(commit=False)
+            review.product = product
+            review.user = request.user
+            review.save()
+            '''
+            for 루프를 통해 request.FILES에 전달된 이미지 파일을 순회하면서 Review_imgs 객체를 생성하고 review 객체와 이미지 파일을 연결합니다. 
+            '''
+            for img in request.FILES.getlist('img'):
+                review_image_form = self.get_form(self.second_form_class)
+                review_image = review_image_form.save(commit=False)
+                review_image.review = review
+                review_image.img = img
+                review_image.save()
+            return self.form_valid(review_form)
+        return self.form_invalid(review_form)
+    
+    '''
+    GET 요청을 처리합니다. get_form() 메소드를 사용하여 review_form과 review_image_form을 가져온 후 context에 추가하여 템플릿에 전달합니다.
+    '''
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        form_class = self.get_form_class()
+        review_form = self.get_form(form_class)
+        review_image_form = self.get_form(self.second_form_class)
+        return self.render_to_response(self.get_context_data(review_form=review_form, review_image_form=review_image_form))
 
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+    
 
 class ReviewDeleteView(LoginRequiredMixin, DeleteView):
     model = Review
-    success_url = reverse_lazy('products:product_detail')
+    template_name = 'products/product_detail.html'
+
+    def get_success_url(self):
+        product_pk = self.kwargs['pk']
+        return reverse_lazy('products:product_detail', kwargs={'pk': product_pk})
 
     def get_object(self, queryset=None):
         product_pk = self.kwargs['pk']
         review_pk = self.kwargs['review_pk']
-        review = get_object_or_404(Review, pk=review_pk)
-        if review.product.filter(pk=product_pk).exists():
-            return review
-        else:
-            raise Http404("Review does not exist for this product")
-
+        review = get_object_or_404(Review, pk=review_pk, product=product_pk)
+        return review
+    
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         # 연결된 리뷰 이미지들을 가져와서 삭제합니다.
