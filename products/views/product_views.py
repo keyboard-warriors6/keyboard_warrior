@@ -23,12 +23,15 @@ class ProductDetailView(DetailView):
 
         reviews = product.reviews.all()
         review_data = []
-        for review in reviews:
-            review_images = review.images.all()
-            review_data.append({
-                'review': review,
-                'images': review_images,
-            })
+        try:
+            for review in reviews:
+                review_images = review.images.all()
+                review_data.append({
+                    'review': review,
+                    'images': review_images,
+                })
+        except:
+            pass
 
         inquiries = product.inquiries.all()
         inquiry_data = []
