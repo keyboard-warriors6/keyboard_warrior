@@ -9,12 +9,7 @@
   <h1 class="title">회원가입</h1>
   <form action="{% url 'accounts:signup' %}" method="POST">
     {% csrf_token %}
-    {% for feild in form %}
-      <div class="mb-6">
-        <p class="mb-2">{{ feild.label }}</p>
-        {{ feild }}
-      </div>
-    {% endfor %}
+    {{ form.as_p }}
     <input type="submit" value="회원가입하기" class="signup-btn bg-[#99ccff] mt-6">
   </form>
   <p class="mt-6 text-center text-sm">이미 계정이 있으신가요? <a href="" class="font-bold underline underline-offset-2">로그인</a></p>
