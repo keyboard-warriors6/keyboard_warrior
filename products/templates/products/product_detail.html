@@ -1,0 +1,455 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static '/css/product_detail.css' %}">
+{% endblock head %}
+
+{% block content %}
+  <!-- main -->
+  <main class="mx-auto">
+    <!-- header -->
+    <div class="flex flex-row">
+      <!-- 상품 이미지 -->
+      <div class="basis-1/2 m-12 product-img" style="">
+        <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/165785282967534914.jpg?gif=1&w=850&h=850&c=c&webp=1" alt="상품 사진">
+      </div>
+  
+      <!-- 상품 정보 -->
+      <div class="basis-1/2 m-12" style="">
+        <p class="py-3">콕스</p>
+        <p class="py-3 text-2xl">COX CK01 TKL 기계식 텐키리스 게이밍 키보드</p>
+        <p class="flex items-center py-3">
+          <svg class="svg1" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+          <svg class="svg1" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+          <svg class="svg1" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+          <svg class="svg1" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+          <svg class="svg1" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+          <span class="product-information-star-cnt">&nbsp; &nbsp; 10개 리뷰</span>
+        </p>
+        <p class="py-3 text-xl font-semibold">34,000원</p>
+        <p class="py-3">
+          배송 <span class="font-semibold">3,000원</span> 선결제 <br>
+          일반택배 <br>
+          ✔ 지역별 차등배송비 ✔ 제주도/도서산간 지역 5,000원
+        </p>
+        <div>
+          <select id="category-select" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected disabled>스위치</option>
+            <option value="청축">청축(34,000원)</option>
+            <option value="갈축">갈축(34,000원)</option>
+            <option value="적축">적축(34,000원)</option>
+          </select>
+          
+          <div id="options-container" class="hidden product-select">
+            <label for="quantity-select"></label>
+            <div class="product-select-cnt">
+              <button class="decrement-quantity" data-target="quantity-product-1">-</button>
+              <input type="text" id="quantity-product-1" class="quantity" value="1" readonly>
+              <button class="increment-quantity" data-target="quantity-product-1">+</button>
+            </div>
+          </div>
+          <div class="flex product-price mb-6">
+            <span>주문금액</span>
+            <span>0원</span>
+          </div>
+          <div class="flex flex-row mt-2" style="justify-content: space-around;">
+            <button id="add-to-cart-button" class="basis-1/2 rounded-none product-price-btn1 m-1" style="border-radius: 4px;">장바구니</button>
+            <button class="basis-1/2 rounded-none product-price-btn2 m-1" style="border-radius: 4px;">바로구매</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- main content bar -->
+    <div class="flex product-category_bar py-2 gap-20">
+      <ul class="flex">
+        <li><a href="#" class="ms-12 product-category_bar-list font-semibold">상품정보</a></li>
+        <li><a href="#" class="mx-12 product-category_bar-list font-semibold">리뷰</a></li>
+        <li><a href="#" class="product-category_bar-list font-semibold">문의</a></li>
+      </ul>
+    </div>
+
+    <!-- main content -->
+    <div class="flex flex-row product-content">
+      <!-- 상품 상세정보 -->
+      <div class="basis-3/5 m-12">
+        <!-- 더보기 버튼 만들어야 함 -->
+        <div class="">
+          <img src="https://exit.ohou.se/d89cfa7557cd34a185ec45dcf4bf964f6c11fdf5/instore0410.cafe24.com/img/iak_/COX/COX_BANNER2.jpg" alt="상세정보 사진">
+          <img src="https://exit.ohou.se/e71e8b7d1de3b92a1561ed0db197028a6214eacb/instore0410.cafe24.com/img/iak_/COX/COX_IN_02.jpg" alt="상세정보 사진">
+        </div>
+        <div class="mt-12 border-t-2"></div>
+        <!-- 리뷰 평균 -->
+        <div class="product-review mt-12">
+          <p class="text-lg font-semibold">리뷰 <span style="color:#99CCFF">10</span></p>
+          <a href="#" class="font-semibold" style="color:#99CCFF">리뷰쓰기</a>
+
+          <!-- 리뷰 쓰기 -->
+          <!--<p>리뷰</p>
+          <hr>
+          <div>
+            {% for review in reviews %}
+              <div>
+                <p>{{ review.review.content }}</p>
+                <p>별점: {{ review.review.rating }}</p>
+                {% for image in review.images %}
+                  <img src="{{ image.img.url }}" alt="review image">
+                {% endfor %}
+                <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit">삭제</button>
+                </form>
+              </div>
+              <hr>
+            {% endfor %}  
+          </div>
+          <div>
+            <form action="{% url 'products:review_create' product_pk=product.pk %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ review_form.as_p }}
+              {{ review_image_form.as_p }}
+              <input type="submit">
+            </form>
+          </div>-->
+        </div>
+        <div class="flex flex-row product-review-box h-40">
+          <div class="basis-1/2 product-review-star1">
+            <p class="flex items-center">
+              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-3" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-3"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-3" fill="#DBDBDB"></use><use clip-path="url(#star-clip-3)" xlink:href="#star-path-3"></use></svg>
+              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-3" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-3"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-3" fill="#DBDBDB"></use><use clip-path="url(#star-clip-3)" xlink:href="#star-path-3"></use></svg>
+              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-3" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-3"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-3" fill="#DBDBDB"></use><use clip-path="url(#star-clip-3)" xlink:href="#star-path-3"></use></svg>
+              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-3" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-3"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-3" fill="#DBDBDB"></use><use clip-path="url(#star-clip-3)" xlink:href="#star-path-3"></use></svg>
+              <span class="text-2xl font-bold">&nbsp; 5.0</span>
+            </p>
+          </div>
+          <div class="basis-1/2 product-review-star2">
+            <div class="product-review-star2-status">
+              <p class="text-sm">5점</p>
+              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
+                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 30%"></div>
+              </div>
+              <p>3</p>
+            </div>
+            <dv class="product-review-star2-status">
+              <p class="text-sm">4점</p>
+              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
+                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 40%"></div>
+              </div>
+              <p>4</p>
+            </dv>
+            <di class="product-review-star2-status">
+              <p class="text-sm">3점</p>
+              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
+                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 20%"></div>
+              </div>
+              <p>2</p>
+            </dv>
+            <di class="product-review-star2-status">
+              <p class="text-sm">2점</p>
+              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
+                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 0%"></div>
+              </div>
+              <p>0</p>
+            </dv>
+            <di class="product-review-star2-status">
+              <p class="text-sm">1점</p>
+              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
+                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 10%"></div>
+              </div>
+              <p>1</p>
+            </di>
+          </div>
+        </div>
+        <!-- 리뷰 내용 -->
+        <div class="mt-9 pb-10">
+          <div class="flex flex-row">
+            <div class="basis-1/2 product-review-header">
+              <!-- 유저 프로필 이미지 -->
+              <img src="{% static '/img/user_image.png' %}" alt="프로필 사진" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
+              <div>
+                <p class="product-review-header-font" style="margin-bottom:7px;">username</p>
+                <div class="flex">
+                  <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                  <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                  <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                  <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                  <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                  <!-- 리뷰 작성일자 -->
+                  <span class="product-review-header-font" style="margin-left:5px; color:#757575;">2023.05.12 ∙ 구매</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 별점 세부사항 -->
+          <div class="flex">
+            <div class="me-3 flex flex-col">
+              <div class="flex">
+                <p class="product-review-header-content">내구성</p>
+                <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+                <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+              </div>
+              <div class="flex">
+                <p class="product-review-header-content">디자인</p>
+                <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex">
+                <p class="product-review-header-content">가격</p>
+                <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+              </div>
+              <div class="flex">
+                <p class="product-review-header-content">배송</p>
+                <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+              </div>
+            </div>
+          </div>
+          <!-- 키보드 카테고리(스위치) -->
+          <div class="my-5">
+            <p class="product-review-category">갈축</p>
+          </div>
+          <!-- 리뷰 이미지 -->
+          <div>
+            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168311060961223369.jpeg?gif=1&w=240&h=240&c=c&webp=1" alt="리뷰 사진" style="width:112px; height:112px;">
+          </div>
+          <!-- 리뷰 내용 -->
+          <div>
+            <p class="product-review-content">키보드 너무 좋아요오오오옹오옹ㅠ</p>
+          </div>
+          <!-- 도움이 돼요 버튼 -->
+          <div>
+            <button type="button" class="product-review-like_btn">도움이 돼요</button>
+          </div>
+        </div>
+
+        <hr>
+        
+        <div class="mt-9 pb-10">
+            <div class="flex flex-row">
+                <div class="basis-1/2 product-review-header">
+                    <img src="{% static '/img/user_image.png' %}" alt="프로필 사진" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
+                    <div>
+                        <p class="product-review-header-font" style="margin-bottom:7px;">iamloopy</p>
+                        <div class="flex">
+                            <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                            <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                            <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                            <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                            <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
+                            <!-- 리뷰 작성일자 -->
+                            <span class="product-review-header-font" style="margin-left:5px; color:#757575;">2023.05.12 ∙ 구매</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 별점 세부사항 -->
+            <div class="flex">
+              <div class="me-3 flex flex-col">
+                <div class="flex">
+                  <p class="product-review-header-content">내구성</p>
+                  <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+                  <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+                </div>
+                <div class="flex">
+                  <p class="product-review-header-content">디자인</p>
+                  <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex">
+                  <p class="product-review-header-content">가격</p>
+                  <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+                </div>
+                <div class="flex">
+                  <p class="product-review-header-content">배송</p>
+                  <svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>
+                </div>
+              </div>
+            </div>
+            <!-- 키보드 카테고리(스위치) -->
+            <div class="my-5">
+              <p class="product-review-category">적축</p>
+            </div>
+            <!-- 리뷰 이미지 -->
+            <div>
+              <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168311060961223369.jpeg?gif=1&w=240&h=240&c=c&webp=1" alt="리뷰 사진" style="width:112px; height:112px;">
+            </div>
+            <!-- 리뷰 내용 -->
+            <div>
+              <p class="product-review-content">굿</p>
+            </div>
+            <!-- 도움이 돼요 버튼 -->
+            <div>
+              <button type="button" class="product-review-like_btn">도움이 돼요</button>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- 페이지네이션 -->
+          <div class="product-pagination">
+            <ul class="inline-flex items-center -space-x-px">
+              <li>
+                <a href="#" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <span class="sr-only">Previous</span>
+                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+              </li>
+              <li>
+                <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+              </li>
+              <li>
+                <a href="#" aria-current="page" class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+              </li>
+              <li>
+                <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+              </li>
+              <li>
+                <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+              </li>
+              <li>
+                <a href="#" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <span class="sr-only">Next</span>
+                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- 문의 -->
+          <div class="product-review mt-12">
+            <p class="text-lg font-semibold">문의 <span style="color:#99CCFF">10</span></p>
+            <a href="#" class="font-semibold" style="color:#99CCFF">문의하기</a>
+          </div>
+          <div>
+            <!-- header -->
+            <p class="product-inquiry-header1">
+              비구매 | 상품 |
+              <span style="color:#99CCFF;">답변완료</span>
+            </p>
+            <p class="product-inquiry-header2">
+              use*** | 2023년 05월 12일 00시 00분
+            </p>
+            <!-- Q & A -->
+            <!-- question -->
+            <div class="flex mb-2.5">
+              <span class="product-inquiry-qa">Q &nbsp;</span>
+              <p style="font-size: 15px;">교체할 수 있는 키캡 제공되나요?</p>
+            </div>
+            <!-- answer -->
+            <div class="flex mb-1">
+              <span class="product-inquiry-qa">A &nbsp;</span>
+              <p>
+                <span style="font-weight: 700; color: #424242; font-size: 15px;">주식회사 인스토어 &nbsp;</span>
+                <span style="font-size: 12px; color: #bdbdbd;">2023년 05월 12일 00시 00분</span>
+              </p>
+            </div>
+            <p class="product-inquiry-content">
+              안녕하세요 인스토어입니다. <br>
+              해당 제품 투톤 기본 키캡 외 키갭 구성품 동봉되어 있지 않습니다.
+            </p>
+          </div>
+
+          <!-- 추천 상품 -->
+          <div></div>
+
+        </div>
+
+        <!-- 구매창 -->
+        <div class="basis-2/5 mx-12 product-sidebar" style="">
+          <div class="mt-12">
+            <!--<select id="default" class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border-color: #99CCFF; border-radius: 4px;">
+              <option selected>스위치</option>
+              <option value="">청축(34,000원)</option>
+              <option value="">갈축(34,000원)</option>
+              <option value="">적축(34,000원)</option>
+            </select>-->
+          </div>
+          <div class="flex product-price mb-6">
+            <span>주문금액</span>
+            <span>0원</span>
+          </div>
+          <div class="flex flex-row mt-2" style="justify-content: space-around;">
+            <button class="basis-1/5 rounded-none product-sidebar-bookmark-btn m-1" style="border-radius: 4px;">
+                <svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
+            </button>
+            <button class="basis-2/5 rounded-none product-price-btn1 m-1" style="border-radius: 4px;">장바구니</button>
+            <button class="basis-2/5 rounded-none product-price-btn2 m-1" style="border-radius: 4px;">바로구매</button>
+          </div>
+        </div>
+      </div>
+  </main>
+
+  <script>
+    // a태그 비동기 처리
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+      });
+    });
+  
+    // select 태그와 관련된 요소들을 가져옴
+    const categorySelect = document.querySelector('#category-select');
+    const optionsContainer = document.querySelector('#options-container');
+    const quantitySelect = document.querySelector('#quantity-select');
+    const incrementButtons = document.querySelectorAll('.increment-quantity');
+    const decrementButtons = document.querySelectorAll('.decrement-quantity');
+        
+    // 카테고리를 선택할 때마다 호출되는 함수
+    function handleCategorySelect() {
+      const selectedCategory = categorySelect.value;
+    
+      // 카테고리가 선택되지 않은 경우, 수량 선택 폼을 숨김
+      if (selectedCategory === '') {
+        optionsContainer.classList.add('hidden');
+        return;
+      }
+      
+      // 카테고리가 선택된 경우, 수량 선택 폼을 보여줌
+      optionsContainer.classList.remove('hidden');
+      
+      // 수량 선택 폼의 라벨을 변경
+      const quantityLabel = document.querySelector('#options-container label[for="quantity-select"]');
+      quantityLabel.textContent = `${selectedCategory} `;
+    }
+  
+    function handleQuantityChange(e) {
+      const button = e.target;
+      const targetId = button.getAttribute('data-target');
+      const target = document.getElementById(targetId);
+      let quantity = Number(target.value);
+    
+      if (button.classList.contains('increment-quantity')) {
+        quantity++;
+      } else if (button.classList.contains('decrement-quantity')) {
+        if (quantity > 1) {
+          quantity--;
+        }
+      }
+      target.value = quantity;
+    }
+  
+    incrementButtons.forEach(button => {
+      button.addEventListener('click', handleQuantityChange);
+    });
+  
+    decrementButtons.forEach(button => {
+      button.addEventListener('click', handleQuantityChange);
+    });
+    
+    // 카테고리 선택 이벤트 리스너 등록
+    categorySelect.addEventListener('change', handleCategorySelect);
+    
+    // 장바구니 추가 버튼 클릭 이벤트 리스너 등록
+    const addToCartButton = document.querySelector('#add-to-cart-button');
+    addToCartButton.addEventListener('click', () => {
+      const selectedCategory = categorySelect.value;
+      const selectedQuantity = quantitySelect.value;
+      alert(`${selectedCategory} ${selectedQuantity}개를 장바구니에 추가했습니다.`);
+    });
+  </script>
+{% endblock content %}

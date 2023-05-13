@@ -1,6 +1,10 @@
-<form action="{% url 'accounts:login' %}" method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit">
-</form>
+{% extends 'base.html' %}
 
+{% block content %}
+  <form action="{% url 'accounts:login' %}" method="POST">
+    <h2>로그인</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="로그인">
+  </form>
+{% endblock content %}
