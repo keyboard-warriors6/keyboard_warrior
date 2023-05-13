@@ -1,0 +1,30 @@
+main {
+    width: 350px;
+    margin: 0 auto 5rem;
+}
+
+input {
+    width: 100%;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: xx-large;
+}
+
+.login-form {
+    border-radius: 4px;
+}
+
+.login-btn {
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    /* box-sizing: border-box; */
+    /* border: 1px solid black; */
+    border-radius: 4px;
+    /* background-color: #99ccff; */
+    color: white;
+    cursor: pointer;
+}
