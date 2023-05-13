@@ -43,6 +43,7 @@ class Product(models.Model):
     product_img = models.ImageField(blank=True, upload_to=image_path)
     price = models.IntegerField()
     discount_rate = models.FloatField()
+    bookmark = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='bookmark')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
