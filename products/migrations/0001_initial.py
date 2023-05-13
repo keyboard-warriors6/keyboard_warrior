@@ -58,15 +58,15 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('likes', models.ManyToManyField(related_name='liked_reviews', to=settings.AUTH_USER_MODEL)),
-                ('product', models.ManyToManyField(related_name='reviews', to='products.Product')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='products.product')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews_written', to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
-            name='Review_imgs',
+            name='ReviewImages',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('img', models.ImageField(upload_to=products.models.Review_imgs.image_path)),
+                ('img', models.ImageField(blank=True, null=True, upload_to=products.models.ReviewImages.image_path)),
                 ('review', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='products.review')),
             ],
         ),

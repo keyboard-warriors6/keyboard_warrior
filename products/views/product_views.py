@@ -15,8 +15,7 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     model = Product
     context_object_name = 'product'
-
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.get_object()
@@ -44,6 +43,8 @@ class ProductDetailView(DetailView):
                 })
 
         context['category'] = product.category
+        context['review_form'] = ReviewForm()
+        context['review_image_form'] = ReviewImageForm() 
         context['reviews'] = review_data
         context['inquiry'] = inquiry_data
         return context

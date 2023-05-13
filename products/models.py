@@ -61,7 +61,7 @@ class Review(models.Model):
     likes: '이 리뷰가 도움이 되었어요'
     """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews_written')
-    product = models.ManyToManyField(Product, related_name='reviews')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     content = models.TextField(blank=True, null=True)
     rating = models.IntegerField(choices = point)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='liked_reviews')
@@ -74,14 +74,15 @@ class Review(models.Model):
         return f'{self.product.name} - {self.user.username}'
 
 
-class Review_imgs(models.Model):
+class ReviewImages(models.Model):
     # 리뷰에 첨부하는 사진이 저장되는 경로
     def image_path(instance, filename):
         return f'reviews/{instance.review.pk}/{filename}'
 
 
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name='images')
-    img = models.ImageField(upload_to=image_path)
+    # img 선택요소로 수정함
+    img = models.ImageField(upload_to=image_path, blank=True, null=True)
 
 
 # class Review_video(models.Model):
