@@ -1,0 +1,509 @@
+{% extends 'base_profile.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- 프로필 -->
+  <section id="example-0">
+  <div class="title-container">
+    <p class="text-4xl">프로필</p>
+  </div>
+
+  <div class="profile-container">
+    <div class="flex flex-row">
+      <div class="profile-image m-10">
+        <img src="/static/img/icon_profile.png" alt="icon_profile">
+      </div>
+      <div class="mt-14">
+        <p class="user-name">아이디</p>
+        <button class="button-setting mt-10">
+          <p class="text-base">설정</p>
+        </button>
+      </div>
+    </div>
+
+    <div><hr class="profile-line"></div>
+
+    <div class="flex flex-row justify-around">
+      <div class="text-center m-5">
+        <img src="/static/img/icon_bookmark.png" alt="icon_bookmark" class="profile-icon">
+        <p>스크랩북</p>
+        <p>0</p>
+      </div>
+      <div class="text-center m-5">
+        <img src="/static/img/icon_heart.png" alt="icon_heart" class="profile-icon">
+        <p>리뷰스크랩</p>
+        <p>0</p>
+      </div>      <div class="text-center m-5">
+        <img src="/static/img/icon_coupon.png" alt="icon_coupon" class="profile-icon">
+        <p>쿠폰</p>
+        <p>0</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 나의 쇼핑 -->
+  <div class="title-container mt-36">
+    <section id="example-1">
+    <p class="text-4xl">나의 쇼핑</p>
+  </div>
+
+  <!-- 조회 결과 없을 때, 차후에 if문으로 변경할 것 --> 
+  <div class="purchased_item-container">
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-[#99ccff] hover:bg-[#409fff] font-medium rounded-lg text-sm px-4 py-2.5 m-10 text-center inline-flex items-center" type="button">조회 기간<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+    <!-- Dropdown menu -->
+    <div id="dropdown" class="z-10 hidden bg-white divide-y rounded-lg shadow w-44">
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1개월 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3개월 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">6개월 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1년 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">2년 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3년 전</a>
+        </li>
+      </ul>
+    </div>
+    <p class='text-xl text-center mb-20'>주문하신 내역이 없습니다.</p>
+  </div>
+
+    <!-- 조회 결과가 1건이라도 있을 때 -->
+  <div class="purchased_item-container">
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-[#99ccff] hover:bg-[#409fff] font-medium rounded-lg text-sm px-4 py-2.5 m-10 text-center inline-flex items-center" type="button">조회 기간<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+    <!-- Dropdown menu -->
+    <div id="dropdown" class="z-10 hidden bg-white divide-y rounded-lg shadow w-44">
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1개월 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3개월 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">6개월 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1년 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">2년 전</a>
+        </li>
+        <li>
+          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3년 전</a>
+        </li>
+      </ul>
+    </div>
+
+    <p class="text-xl ms-5 p-3">2023.05.12</p>
+    <hr class="purchase-line">
+
+    <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 5/12(금)</span> - 도착완료</p>
+    <div class="flex flex-row">
+      <div class="purchased_item-image m-10">
+        <img src="/static/img/products_sample.png" alt="icon_profile">
+      </div>
+
+      <div class="mt-10">
+        <p class="text-sm mb-1">라이프썸</p>
+        <p class="text-lg mb-1">슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-lg mb-1">(LFS-HA39) 7종 택1</p>
+      </div>
+
+      <div class="ms-24 mt-10">
+        <p class="text-lg mb-1">청축</p>
+        <p class="text-xl mb-1">49,000원 1개</p>
+        <p class="text-[#99ccff]">일반택배</p>
+      </div>
+
+      <div class="ms-32 flex flex-column">
+        <button class="button-big button-color-delivery mt-5">
+          <p class="text-base">배송 추적</p> <!-- 기능 변경 필요, 배송 현황은 알 수 없을 것 같아서 예를 들면 상품 보러가기 라던지 -->
+        </button>
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 작성</p>
+        </button>
+      </div>
+    </div>
+
+    <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 5/12(금)</span> - 도착완료</p>
+    <div class="flex flex-row">
+      <div class="purchased_item-image m-10">
+        <img src="/static/img/products_sample.png" alt="icon_profile">
+      </div>
+
+      <div class="mt-10">
+        <p class="text-sm mb-1">라이프썸</p>
+        <p class="text-lg mb-1">슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-lg mb-1">(LFS-HA39) 7종 택1</p>
+      </div>
+
+      <div class="ms-24 mt-10">
+        <p class="text-lg mb-1">청축</p>
+        <p class="text-xl mb-1">49,000원 1개</p>
+        <p class="text-[#99ccff]">일반택배</p>
+      </div>
+
+      <div class="ms-32 flex flex-column">
+        <button class="button-big button-color-delivery mt-5">
+          <p class="text-base">배송 추적</p>
+        </button>
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 작성</p>
+        </button>
+      </div>
+    </div>
+
+    <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 5/12(금)</span> - 도착완료</p>
+    <div class="flex flex-row">
+      <div class="purchased_item-image m-10">
+        <img src="/static/img/products_sample.png" alt="icon_profile">
+      </div>
+
+      <div class="mt-10">
+        <p class="text-sm mb-1">라이프썸</p>
+        <p class="text-lg mb-1">슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-lg mb-1">(LFS-HA39) 7종 택1</p>
+      </div>
+
+      <div class="ms-24 mt-10">
+        <p class="text-lg mb-1">청축</p>
+        <p class="text-xl mb-1">49,000원 1개</p>
+        <p class="text-[#99ccff]">일반택배</p>
+      </div>
+
+      <div class="ms-32 flex flex-column">
+        <button class="button-big button-color-delivery mt-5">
+          <p class="text-base">배송 추적</p>
+        </button>
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 작성</p>
+        </button>
+      </div>
+    </div>
+
+    <p class="text-xl ms-5 p-3">2023.05.11</p>
+    <hr class="purchase-line">
+
+    <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 5/11(목)</span> - 도착완료</p>
+    <div class="flex flex-row">
+      <div class="purchased_item-image m-10">
+        <img src="/static/img/products_sample.png" alt="icon_profile">
+      </div>
+
+      <div class="mt-10">
+        <p class="text-sm mb-1">라이프썸</p>
+        <p class="text-lg mb-1">슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-lg mb-1">(LFS-HA39) 7종 택1</p>
+      </div>
+
+      <div class="ms-24 mt-10">
+        <p class="text-lg mb-1">청축</p>
+        <p class="text-xl mb-1">49,000원 1개</p>
+        <p class="text-[#99ccff]">일반택배</p>
+      </div>
+
+      <div class="ms-32 flex flex-column">
+        <button class="button-big button-color-delivery mt-5">
+          <p class="text-base">배송 추적</p>
+        </button>
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 작성</p>
+        </button>
+      </div>
+    </div>
+
+    <div aria-label="Page navigation example" class="text-center m-5">
+      <ul class="inline-flex items-center -space-x-px">
+        <li>
+          <a href="#" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-[#99ccff] hover:text-gray-700">
+            <span class="sr-only">Previous</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">1</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">2</a>
+        </li>
+        <li>
+          <a href="#" aria-current="page" class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-[#99ccff] hover:bg-[#409fff] hover:text-blue-700">3</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">4</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">5</a>
+        </li>
+        <li>
+          <a href="#" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-[#99ccff] hover:text-gray-700">
+            <span class="sr-only">Next</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- 나의 리뷰 -->
+  <div class="title-container mt-36">
+    <section id="example-2">
+    <p class="text-4xl">나의 리뷰</p>
+  </div>
+
+  <!-- 조회 결과 없을 때, 차후에 if문으로 변경할 것 --> 
+  <div class="purchased_item-container">
+    <button class="button-middle button-color-delivery ms-10 my-10">
+      <p>베스트</p>
+    </button>
+    <button class="button-middle button-color-delivery ms-3 my-10">
+      <p>최신순</p>
+    </button>
+    <p class='text-xl text-center mb-20'>리뷰를 작성하신 내역이 없습니다.</p>
+  </div>
+
+  <!-- 조회 결과가 1건이라도 있을 때 -->
+  <div class="purchased_item-container">
+    <button class="button-middle button-color-delivery ms-10 mt-10">
+      <p>베스트</p>
+    </button>
+    <button class="button-middle button-color-delivery ms-3 mt-10">
+      <p>최신순</p>
+    </button>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-2">⭐⭐⭐⭐⭐ 2023.05.12</p>
+        <p class="text-lg mb-2">키보드는 나의 든든한 동반자입니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 수정</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-2">⭐⭐⭐⭐⭐ 2023.05.12</p>
+        <p class="text-lg mb-2">키보드는 나의 든든한 동반자입니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 수정</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-2">⭐⭐⭐⭐⭐ 2023.05.12</p>
+        <p class="text-lg mb-2">키보드는 나의 든든한 동반자입니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 수정</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-2">⭐⭐⭐⭐⭐ 2023.05.12</p>
+        <p class="text-lg mb-2">키보드는 나의 든든한 동반자입니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 수정</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-2">⭐⭐⭐⭐⭐ 2023.05.12</p>
+        <p class="text-lg mb-2">키보드는 나의 든든한 동반자입니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-8">
+          <p class="text-base">리뷰 수정</p>
+        </button>
+      </div>
+    </div>
+
+    <div aria-label="Page navigation example" class="text-center m-5">
+      <ul class="inline-flex items-center -space-x-px">
+        <li>
+          <a href="#" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-[#99ccff] hover:text-gray-700">
+            <span class="sr-only">Previous</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">1</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">2</a>
+        </li>
+        <li>
+          <a href="#" aria-current="page" class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-[#99ccff] hover:bg-[#409fff] hover:text-blue-700">3</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">4</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">5</a>
+        </li>
+        <li>
+          <a href="#" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-[#99ccff] hover:text-gray-700">
+            <span class="sr-only">Next</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 나의 문의 -->
+  <div class="title-container mt-36">
+    <section id="example-3">
+    <p class="text-4xl">나의 문의</p>
+  </div>
+
+  <!-- 조회 결과 없을 때, 차후에 if문으로 변경할 것 --> 
+  <div class="purchased_item-container">
+    <button class="button-middle button-color-delivery ms-10 my-10">
+      <p>답변 대기</p>
+    </button>
+    <button class="button-middle button-color-delivery ms-3 my-10">
+      <p>답변 완료</p>
+    </button>
+    <p class='text-xl text-center mb-20'>문의하신 내역이 없습니다.</p>
+  </div>
+
+  <!-- 조회 결과가 1건이라도 있을 때 -->
+  <div class="purchased_item-container mb-36">
+    <button class="button-middle button-color-delivery ms-10 mt-10">
+      <p>답변 대기</p>
+    </button>
+    <button class="button-middle button-color-delivery ms-3 mt-10">
+      <p>답변 완료</p>
+    </button>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10 me-20">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-5"> 2023.05.12</p>
+        <p class="text-lg mb-5">Q. 키가 잘 안눌려요. </p>
+        <p class="text-lg mb-2">A. 안녕하세요 ㅇㅇ님 키가 잘 안눌린다고 문의 주셨는데요. 키 반응이 둔하거나 부드럽지 않다고 느껴지는 경우, 키의 높이나 간격이 불편하게 느껴지는 경우 등을 정확하게 언급해 주시면, 자세한 해결 방법을 드릴 수 있습니다. 감사합니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-20">
+          <p class="text-base">답변 보러가기</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10 me-20">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-5"> 2023.05.12</p>
+        <p class="text-lg mb-5">Q. 키가 잘 안눌려요. </p>
+        <p class="text-lg mb-2">A. 안녕하세요 ㅇㅇ님 키가 잘 안눌린다고 문의 주셨는데요. 키 반응이 둔하거나 부드럽지 않다고 느껴지는 경우, 키의 높이나 간격이 불편하게 느껴지는 경우 등을 정확하게 언급해 주시면, 자세한 해결 방법을 드릴 수 있습니다. 감사합니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-20">
+          <p class="text-base">답변 보러가기</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10 me-20">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-5"> 2023.05.12</p>
+        <p class="text-lg mb-5">Q. 키가 잘 안눌려요. </p>
+        <p class="text-lg mb-2">A. 안녕하세요 ㅇㅇ님 키가 잘 안눌린다고 문의 주셨는데요. 키 반응이 둔하거나 부드럽지 않다고 느껴지는 경우, 키의 높이나 간격이 불편하게 느껴지는 경우 등을 정확하게 언급해 주시면, 자세한 해결 방법을 드릴 수 있습니다. 감사합니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-20">
+          <p class="text-base">답변 보러가기</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10 me-20">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-5"> 2023.05.12</p>
+        <p class="text-lg mb-5">Q. 키가 잘 안눌려요. </p>
+        <p class="text-lg mb-2">A. 안녕하세요 ㅇㅇ님 키가 잘 안눌린다고 문의 주셨는데요. 키 반응이 둔하거나 부드럽지 않다고 느껴지는 경우, 키의 높이나 간격이 불편하게 느껴지는 경우 등을 정확하게 언급해 주시면, 자세한 해결 방법을 드릴 수 있습니다. 감사합니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-20">
+          <p class="text-base">답변 보러가기</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-row">
+      <div class="my-10 ms-10 me-20">
+        <p class="text-xl mb-2">[라이프썸] 슬림 블루투스 업무용 저소음 키보드</p>
+        <p class="text-sm mb-5"> 2023.05.12</p>
+        <p class="text-lg mb-5">Q. 키가 잘 안눌려요. </p>
+        <p class="text-lg mb-2">A. 안녕하세요 ㅇㅇ님 키가 잘 안눌린다고 문의 주셨는데요. 키 반응이 둔하거나 부드럽지 않다고 느껴지는 경우, 키의 높이나 간격이 불편하게 느껴지는 경우 등을 정확하게 언급해 주시면, 자세한 해결 방법을 드릴 수 있습니다. 감사합니다. </p>
+      </div>
+      <div class="ms-auto me-12">
+        <button class="button-big button-color-review mt-20">
+          <p class="text-base">답변 보러가기</p>
+        </button>
+      </div>
+    </div>
+    <div aria-label="Page navigation example" class="text-center m-5">
+      <ul class="inline-flex items-center -space-x-px">
+        <li>
+          <a href="#" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-[#99ccff] hover:text-gray-700">
+            <span class="sr-only">Previous</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">1</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">2</a>
+        </li>
+        <li>
+          <a href="#" aria-current="page" class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-[#99ccff] hover:bg-[#409fff] hover:text-blue-700">3</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">4</a>
+        </li>
+        <li>
+          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">5</a>
+        </li>
+        <li>
+          <a href="#" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-[#99ccff] hover:text-gray-700">
+            <span class="sr-only">Next</span>
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endblock content %}
