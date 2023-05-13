@@ -20,6 +20,12 @@ urlpatterns = [
     path('purchase_create/', PurchaseCreateView.as_view(), name='purchase_create'),
     path('purchase_list/', PurchaseListView.as_view(), name='purchase_list'),
 
+    # 장바구니
+    path('cart/', CartListView.as_view(), name='cart_list'),
+    path('<int:product_pk>/add-to-cart/', CartCreateView.as_view(), name='cart_create'),
+    path('cart/<int:cart_pk>/delete/', CartDeleteView.as_view(), name='cart_delete'),
+    path('cart/<int:cart_pk>/update/', CartUpdateView.as_view(), name='cart_update'),
+
     # 문의, 답변
     path('<int:product_pk>/inquiry/create/', InquiryCreateView.as_view(), name='inquiry_create'),
     path('<int:product_pk>/inquiry/<int:inquiry_pk>/update/', InquiryUpdateView.as_view(), name='inquiry_update'),

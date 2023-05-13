@@ -1,10 +1,12 @@
-from typing import Any
 from django.db.models import F, Sum
 from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.forms import inlineformset_factory
-from django.views.generic.edit import CreateView
+from django.contrib import messages
+from django.http import JsonResponse
+from django.views.generic import FormView, View, DeleteView
+from django.views.generic.edit import CreateView, ProcessFormView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.functions import TruncDate
@@ -12,17 +14,12 @@ from products.models import *
 from products.forms import *
 
 
-
 # 구매하기(Create)
 class PurchaseCreateView(LoginRequiredMixin, CreateView):
     model = Purchase
     form_class = PurchaseForm
-    template_name = 'products/create.html'
+    template_name = 'products/purchase_create.html'
     success_url = reverse_lazy('products:complete')
-
-    '''
-    inlineformset_factory 함수를 사용해 동적으로 생성된 폼셋 클래스입니다. 이 폼셋 클래스는 Purchase 모델과 PurchaseItem 모델 간의 관계를 나타냅니다. fields 매개변수에는 폼셋에 포함될 필드 목록을 지정합니다. extra 매개변수는 초기 폼셋에 몇 개의 빈 폼이 포함될지 지정합니다. can_delete 매개변수는 사용자가 폼셋에서 항목을 삭제할 수 있는지 여부를 지정합니다.
-    '''
     PurchaseItemFormSet = inlineformset_factory(
         Purchase,
         PurchaseItem,
@@ -31,38 +28,38 @@ class PurchaseCreateView(LoginRequiredMixin, CreateView):
         can_delete=False,
     )
 
-    '''
-    get_form_kwargs(self): 폼 인스턴스를 만들 때 사용할 인수를 반환하는 메서드. user 인수를 추가하여 폼이 사용자 정보를 알 수 있도록 함.
-    '''
+    def get_initial(self):
+        initial = super().get_initial()
+        cart_pk = self.request.GET.get('cart_pk')
+        product_pk = self.request.GET.get('product_pk')
+        cnt = self.request.GET.get('cnt')
+        if cart_pk:
+            cart_item = Cart.objects.get(pk=cart_pk, user=self.request.user)
+            initial['product'] = cart_item.product
+            initial['cnt'] = cart_item.cnt
+            initial['purchase_items'] = [
+                {
+                    'product': cart_item.product,
+                    'cnt': cart_item.cnt,
+                }
+            ]
+        elif product_pk and cnt:
+            product = Product.objects.get(pk=product_pk)
+            initial['product'] = product
+            initial['cnt'] = cnt
+            initial['purchase_items'] = [
+                {
+                    'product': product,
+                    'cnt': cnt,
+                }
+            ]
+        return initial
+    
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
-
-    '''
-    폼 인스턴스를 만들 때 초기값을 설정하는 메서드입니다. 상세 페이지에서 구매 버튼을 눌렀을 때는 해당 상품과 수량을 폼에 미리 채워 넣습니다. 장바구니에서 구매 버튼을 눌렀을 때는 장바구니에 담긴 모든 항목의 정보를 폼에 미리 채워 넣습니다.
-    '''
-
-    def get_initial(self):
-        initial = super().get_initial()
-        # 이 부분 문제 생길 수 있음
-        product_pk = self.request.GET.get('product')
-        cnt = self.request.GET.get('cnt')
-        if product_pk:
-            product = get_object_or_404(Product, pk=product_pk)
-            cnt = cnt if cnt and cnt.isdigit() else 1
-            initial['purchase_items'] = [{'product': product, 'cnt': cnt}]
-        else:
-            initial['purchase_items'] = [
-                {'product': item.product, 'cnt': item.cnt}
-                for item in Cart.objects.filter(user=self.request.user)
-            ]
-        return initial
     
-    '''
-    템플릿에서 사용할 컨텍스트 데이터를 반환하는 메서드입니다. POST 요청인 경우 폼셋을 바인딩합니다. GET 요청인 경우 폼셋에 초기값을 설정합니다.
-    '''
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.request.method == 'POST':
@@ -76,8 +73,15 @@ class PurchaseCreateView(LoginRequiredMixin, CreateView):
                 instance=self.object,
                 initial=initial['purchase_items'],
             )
-        context['total_price'] = self.object.total_price
+        context['total_price'] = self.object.total_price if self.object else 0
         return context
+    
+    def create(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.status = '주문 완료'
+        self.object.save()
+        return self.object
     
     def form_invalid(self, form):
         self.object = self.model(user=self.request.user, status='주문 실패')
@@ -87,10 +91,7 @@ class PurchaseCreateView(LoginRequiredMixin, CreateView):
         context = self.get_context_data()
         purchase_item_formset = context['purchase_item_formset']
         if purchase_item_formset.is_valid():
-            self.object = form.save(commit=False)
-            self.object.user = self.request.user
-            self.object.status = '주문 완료'
-            self.object.save()
+            self.create(form)
             purchase_item_formset.instance = self.object
             purchase_item_formset.save()
             Cart.objects.filter(user=self.request.user).delete()
@@ -99,7 +100,7 @@ class PurchaseCreateView(LoginRequiredMixin, CreateView):
             return self.form_invalid(form)
         
         
-# 내가 구매한 상품 목록 조회하기(Read)
+# # 내가 구매한 상품 목록 조회하기(Read)
 class PurchaseListView(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = 'products:purchase_list.html'
@@ -121,3 +122,96 @@ class PurchaseListView(LoginRequiredMixin, ListView):
             purchase.purchase_items = purchase_items
 
         return context
+    
+
+# 장바구니 생성
+class CartCreateView(LoginRequiredMixin, FormView):
+    form_class = CartForm
+    template_name = 'products/product_detail.html'
+
+    def form_valid(self, form):
+        product = get_object_or_404(Product, pk=self.kwargs['product_pk'])
+        cnt = form.cleaned_data['cnt']
+        user = self.request.user
+        cart, created = Cart.objects.get_or_create(
+            user=user,
+            product=product,
+            defaults={'cnt': cnt}
+        )
+
+        if not created:
+            cart.cnt += cnt
+            cart.save()
+
+        messages.success(self.request, f'{product.name}이(가) 장바구니에 추가되었습니다.')
+        return redirect('products:cart_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = get_object_or_404(Product, pk=self.kwargs['product_pk'])
+        context['product'] = product
+        context['cart_form'] = CartForm
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['initial'] = {'cnt': 1}
+        return kwargs
+
+    def get_success_url(self):
+        return reverse_lazy('products:cart_list')
+    
+
+# 장바구니 조회
+class CartListView(LoginRequiredMixin, View):
+    template_name = 'products/cart_list.html'
+
+    def get(self, request, *args, **kwargs):
+        cart_items = Cart.objects.filter(user=request.user)
+        total_price = 0
+
+        for item in cart_items:
+            item.price = item.cnt * item.product.price
+            total_price += item.price
+
+        context = {
+            'cart_items': cart_items,
+            'total_price': total_price
+        }
+
+        return render(request, self.template_name, context)
+    
+
+# 장바구니 물건 삭제
+class CartDeleteView(LoginRequiredMixin, DeleteView):
+    model = Cart
+    success_url = reverse_lazy('products:cart_list')
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
+    
+    def get_object(self, queryset=None):
+        cart_pk = self.kwargs.get('cart_pk')
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, pk=cart_pk)
+        return obj
+    
+
+# 장바구니 물건 수량 수정(비동기)
+class CartUpdateView(LoginRequiredMixin, ProcessFormView):
+    model = Cart
+    fields = ['cnt']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        data = {'success': True}
+        return JsonResponse(data)
+
+    def form_invalid(self, form):
+        data = {'success': False, 'errors': form.errors}
+        return JsonResponse(data, status=400)
