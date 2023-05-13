@@ -73,7 +73,7 @@ class ReviewDeleteView(LoginRequiredMixin, DeleteView):
         return reverse_lazy('products:product_detail', kwargs={'pk': product_pk})
 
     def get_object(self, queryset=None):
-        product_pk = self.kwargs['pk']
+        product_pk = self.kwargs['product_pk']
         review_pk = self.kwargs['review_pk']
         review = get_object_or_404(Review, pk=review_pk, product=product_pk)
         return review

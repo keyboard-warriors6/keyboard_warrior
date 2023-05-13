@@ -97,10 +97,18 @@ class Inquiry(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
+    def __str__(self):
+        return f'{self.product.name} - {self.user}'
+
+
 class Answer(models.Model):
-    inquiry = models.OneToOneField(Inquiry, on_delete=models.CASCADE)
+    inquiry = models.OneToOneField(Inquiry, on_delete=models.CASCADE, related_name='answer')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    
+    def __str__(self):
+        return f'Answer: {self.inquiry}'
 
 
 class Purchase(models.Model):
