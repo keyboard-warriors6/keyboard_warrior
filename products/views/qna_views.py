@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView
 from products.forms import *
 from products.models import *
 
 
-class InquiryCreateView(CreateView):
+class InquiryCreateView(LoginRequiredMixin, CreateView):
     model = Inquiry
     form_class = InquiryForm
     template_name = 'products/inquiry_create.html'
@@ -21,10 +22,15 @@ class InquiryCreateView(CreateView):
         return reverse_lazy('products:product_detail', kwargs={'pk': self.kwargs['product_pk']})
 
 
-class InquiryUpdateView(UpdateView):
+class InquiryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Inquiry
     form_class = InquiryForm
     template_name = 'products/inquiry_update.html'
+
+
+    def test_func(self):
+        inquiry = self.get_object()
+        return self.request.user == inquiry.user
 
 
     def get_object(self, queryset=None):
@@ -38,8 +44,19 @@ class InquiryUpdateView(UpdateView):
         return reverse_lazy('products:product_detail', args=[product_pk])
 
 
-class InquiryDeleteView(DeleteView):
+class InquiryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Inquiry
+
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        if obj.user != request.user and not request.user.is_superuser:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
 
 
     def get_object(self, queryset=None):
@@ -57,10 +74,14 @@ class InquiryDeleteView(DeleteView):
         return self.post(request, *args, **kwargs)
 
 
-class AnswerCreateView(CreateView):
+class AnswerCreateView(UserPassesTestMixin, CreateView):
     model = Answer
     form_class = AnswerForm
     template_name = 'products/answer_create.html'
+
+
+    def test_func(self):
+        return self.request.user.is_admin
 
 
     def form_valid(self, form):
@@ -73,10 +94,14 @@ class AnswerCreateView(CreateView):
         return reverse_lazy('products:product_detail', kwargs={'pk': self.kwargs['product_pk']})
 
 
-class AnswerUpdateView(UpdateView):
+class AnswerUpdateView(UserPassesTestMixin, UpdateView):
     model = Answer
     form_class = AnswerForm
     template_name = 'products/answer_update.html'
+
+
+    def test_func(self):
+        return self.request.user.is_admin
 
 
     def get_object(self, queryset=None):
@@ -90,8 +115,12 @@ class AnswerUpdateView(UpdateView):
         return reverse_lazy('products:product_detail', args=[product_pk])
 
 
-class AnswerDeleteView(DeleteView):
+class AnswerDeleteView(UserPassesTestMixin, DeleteView):
     model = Answer
+
+
+    def test_func(self):
+        return self.request.user.is_admin
 
     
     def get_object(self, queryset=None):

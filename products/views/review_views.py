@@ -1,6 +1,7 @@
 from django.http import JsonResponse, Http404, HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
@@ -64,9 +65,15 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         return super().form_invalid(form)
     
 
-class ReviewDeleteView(LoginRequiredMixin, DeleteView):
+class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
     template_name = 'products/product_detail.html'
+
+
+    def test_func(self):
+        review = self.get_object()
+        return self.request.user == review.user
+
 
     def get_success_url(self):
         product_pk = self.kwargs['product_pk']
@@ -88,12 +95,17 @@ class ReviewDeleteView(LoginRequiredMixin, DeleteView):
         return super().delete(request, *args, **kwargs)
 
 
-class ReviewUpdateView(LoginRequiredMixin, UpdateView):
+class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
     form_class = ReviewForm
     template_name = 'products/product_detail.html'
     context_object_name = 'review'
     # success_url = reverse_lazy('products:product_detail')
+
+
+    def test_func(self):
+        review = self.get_object()
+        return self.request.user == review.user
 
     #  2. 템플릿에 사용할 수 있는 추가적인 데이터를 컨텍스트에 추가(이미지 폼) -> 리뷰 폼과 리뷰 이미지 수정 폼을 함께 쓸 수 있게 함
     def get_context_data(self, **kwargs):

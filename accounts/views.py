@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
@@ -71,3 +71,7 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
         messages.success(request, _('Your account has been deleted.'))
         request.session.flush()
         return redirect(self.success_url)
+
+
+def permission_denied_view(request, exception):
+    return render(request, '403.html', status=403)
