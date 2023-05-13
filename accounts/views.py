@@ -21,6 +21,7 @@ class LoginView(FormView):
     form_class = AuthenticationForm
     # success_url = reverse_lazy('index')
     success_url = reverse_lazy('products:product_list')
+    # success_url = reverse_lazy('products:product_create')
     template_name = 'accounts/login.html'
 
     def form_valid(self, form):
@@ -29,7 +30,7 @@ class LoginView(FormView):
     
 
 class LogoutView(RedirectView):
-    url = reverse_lazy('index')
+    url = reverse_lazy('products:product_list')
 
     def get(self, request, *args, **kwargs):
         logout(request)
