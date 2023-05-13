@@ -47,7 +47,7 @@ class ProductDetailView(DetailView):
         context['review_form'] = ReviewForm()
         context['review_image_form'] = ReviewImageForm() 
         context['reviews'] = review_data
-        context['inquiry'] = inquiry_data
+        context['inquiries'] = inquiry_data
         return context
     
 
