@@ -9,6 +9,7 @@ urlpatterns = [
     path('<int:product_pk>/', ProductDetailView.as_view(), name='product_detail'),
     path('<int:product_pk>/update/', ProductUpdateView.as_view(), name='product_update'),
     path('<int:product_pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
+    path('<int:product_pk>/bookmark/', ProductBookmarkView.as_view(), name='product_bookmark'),
   
     # 후기
     path('<int:product_pk>/review/', ReviewCreateView.as_view(), name='review_create'),

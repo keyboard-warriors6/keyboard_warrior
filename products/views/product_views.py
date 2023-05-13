@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView, View
@@ -48,6 +49,12 @@ class ProductDetailView(DetailView):
         context['reviews'] = review_data
         context['inquiry'] = inquiry_data
         return context
+    
+
+    def get_object(self, queryset=None):
+        product_pk = self.kwargs.get('product_pk')
+        product = self.model.objects.get(pk=product_pk)
+        return product
 
 
 class ProductCreateView(FormMixin, TemplateView):
@@ -137,3 +144,19 @@ class ProductDeleteView(DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+
+class ProductBookmarkView(View):
+    def post(self, request, *args, **kwargs):
+        product_pk = kwargs['product_pk']
+        product = Product.objects.get(pk=product_pk)
+        if product.bookmark.filter(pk=request.user.pk).exists():
+            product.bookmark.remove(request.user)
+            bookmark = False
+        else:
+            product.bookmark.add(request.user)
+            bookmark = True
+        context = {
+            'bookmark': bookmark,
+        }
+        return JsonResponse(context)
