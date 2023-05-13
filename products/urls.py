@@ -9,6 +9,7 @@ urlpatterns = [
     path('<int:product_pk>/', ProductDetailView.as_view(), name='product_detail'),
     path('<int:product_pk>/update/', ProductUpdateView.as_view(), name='product_update'),
     path('<int:product_pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
+    path('<int:product_pk>/bookmark/', ProductBookmarkView.as_view(), name='product_bookmark'),
   
     # 후기
     path('<int:product_pk>/review/', ReviewCreateView.as_view(), name='review_create'),
@@ -16,6 +17,8 @@ urlpatterns = [
     path('<int:product_pk>/review/<int:review_pk>/update/', ReviewUpdateView.as_view(), name='review_update'),
   
     # 구매
+    path('purchase_create/', PurchaseCreateView.as_view(), name='purchase_create'),
+    path('purchase_list/', PurchaseListView.as_view(), name='purchase_list'),
 
     # 문의, 답변
     path('<int:product_pk>/inquiry/create/', InquiryCreateView.as_view(), name='inquiry_create'),
