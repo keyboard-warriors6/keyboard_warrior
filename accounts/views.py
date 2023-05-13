@@ -20,7 +20,7 @@ class SignupView(CreateView):
 class LoginView(FormView):
     form_class = AuthenticationForm
     # success_url = reverse_lazy('index')
-    success_url = reverse_lazy('products:product_create')
+    success_url = reverse_lazy('products:product_list')
     template_name = 'accounts/login.html'
 
     def form_valid(self, form):
