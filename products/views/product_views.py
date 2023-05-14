@@ -121,6 +121,7 @@ class ProductUpdateView(UserPassesTestMixin, PermissionRequiredMixin, UpdateView
     second_form_class = CategoryForm
     permission_required = 'products.add_product'
     raise_exception = True
+    pk_url_kwarg = 'product_pk'
 
 
     def test_func(self):
@@ -137,6 +138,10 @@ class ProductUpdateView(UserPassesTestMixin, PermissionRequiredMixin, UpdateView
             context['category_form'] = self.second_form_class(instance=product.category)
         context['product_pk'] = product_pk
         return context
+
+
+    def get_success_url(self):
+        return reverse('products:product_detail', kwargs={'product_pk': self.kwargs.get('product_pk')})
 
 
     def post(self, request, *args, **kwargs):
