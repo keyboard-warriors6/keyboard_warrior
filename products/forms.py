@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
-
+from django.forms import inlineformset_factory, HiddenInput
+from django.urls import reverse_lazy
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -49,33 +50,8 @@ class AnswerForm(forms.ModelForm):
 class PurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
-        fields = ('address', 'purchase_items')
-        # 추가
-        widgets = {'purchase_items': forms.CheckboxSelectMultiple}
+        fields = ('address',)
 
-    def __init__(self, user, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.user = user
-        # 장바구니에 있는 상품 필터링
-        cart_items = Cart.objects.filter(user=user)
-        self.fields['purchase_items'].queryset = Product.objects.filter(id__in=cart_items.values('product__id'))
-
-        # 상세 페이지에서 선택한 상품 필터링
-        product_id = self.initial.get('product_id')
-        if product_id:
-            product = Product.objects.get(id=product_id)
-            self.fields['purchase_items'].queryset = Product.objects.filter(id=product.id)
-
-    purchase_items = forms.ModelMultipleChoiceField(queryset=Product.objects.none(), required=True)
-
-
-# PurchaseItemFormSet = forms.models.inlineformset_factory(
-#     Purchase,
-#     PurchaseItem,
-#     fields = ('cnt',),
-#     extra = 1,
-#     can_delete=False,
-# )
 
 class CartForm(forms.ModelForm):
     cnt = forms.IntegerField(

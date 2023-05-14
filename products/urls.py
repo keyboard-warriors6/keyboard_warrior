@@ -17,8 +17,11 @@ urlpatterns = [
     path('<int:product_pk>/review/<int:review_pk>/update/', ReviewUpdateView.as_view(), name='review_update'),
   
     # 구매
+    ## 다중 구매(from 장바구니)
     path('purchase_create/', PurchaseCreateView.as_view(), name='purchase_create'),
     path('purchase_list/', PurchaseListView.as_view(), name='purchase_list'),
+    ## 상세페이지 구매
+    path('products/<int:pk>/purchase/', PurchaseCreateFromDetailView.as_view(), name='purchase_from_detail'),
 
     # 장바구니
     path('cart/', CartListView.as_view(), name='cart_list'),
