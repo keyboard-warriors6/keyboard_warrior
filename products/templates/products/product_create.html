@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/product_create.css' %}">
+{% endblock head %}
+
+{% block content %}
+  <h2 class="title mt-20 mb-5">상품 등록하기</h2>
+  <form action="{% url 'products:product_create' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="relative">
+        {{ field }}
+        <label for="{{ field.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ field.label }}</label>
+      </div>
+    {% endfor %}
+
+    {% for field in category_form %}
+      <div class="relative">
+        {{ field }}
+        <label for="{{ field.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ field.label }}</label>
+      </div>
+    {% endfor %}
+    <input type="submit" value="상품 등록" class="product-create-btn bg-[#99ccff] mb-20">
+</form>
+{% endblock content %}

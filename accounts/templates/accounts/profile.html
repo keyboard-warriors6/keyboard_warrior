@@ -3,7 +3,7 @@
 
 {% block content %}
   <!-- 프로필 -->
-  <section id="example-0">
+  {% comment %} <section id="example-0"> {% endcomment %}
   <div class="title-container">
     <p class="text-4xl">프로필</p>
   </div>
@@ -22,10 +22,12 @@
     </div>
 
     <div><hr class="profile-line"></div>
-
+    
     <div class="flex flex-row justify-around">
       <div class="text-center m-5">
         <img src="/static/img/icon_bookmark.png" alt="icon_bookmark" class="profile-icon">
+        <section id="example-1">
+
         <p>스크랩북</p>
         <p>0</p>
       </div>
@@ -41,9 +43,10 @@
     </div>
   </div>
 
+
   <!-- 나의 쇼핑 -->
+  <div></div>
   <div class="title-container mt-36">
-    <section id="example-1">
     <p class="text-4xl">나의 쇼핑</p>
   </div>
 
@@ -221,6 +224,7 @@
       </div>
     </div>
 
+    <section id="example-2">
     <div aria-label="Page navigation example" class="text-center m-5">
       <ul class="inline-flex items-center -space-x-px">
         <li>
@@ -257,7 +261,6 @@
 
   <!-- 나의 리뷰 -->
   <div class="title-container mt-36">
-    <section id="example-2">
     <p class="text-4xl">나의 리뷰</p>
   </div>
 
@@ -346,6 +349,7 @@
       </div>
     </div>
 
+    <section id="example-3">
     <div aria-label="Page navigation example" class="text-center m-5">
       <ul class="inline-flex items-center -space-x-px">
         <li>
@@ -381,7 +385,6 @@
   
   <!-- 나의 문의 -->
   <div class="title-container mt-36">
-    <section id="example-3">
     <p class="text-4xl">나의 문의</p>
   </div>
 
