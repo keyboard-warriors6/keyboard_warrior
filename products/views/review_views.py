@@ -1,5 +1,6 @@
 from django.http import JsonResponse, Http404, HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect
@@ -164,4 +165,23 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return self.form_invalid(form)
     
 
-# 후기 조회는 상품 디테일에서 구현됨
+# 좋아요
+class ReviewLikeView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        review_pk = kwargs.get('review_pk')
+        review = get_object_or_404(Review, pk=review_pk)
+        user = request.user
+
+        if user.is_authenticated:
+            if user in review.likes.all():
+                review.likes.remove(user)
+                liked = False
+            else:
+                review.likes.add(user)
+                liked = True
+            likes_count = review.likes.count()
+            return JsonResponse({'liked': liked,
+                                'likes_count': likes_count
+                                })
+        else:
+            return JsonResponse({'error': '로그인이 필요합니다.'}, status=401)
