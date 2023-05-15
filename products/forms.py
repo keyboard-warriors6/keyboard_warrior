@@ -51,7 +51,7 @@ class PurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
         fields = ('address',)
-
+        
 
 class CartForm(forms.ModelForm):
     cnt = forms.IntegerField(
@@ -61,6 +61,7 @@ class CartForm(forms.ModelForm):
         initial=1,
         widget=forms.NumberInput(attrs={'class': 'form-control'})
     )
+
     class Meta:
         model = Cart
         fields = ('cnt',)
