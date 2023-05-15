@@ -16,7 +16,6 @@ class CategoryForm(forms.ModelForm):
         self.fields['brand'].label = '브랜드명'
         self.fields['brand'].help_text = ''
         self.fields['bluetooth'].widget.attrs['class'] = 'product-create-form block mt-6 px-2.5 pb-2.5 pt-4 w-fulltext-gray-900 bg-white border-1 appearance-none peer'
-        self.fields['bluetooth'].widget.attrs['style'] = 'transform: scale(1.2);'
         self.fields['switch'].widget.attrs['class'] = 'product-create-form block mt-6 px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white border-1 appearance-none peer'
         self.fields['switch'].widget.attrs['placeholder'] = " "
         self.fields['switch'].label = '스위치 종류'
@@ -26,7 +25,6 @@ class CategoryForm(forms.ModelForm):
         self.fields['pressure'].label = '키압'
         self.fields['pressure'].help_text = '' 
         self.fields['tenkey'].widget.attrs['class'] = 'product-create-form block mt-6 px-2.5 pb-2.5 pt-4 w-fulltext-gray-900 bg-white border-1 appearance-none peer'
-        self.fields['tenkey'].widget.attrs['style'] = 'transform: scale(1.2);'
         
     """
     brand: 브랜드명
