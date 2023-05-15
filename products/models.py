@@ -11,11 +11,13 @@ class Category(models.Model):
     pressure: 키압
     tenkey: True일 때 텐키리스, False일 때 풀배열
     """
+    BTCHOICES = [(False, '유선'), (True, '무선')]
+    TKCHOICES = [(False, '풀배열'), (True, '텐키리스')]
     brand = models.CharField(max_length=50)
-    bluetooth = models.BooleanField(default=False)
+    bluetooth = models.BooleanField("유/무선", default=False, choices=BTCHOICES)
     switch = models.CharField(max_length=10)
     pressure = models.IntegerField()
-    tenkey = models.BooleanField(default=False)
+    tenkey = models.BooleanField("배열", default=False, choices=TKCHOICES)
 
 
     # '브랜드명 - 제품명'으로 출력된다
@@ -42,7 +44,7 @@ class Product(models.Model):
     category = models.OneToOneField(Category, on_delete=models.CASCADE)
     product_img = models.ImageField(blank=True, upload_to=image_path)
     price = models.IntegerField()
-    discount_rate = models.FloatField()
+    discount_rate = models.IntegerField()
     bookmark = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='bookmark')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
