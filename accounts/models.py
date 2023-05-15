@@ -4,6 +4,19 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager, Permission
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import ugettext_lazy as _
 
+
+class Level(models.Model):
+    GRADE_CHOICES = [
+        ('B', 'Bronze'), ('S', 'Silver'), ('G', 'Gold'), ('P', 'Platinum')
+    ]
+    grade = models.CharField(max_length=2, choices=GRADE_CHOICES)
+    discount = models.IntegerField()
+
+
+    def __str__(self):
+        return self.get_grade_display()
+
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
         if not email:
@@ -38,7 +51,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-
 class User(AbstractUser):
     def accounts_image_path(instance, filename):
         return f'accounts/{instance.pk}/{filename}'
@@ -52,6 +64,7 @@ class User(AbstractUser):
     profile_img = models.ImageField(upload_to=accounts_image_path, null=True, blank=True)
     phone_number = PhoneNumberField(region='KR', blank=True, null=True)
     user_address = models.CharField(max_length=255, blank=True)
+    level = models.ForeignKey(Level, on_delete=models.SET_DEFAULT, default=1)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
@@ -62,10 +75,10 @@ class User(AbstractUser):
         return self.username
     
     def get_full_name(self):
-        return self.username
+        return self.last_name + self.first_name
 
     def get_short_name(self):
-        return self.username
+        return self.first_name
     
     # 성, 이름 필드 자체를 지우려면 아래의 주석을 활성화시키면 됨.
     # first_name = None
@@ -74,6 +87,3 @@ class User(AbstractUser):
     # class Meta:
     #     # db에서 first_name, last_name 컬럼 제거
     #     db_table = 'accounts_user'
-    
-
-
