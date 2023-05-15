@@ -6,8 +6,8 @@
 {% endblock head %}
 
 {% block content %}
-  <h1 class="title">회원가입</h1>
-  <form action="{% url 'accounts:signup' %}" method="POST">
+  <h1 class="title mt-14">회원가입</h1>
+  <form action="{% url 'accounts:signup' %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% if form.errors %}
       {% for error in form.errors.values %}

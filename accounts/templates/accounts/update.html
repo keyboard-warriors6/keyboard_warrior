@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/update.css' %}">
+{% endblock head %}
+
+{% block content %}
+  <h1 class="title mt-14">회원정보 수정하기</h1>
+  <form action="{% url 'accounts:update' user.username %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if form.errors %}
+      {% for error in form.errors.values %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <div class="relative">
+      {{ form.username }}
+      <label for="{{ form.username.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.username.label }}</label>
+    </div>
+
+    <div class="relative">
+      {{ form.email }}
+      <label for="{{ form.email.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.email.label }}</label>
+    </div>
+
+    <div class="relative">
+      {{ form.profile_img }}
+    </div>
+
+    <div class="relative">
+      {{ form.phone_number }}
+      <label for="{{ form.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.phone_number.label }}</label>
+    </div>
+
+    <div class="relative">
+      {{ form.user_address }}
+      <label for="{{ form.user_address.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.user_address.label }}</label>
+    </div>
+
+  
+    <input type="submit" value="회원정보 수정하기" class="signup-btn bg-[#99ccff] mt-6">
+  </form>
+{% endblock content %}

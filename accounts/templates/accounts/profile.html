@@ -1,9 +1,12 @@
 {% extends 'base_profile.html' %}
 {% load static %}
 
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock head %}
+
 {% block content %}
   <!-- 프로필 -->
-  {% comment %} <section id="example-0"> {% endcomment %}
   <div class="title-container">
     <p class="text-4xl">프로필</p>
   </div>
@@ -11,13 +14,19 @@
   <div class="profile-container">
     <div class="flex flex-row">
       <div class="profile-image m-10">
-        <img src="/static/img/icon_profile.png" alt="icon_profile">
+        {% if user.profile_img %}
+          <img src="{{ user.profile_img.url }}" alt="profile_img">
+        {% else %}
+          <img src="https://i.pinimg.com/564x/d2/98/4e/d2984ec4b65a8568eab3dc2b640fc58e.jpg" alt="no_image">
+        {% endif %}
       </div>
       <div class="mt-14">
-        <p class="user-name">아이디</p>
-        <button class="button-setting mt-10">
-          <p class="text-base">설정</p>
-        </button>
+        <p class="user-name">{{ user }}</p>
+        <a href="{% url 'accounts:update' user.username %}">
+          <button class="button-setting mt-10">
+            <p class="text-base">설정</p>
+          </button>
+        </a>
       </div>
     </div>
 
@@ -42,7 +51,28 @@
       </div>
     </div>
   </div>
-
+  
+  {% comment %}
+  collapse 연습 중, 미완성
+  <button
+    class="inline-block rounded bg-[#99ccff] px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-[#409fff]"
+    type="button"
+    data-te-collapse-init
+    data-te-ripple-init
+    data-te-ripple-color="light"
+    data-te-target="#collapseExample"
+    aria-expanded="false"
+    aria-controls="collapseExample">
+    Button with data-te-target
+  </button>
+  <div class="!visible hidden" id="collapseExample" data-te-collapse-item>
+    <div
+      class="block rounded-lg bg-[#99ccff]">
+      Some placeholder content for the collapse component. This panel is
+      hidden by default but revealed when the user activates the relevant
+      trigger.
+    </div>
+  </div> {% endcomment %}
 
   <!-- 나의 쇼핑 -->
   <div></div>
@@ -50,7 +80,7 @@
     <p class="text-4xl">나의 쇼핑</p>
   </div>
 
-  <!-- 조회 결과 없을 때, 차후에 if문으로 변경할 것 --> 
+  <!-- 조회 결과 없을 때, 차후에 if문으로 변경할 것 -->
   <div class="purchased_item-container">
     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-[#99ccff] hover:bg-[#409fff] font-medium rounded-lg text-sm px-4 py-2.5 m-10 text-center inline-flex items-center" type="button">조회 기간<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
     <!-- Dropdown menu -->
@@ -510,3 +540,7 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block script %}
+  <script src="{% static 'js/profile.js' %}"></script>
+{% endblock script %}
