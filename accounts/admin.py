@@ -1,8 +1,19 @@
 from django.contrib import admin
-
-# Register your models here.
+from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import Level
 
 
-admin.site.register(User, UserAdmin)
+class CustomUserAdmin(UserAdmin):
+    model = get_user_model()
+    fieldsets = UserAdmin.fieldsets + (
+        (None, {
+            "fields": (
+                ('phone_number', 'user_address', 'level', 'profile_img')
+            ),
+        }),
+    )
+    
+
+admin.site.register(get_user_model(), CustomUserAdmin)
+admin.site.register(Level)

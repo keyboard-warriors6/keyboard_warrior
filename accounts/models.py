@@ -4,6 +4,19 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager, Permission
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import ugettext_lazy as _
 
+
+class Level(models.Model):
+    GRADE_CHOICES = [
+        ('B', 'Bronze'), ('S', 'Silver'), ('G', 'Gold'), ('P', 'Platinum')
+    ]
+    grade = models.CharField(max_length=2, choices=GRADE_CHOICES)
+    discount = models.IntegerField()
+
+
+    def __str__(self):
+        return self.get_grade_display()
+
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, username, password=None, **extra_fields):
         if not email:
@@ -51,6 +64,7 @@ class User(AbstractUser):
     profile_img = models.ImageField(upload_to=accounts_image_path, null=True, blank=True)
     phone_number = PhoneNumberField(region='KR', blank=True, null=True)
     user_address = models.CharField(max_length=255, blank=True)
+    level = models.ForeignKey(Level, on_delete=models.SET_DEFAULT, default=1)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
