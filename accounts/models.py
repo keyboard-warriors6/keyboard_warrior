@@ -38,7 +38,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-
 class User(AbstractUser):
     def accounts_image_path(instance, filename):
         return f'accounts/{instance.pk}/{filename}'
@@ -62,10 +61,10 @@ class User(AbstractUser):
         return self.username
     
     def get_full_name(self):
-        return self.username
+        return self.last_name + self.first_name
 
     def get_short_name(self):
-        return self.username
+        return self.first_name
     
     # 성, 이름 필드 자체를 지우려면 아래의 주석을 활성화시키면 됨.
     # first_name = None
@@ -74,6 +73,3 @@ class User(AbstractUser):
     # class Meta:
     #     # db에서 first_name, last_name 컬럼 제거
     #     db_table = 'accounts_user'
-    
-
-
