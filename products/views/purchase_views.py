@@ -243,24 +243,17 @@ class CartDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         
 
 # 장바구니 물건 수량 수정(비동기)
-class CartUpdateView(LoginRequiredMixin, UpdateView, FormMixin):
+class CartUpdateView(LoginRequiredMixin, View):
     model = Cart
     fields = ['cnt']
+    def post(self, request, cart_pk):
+        cart = get_object_or_404(Cart, pk=cart_pk)
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
+        # Update the quantity of the cart item
+        new_cnt = int(request.POST.get('cnt', 0))
+        cart.cnt= new_cnt
+        cart.save()
 
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
-
-        if form.is_valid():
-            self.object.cnt = form.cleaned_data['cnt']
-            self.object.save()
-
-            data = {'success': True}
-            return JsonResponse(data)
-        else:
-            data = {'success': False, 'errors': form.errors}
-            return JsonResponse(data, status=400)
+        # Return a JSON response with the updated quantity
+        data = {'cnt': cart.cnt}
+        return JsonResponse(data)
