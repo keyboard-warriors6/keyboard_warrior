@@ -1,3 +1,12 @@
 .carousel-wrapper {
   height: 500px !important; 
 }
+
+.carousel-button {
+  transition: box-shadow 0.5s ease 0s;
+  box-shadow: 0px 0px 2px 0.5px rgb(0 0 0 / 0.15);
+}
+
+.carousel-button:hover {
+  box-shadow: 0px 0px 2px 0.5px rgb(0 0 0 / 0.2);
+}
