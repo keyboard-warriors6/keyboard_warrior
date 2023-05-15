@@ -7,11 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- <link rel="stylesheet" href="{% static 'css/base.css' %}"> -->
   <link rel="stylesheet" href="/static/css/base_profile.css">
-  <link rel="stylesheet" href="/static/css/profile.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet"/>
   <link rel="icon" href="{% static 'img/favicon.svg' %}">
+  {% block head %}{% endblock head %}
 </head>
 <body>
   <!-- navbar -->
@@ -39,7 +38,7 @@
                     <a href="#" class="px-2 lg:px-4 md:px-6">
                       <img src="/static/img/icon_cart.png" alt="icon_bookcart" style="w-8 lg:w-10 md:w-12";>
                     </a>
-                    <a href="#" class="px-2 lg:px-4 md:px-6">
+                    <a href="{% url 'accounts:profile' user %}" class="px-2 lg:px-4 md:px-6">
                       <img src="/static/img/icon_profile.png" alt="icon_bookcart" style="w-8 lg:w-10 md:w-12";>
                     </a>
                 </div>            
@@ -144,6 +143,7 @@
       </div>
     </div>
   </footer>
+  {% block script %}{% endblock script %}
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </html>

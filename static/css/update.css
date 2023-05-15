@@ -1,0 +1,46 @@
+main {
+  width: 350px;
+  margin: 0 auto 5rem;
+}
+
+input {
+  width: 100%;
+  border-radius: 0.25rem;
+  border-color: #dbdbdb;
+}
+
+.errorlist {
+  margin-bottom: 0.25rem;
+  color: rgb(255, 109, 109);
+}
+
+.title {
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.signup-form {
+  margin-bottom: 1.5rem;
+  border-radius: 0.25rem;
+  border-color: rgb(209 213 219);
+}
+
+.signup-form:focus {
+  border-color: #99ccff;
+  --tw-ring-color: #99ccff;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 0.875rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background-color: #7dafe1;
+}
