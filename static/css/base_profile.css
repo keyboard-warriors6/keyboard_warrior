@@ -35,6 +35,11 @@ nav, .menubar {
   justify-content: space-around;
 }
 
+.menubar-content-list:active {
+  border-bottom: 3px solid #99CCFF;
+  z-index: 1;
+}
+
 .menubar-content-list:hover {
   color: #99CCFF;
 }

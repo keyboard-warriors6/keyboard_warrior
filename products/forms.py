@@ -22,9 +22,10 @@ class CategoryForm(forms.ModelForm):
         self.fields['switch'].help_text = ''
         self.fields['pressure'].widget.attrs['class'] = 'product-create-form block mt-6 px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white border-1 appearance-none peer'
         self.fields['pressure'].widget.attrs['placeholder'] = " "
-        self.fields['pressure'].label = '키압'
+        self.fields['pressure'].label = '키압(g)'
         self.fields['pressure'].help_text = '' 
         self.fields['tenkey'].widget.attrs['class'] = 'product-create-form block mt-6 px-2.5 pb-2.5 pt-4 w-fulltext-gray-900 bg-white border-1 appearance-none peer'
+
         
     """
     brand: 브랜드명
@@ -59,7 +60,7 @@ class ProductForm(forms.ModelForm):
         self.fields['price'].help_text = ''
         self.fields['discount_rate'].widget.attrs['class'] = 'product-create-form block mt-6 px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white border-1 appearance-none peer'
         self.fields['discount_rate'].widget.attrs['placeholder'] = " "
-        self.fields['discount_rate'].label = '할인율'
+        self.fields['discount_rate'].label = '할인율(%)'
         self.fields['discount_rate'].help_text = '%빼고 정수 형태의 숫자로 적어주세요'
 
         
