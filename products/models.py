@@ -45,6 +45,7 @@ class Product(models.Model):
     product_img = models.ImageField(blank=True, upload_to=image_path)
     price = models.IntegerField()
     discount_rate = models.IntegerField()
+    discounted_price = models.IntegerField()
     bookmark = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='bookmark')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -52,6 +53,10 @@ class Product(models.Model):
 
     def __str__(self):
         return str(self.name)
+    
+    def save(self, *args, **kwargs):
+        self.discounted_price = int(self.price * (1 - self.discount_rate / 100))
+        super(Product, self).save(*args, **kwargs)
 
 
 class Review(models.Model):
