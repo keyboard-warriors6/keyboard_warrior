@@ -1,4 +1,5 @@
 import os
+from django.db import transaction
 from django.db.models import F, Sum
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -191,7 +192,7 @@ class PurchaseListView(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = 'products:purchase_list.html'
     context_object_name = 'purchase_list'
-
+    os.getenv('EMAIL_HOST_USER')
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.filter(user=self.request.user)

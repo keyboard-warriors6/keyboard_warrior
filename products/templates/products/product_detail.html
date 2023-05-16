@@ -4,6 +4,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static '/css/product_detail.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock head %}
 
 {% block content %}
@@ -43,9 +44,9 @@
         <div>
           <select id="category-select" class="border-[#99CCFF] mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
             <option selected disabled>스위치</option>
-            <option value="청축">청축(34,000원)</option>
-            <option value="갈축">갈축(34,000원)</option>
-            <option value="적축">적축(34,000원)</option>
+            <option value="청축">청축({{ product.discounted_price }}원)</option>
+            <option value="갈축">갈축({{ product.discounted_price }}원)</option>
+            <option value="적축">적축({{ product.discounted_price }}원)</option>
           </select>
           
           <div id="options-container" class="hidden product-select">
@@ -53,21 +54,34 @@
             <div class="select" style="display: flex; justify-content: space-between;">
               <div class="product-select-cnt">
                 <button class="decrement-quantity" data-target="quantity-product-1">-</button>
-                <input type="text" id="quantity-product-1" class="quantity product-category-select" value="1" readonly>
+                <input type="text" id="cnt" class="quantity product-category-select" value="1" readonly>
                 <button class="increment-quantity" data-target="quantity-product-1">+</button>
               </div>
-              <p style="display: flex; align-items: end; font-size: 18px;">{{ product.discounted_price }} 원</p>
+              <p id="origin_price" style="display: flex; align-items: end; font-size: 18px;"><span>{{ product.discounted_price }}</span> 원</p>
             </div>
           </div>
 
           <div class="flex product-price mb-6">
             <span>주문금액</span>
-            <span>0원</span>
+            <p id="origin_price2"><span>{{ product.discounted_price }}</span> 원</p>
           </div>
 
           <div class="flex flex-row mt-2" style="justify-content: space-around;">
-            <button id="add-to-cart-button" class="basis-1/2 rounded-none product-cart-btn m-1" style="border-radius: 4px;">장바구니</button>
-            <button class="basis-1/2 rounded-none product-purchase-btn m-1" style="border-radius: 4px;">바로구매</button>
+            {% comment %} <button id="add-to-cart-button" class="basis-1/2 rounded-none product-cart-btn m-1" style="border-radius: 4px;">장바구니</button> {% endcomment %}
+            <form method="POST" action="{% url 'products:cart_create' product_pk=product.pk %}">
+              {% csrf_token %}
+              {% comment %} <input type= "hidden" value = {{ cnt }} name="cnt"> {% endcomment %}
+              <input type= "hidden" name="cnt">
+              <button type="submit" class="basis-1/2 rounded-none product-cart-btn m-1" style="border-radius: 4px;">장바구니</button>
+            </form>
+            {% comment %} <button class="basis-1/2 rounded-none product-purchase-btn m-1" style="border-radius: 4px;">바로구매</button> {% endcomment %}
+            <form method="post" action="{% url 'products:purchase_from_detail' product_pk=product.pk %}">
+              {% csrf_token %}
+              <label for="cnt"></label>
+              {% comment %} <input type= "hidden" value = {{ cnt }} name="cnt"> {% endcomment %}
+              <input type= "hidden" name="cnt">
+              <button type="submit" class="basis-1/2 rounded-none product-purchase-btn m-1" style="border-radius: 4px; background-color: #99CCFF;">구매하기</button>
+            </form>
           </div>
         </div>
       </div>
@@ -86,10 +100,10 @@
     <div class="flex flex-row product-content">
       <!-- 상품 상세정보 -->
       <div class="basis-3/5 m-12">
-        <!-- 더보기 버튼 만들어야 함 -->
         <div class="">
-          <img src="https://exit.ohou.se/d89cfa7557cd34a185ec45dcf4bf964f6c11fdf5/instore0410.cafe24.com/img/iak_/COX/COX_BANNER2.jpg" alt="상세정보 사진">
-          <img src="https://exit.ohou.se/e71e8b7d1de3b92a1561ed0db197028a6214eacb/instore0410.cafe24.com/img/iak_/COX/COX_IN_02.jpg" alt="상세정보 사진">
+          {{ product.content }}
+          {% comment %} <img src="https://exit.ohou.se/d89cfa7557cd34a185ec45dcf4bf964f6c11fdf5/instore0410.cafe24.com/img/iak_/COX/COX_BANNER2.jpg" alt="상세정보 사진">
+          <img src="https://exit.ohou.se/e71e8b7d1de3b92a1561ed0db197028a6214eacb/instore0410.cafe24.com/img/iak_/COX/COX_IN_02.jpg" alt="상세정보 사진"> {% endcomment %}
         </div>
         <div class="mt-12 border-t-2"></div>
         <!-- 리뷰 평균 -->
@@ -99,7 +113,7 @@
             리뷰 쓰기
           </button>
         </div>
-        <div class="flex flex-row product-review-box h-40">
+        {% comment %} <div class="flex flex-row product-review-box h-40">
           <div class="basis-1/2 product-review-star1">
             <p class="flex items-center">
               <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
@@ -147,7 +161,7 @@
               <p>1</p>
             </div>
           </div>
-        </div>
+        </div> {% endcomment %}
 
         <!-- Main modal -->
         <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full z-[999]">
@@ -183,15 +197,15 @@
         <!-- 리뷰 쓰기 -->
         <div class="mt-9 pb-10">
           {% for review in reviews %}
-            <div class="flex flex-row">
+            <div class="flex flex-row mt-3">
               <div class="basis-1/2 product-review-header">
                 <!-- 유저 프로필 이미지 -->
                 <img src="{% static '/img/user_image.png' %}" alt="프로필 사진" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
                 <div>
-                  <p class="product-review-header-font" style="margin-bottom:7px;">{{ review.review.user }}</p>
+                  <p class="product-review-header-font">{{ review.review.user }}</p>
                   <div class="flex">
-                    <span id="stars">{{ review.review.rating }}</span>
-                    <p class="product-review-header-font" style="margin-left:5px; color:#757575;">{{ review.review.created_at|date:"Y-m-d" }}</p>
+                    <span class="stars" data-raing={{ review.review.rating}}>{{ review.review.rating }}</span>
+                    <p class="product-review-header-font" style="margin-left:5px; color:#757575; font-size:12px;">{{ review.review.created_at|date:"Y-m-d" }}</p>
                   </div>
                 </div>
               </div>
@@ -200,7 +214,7 @@
             <!-- 리뷰 이미지 -->
             <div>
               {% for image in review.images %}
-                <img src="{{ image.img.url }}" alt="review image" alt="리뷰 사진" style="width:112px; height:112px;">
+                <img src="{{ image.img.url }}" alt="review image" alt="리뷰 사진" style="width:112px; height:112px; margin-top:10px;">
               {% endfor %}
             </div>
 
@@ -210,69 +224,18 @@
             </div>
 
             <!-- 도움이 돼요 버튼 -->
-            <div>
-              <button type="button" class="product-review-like_btn mb-5">도움이 돼요</button>
-            </div>
+            <form class="like-forms" data-review-id="{{ review.review.pk }}">
+              {% csrf_token %}
+              {% if user in review.likes.all %}
+                <input type="submit" value="취소" class="product-review-like_btn mb-5" id="like-{{review.review.pk}}">
+              {% else %}
+                <input type="submit" value="도움이 돼요" class="product-review-like_btn mb-5" id="like-{{review.review.pk}}">
+              {% endif %}
+            </form>
 
             <hr>
           {% endfor %}
         </div>
-        
-        
-        {% comment %} <div>
-          {% for review in reviews %}
-            <div>
-              <p>{{ review.review.user }}</p>
-              <p>{{ review.review.content }}</p>
-              <p>{{ review.review.created_at }}</p>
-              <p>별점: {{ review.review.rating }}</p>
-              {% for image in review.images %}
-                <img src="{{ image.img.url }}" alt="review image">
-              {% endfor %}
-              <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">삭제</button>
-              </form>
-            </div>
-            <hr>
-          {% endfor %}  
-        </div> {% endcomment %}
-
-        <!-- 리뷰 내용 -->
-        {% comment %} <div class="mt-9 pb-10">
-          <div class="flex flex-row">
-            <div class="basis-1/2 product-review-header">
-              <!-- 유저 프로필 이미지 -->
-              <img src="{% static '/img/user_image.png' %}" alt="프로필 사진" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
-              <div>
-                <p class="product-review-header-font" style="margin-bottom:7px;">{{ product.user }}</p>
-                <div class="flex">
-                  <!-- 별점 -->
-                  <svg fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-6" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-6"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-6" fill="#DBDBDB"></use><use clip-path="url(#star-clip-6)" xlink:href="#star-path-6"></use></svg>
-
-                  <!-- 리뷰 작성일자 -->
-                  <span class="product-review-header-font" style="margin-left:5px; color:#757575;">{{ product.create_at|date:"Y-m-d" }} ∙ 구매</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- 키보드 카테고리(스위치) -->
-          <div class="my-5">
-            <p class="product-review-category">{{ product.category }}</p>
-          </div>
-          <!-- 리뷰 이미지 -->
-          <div>
-            <img src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/168311060961223369.jpeg?gif=1&w=240&h=240&c=c&webp=1" alt="리뷰 사진" style="width:112px; height:112px;">
-          </div>
-          <!-- 리뷰 내용 -->
-          <div>
-            <p class="product-review-content">{{ reivew.content }}</p>
-          </div>
-          <!-- 도움이 돼요 버튼 -->
-          <div>
-            <button type="button" class="product-review-like_btn">도움이 돼요</button>
-          </div>
-        </div> {% endcomment %}
 
           <!-- 페이지네이션 -->
           <div class="product-pagination">
@@ -346,61 +309,108 @@
         <!-- 구매창 -->
         <div class="basis-2/5 mx-12 product-sidebar" style="">
           <div class="mt-12">
-            <select id="category-select" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
+            <select id="category-select2" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
               <option selected disabled>스위치</option>
-              <option value="청축">청축(34,000원)</option>
-              <option value="갈축">갈축(34,000원)</option>
-              <option value="적축">적축(34,000원)</option>
+              <option value="청축">청축({{ product.discounted_price }}원)</option>
+              <option value="갈축">갈축({{ product.discounted_price }}원)</option>
+              <option value="적축">적축({{ product.discounted_price }}원)</option>
             </select>
             
-            <div id="options-container" class="hidden product-select">
-              <label for="quantity-select"></label>
+            <div id="options-container2" class="hidden product-select">
+              <label for="quantity-select2"></label>
               <div class="select" style="display: flex; justify-content: space-between;">
                 <div class="product-select-cnt">
                   <button class="decrement-quantity" data-target="quantity-product-1">-</button>
-                  <input type="text" id="quantity-product-1" class="quantity product-category-select" value="1" readonly>
+                  <input type="text" id="cnt2" class="quantity product-category-select" value="1" readonly>
                   <button class="increment-quantity" data-target="quantity-product-1">+</button>
                 </div>
-                <p style="display: flex; align-items: end; font-size: 18px;">{{ product.discounted_price }} 원</p>
+                <p  style="display: flex; align-items: end; font-size: 18px;"><span class="counted-price">{{ product.discounted_price }}</span> 원</p>
               </div>
             </div>
           </div>
           <div class="flex product-price mb-6">
             <span>주문금액</span>
-            <span>0원</span>
+            <p><span class="counted-price">{{ product.discounted_price }}</span> 원</p>
           </div>
           <div class="flex flex-row mt-2" style="justify-content: space-around;">
-            <button class="basis-1/5 rounded-none product-sidebar-bookmark-btn m-1" style="border-radius: 4px;">
-                <svg class="icon--stroke" aria-label="스크랩" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="0.5" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"><path d="M11.53 18.54l-8.06 4.31A1 1 0 0 1 2 21.97V3.5A1.5 1.5 0 0 1 3.5 2h17A1.5 1.5 0 0 1 22 3.5v18.47a1 1 0 0 1-1.47.88l-8.06-4.31a1 1 0 0 0-.94 0z"></path></svg>
-            </button>
-            <button class="basis-2/5 rounded-none product-cart-btn m-1" style="border-radius: 4px;">장바구니</button>
-            <button class="basis-2/5 rounded-none product-purchase-btn m-1" style="border-radius: 4px;">바로구매</button>
+            {% comment %} <button id="add-to-cart-button" class="basis-1/2 rounded-none product-cart-btn m-1" style="border-radius: 4px;">장바구니</button> {% endcomment %}
+            <form method="POST" action="{% url 'products:cart_create' product_pk=product.pk %}">
+              {% csrf_token %}
+              {% comment %} <input type= "hidden" value = {{ cnt }} name="cnt"> {% endcomment %}
+              <input type= "hidden" name="cnt">
+              <button type="submit" class="basis-1/2 rounded-none product-cart-btn m-1" style="border-radius: 4px;">장바구니</button>
+            </form>
+            {% comment %} <button class="basis-1/2 rounded-none product-purchase-btn m-1" style="border-radius: 4px;">바로구매</button> {% endcomment %}
+            <form method="post" action="{% url 'products:purchase_from_detail' product_pk=product.pk %}">
+              {% csrf_token %}
+              <label for="cnt"></label>
+              {% comment %} <input type= "hidden" value = {{ cnt }} name="cnt"> {% endcomment %}
+              <input type= "hidden" name="cnt">
+              <button type="submit" class="basis-1/2 rounded-none product-purchase-btn m-1" style="border-radius: 4px; background-color: #99CCFF;">구매하기</button>
+            </form>
           </div>
         </div>
       </div>
   </main>
 
-  <script>
-    // a태그 비동기 처리
-    {% comment %} document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-      });
-    }); {% endcomment %}
   
-    
-
-    // 별점
-    const numStars = {{ review.review.rating }}; // 출력할 별점 개수
-    // stars 요소에 별점 추가
-    const starsEl = document.getElementById("stars");
-    const star = '<svg style="margin-top:9px;" fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>'
-    for (let i = 0; i < numStars; i++) {
-      starsEl.innerHTML += star;
-    }
-  </script>
 {% endblock content %}
 
 {% block script %}
 <script type="text/javascript" src="/static/JS/product_detail.js"></script>
+<script src="{% static 'axios.min.js' %}"></script>
+<script>
+  // a태그 비동기 처리
+  {% comment %} document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+    });
+  }); {% endcomment %}
+
+  
+
+  // 별점
+  // stars 요소에 별점 추가
+  const starsEl = document.querySelectorAll(".stars");
+  starsEl.forEach((stars) => {
+    const numStars = Number(stars.textContent); // 출력할 별점 개수
+    stars.textContent = ''
+    const star = '<svg fill="#99CCFF" width=".8em" height=".8em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-31" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-31"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-31" fill="#DBDBDB"></use><use clip-path="url(#star-clip-31)" xlink:href="#star-path-31"></use></svg>'
+    for (let i = 0; i < numStars; i++) {
+      stars.innerHTML += star;
+    }
+    stars.classList.add('flex', 'items-center')
+  })
+
+  const forms = document.querySelectorAll('.like-forms')
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+  forms.forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+      const reviewId = event.target.dataset.reviewId
+      console.log(reviewId)
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/products/review/${reviewId}/likes/`,
+        headers:{'X-CSRFToken': csrftoken},
+      })
+      .then((response) => {
+        const isLiked = response.data.liked
+        console.log(isLiked)
+        const likeBtn = document.querySelector(`#like-${reviewId}`)
+        if (isLiked === true) {
+          likeBtn.value = '취소'
+          console.log(likeBtn)
+        } else {
+          likeBtn.value = '도움이 돼요'
+        }
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+    })
+  })
+
+</script>
 {% endblock script %}

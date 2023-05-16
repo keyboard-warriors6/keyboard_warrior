@@ -38,6 +38,7 @@
     background-color: white;
     color: #99CCFF;
     padding: 13px 10px 14px;
+    width: 130px;
 }
 
 .product-purchase-btn {
@@ -46,6 +47,8 @@
     background-color: #99CCFF;
     color: white;
     padding: 13px 10px 14px;
+    width: 130px;
+
 }
 
 .product-category_bar {
