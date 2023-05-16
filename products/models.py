@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db import models
-# from embed_video.fields import EmbedVideoField
+from django.db.models import Avg
 
 
 class Category(models.Model):
@@ -53,6 +53,11 @@ class Product(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+    def product_rating(self):
+        return self.reivews.agrregate(Avg('rating'))
+
     
     def save(self, *args, **kwargs):
         self.discounted_price = int(self.price * (1 - self.discount_rate / 100))

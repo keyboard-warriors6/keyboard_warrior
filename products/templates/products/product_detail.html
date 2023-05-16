@@ -14,7 +14,11 @@
     <div class="flex flex-row">
       <!-- 상품 이미지 -->
       <div class="basis-1/2 m-12 product-img" style="">
-        <img src="{{ product.product_img.url }}" alt="상품 사진">
+        {% if product.product_img %}
+          <img src="{{ product.product_img.url }}" alt="상품 사진">
+        {% else %}
+          <img src="{% static 'img/default_img.svg' %}" class="w-full h-full object-cover">
+        {% endif %}
       </div>
   
       <!-- 상품 정보 -->

@@ -1,17 +1,18 @@
 import os
 from django.db import transaction
 from django.db.models import F, Sum
-from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy, reverse
-from django.forms import inlineformset_factory, formset_factory
+from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
-from django.views.generic import FormView, View, DeleteView
+from django.views.generic import FormView, View, DeleteView, DetailView
 from django.views.generic.edit import CreateView, FormMixin, UpdateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models.functions import TruncDate
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from products.models import *
 from products.forms import *
 
@@ -21,7 +22,7 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
     model = Purchase
     fields = ['address']
     template_name = 'products/purchase_create.html'
-    success_url = reverse_lazy('products:product_list')
+    success_url = reverse_lazy('products:purchase_complete')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -76,7 +77,7 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
             purchase_item.purchase = self.object
             purchase_item.product = item['product']
             purchase_item.cnt = item['cnt']
-            purchase_item.save()
+            purchase_item.save()   
 
         if len(selected_cart_pks) != len(cart):  # 선택된 장바구니 항목만 삭제
             cart_items = Cart.objects.filter(pk__in=selected_cart_pks)
@@ -84,6 +85,9 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
         else:  # 전체 삭제
             cart_items = cart
             self.delete_cart_items(cart_items)
+
+        self.send_order_confirmation_email(purchase=self.object)
+
         return super().form_valid(form)
         
     def form_invalid(self, form):
@@ -94,6 +98,20 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
         if not self.request.user.is_authenticated:
             return self.handle_no_permission()
         return super().get(request, *args, **kwargs)
+    
+    def send_order_confirmation_email(self, purchase):
+        purchase_items = purchase.purchaseitem_set.all()
+        subject = '주문 명세서'
+        from_email = os.getenv('EMAIL_HOST_USER')
+        to_email = [purchase.user.email]  # 구매자 이메일
+        context = {'purchase': purchase, 'purchase_items': purchase_items}
+        html_message = render_to_string('products/purchase_complete_email.html', context)
+        plain_message = strip_tags(html_message)
+        try:
+            send_mail(subject, plain_message, from_email, to_email, html_message=html_message, fail_silently=False)
+        except Exception as e:
+            print("Email sending failed:", str(e))
+
 
 
 class PurchaseFromDetailView(LoginRequiredMixin, CreateView):
@@ -122,11 +140,54 @@ class PurchaseFromDetailView(LoginRequiredMixin, CreateView):
         purchase_item.cnt = cnt
         purchase_item.save()
 
-        return redirect('products:product_list')
+        self.send_order_confirmation_email(purchase=self.object)
 
-        
-        
-# # 내가 구매한 상품 목록 조회하기(Read)
+        return redirect('products:purchase_complete', purchase_pk=self.object.pk)
+
+
+    def send_order_confirmation_email(self, purchase):
+        purchase_items = purchase.purchaseitem_set.all()
+        subject = '주문 명세서'
+        from_email = os.getenv('EMAIL_HOST_USER')
+        to_email = [purchase.user.email]  # 구매자 이메일
+        context = {'purchase': purchase, 'purchase_items': purchase_items}
+        html_message = render_to_string('products/purchase_complete_email.html', context)
+        plain_message = strip_tags(html_message)
+        try:
+            send_mail(subject, plain_message, from_email, to_email, html_message=html_message, fail_silently=False)
+        except Exception as e:
+            print("Email sending failed:", str(e))
+
+
+class PurchaseCompleteView(DetailView):
+    # 상품 image, 상품 수량, 상품 명칭, 각 가격, total_price
+    model = Purchase
+    template_name = 'products/purchase_complete.html'
+    context_object_name = 'purchase'
+
+    def get_object(self, queryset=None):
+        purchase_pk = self.kwargs.get('purchase_pk')
+        queryset = self.get_queryset()
+        if purchase_pk is not None:
+            queryset = queryset.filter(pk=purchase_pk)
+        obj = queryset.first()
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        purchase = self.get_object()
+        purchase_items = purchase.purchaseitem_set.all()
+        total_price = purchase.total_price
+
+        context['purchase_items'] = purchase_items
+        context['total_price'] = total_price
+
+        return context
+
+
+
+# 내가 구매한 상품 목록 조회하기(Read)
 class PurchaseListView(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = 'products:purchase_list.html'

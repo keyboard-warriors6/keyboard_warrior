@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static '/css/purchase.css' %}">
+{% endblock head %}
+
+{% block content %}
+  <form method="POST" action="{% url 'products:purchase_from_cart' %}">
+    {% csrf_token %}
+    <div class="flex gap-10">
+      <div class="basis-2/3">
+        <h1 class="font-bold text-2xl mb-10">주문</h1>
+        <div class="mb-20">
+          <p class="title">주문자</p>
+          <hr class="my-4">
+          <div class="user-info">
+            <p class="user-label">이름</p>
+            <input type="text" name="info" value={{ user.last_name }}{{ user.first_name }}>
+          </div>
+          <div class="user-info">
+            <p class="user-label">이메일</p>
+            <input type="text" name="info" value={{ user.email }}>
+          </div>
+          <div class="user-info">
+            <p class="user-label">휴대전화</p>
+            <input type="text" name="info" value={{ user.phone_number }}>
+          </div>
+          {% for field in form %}
+            <div class="user-info">
+              <p class="user-label">주소</p>
+              {{ field }}
+            </div>
+          {% endfor %}
+        </div>
+        <h2 class="title">주문상품 <span class="text-sm font-normal text-gray-500 pl-2">{{ purchase_items|length }}건</span></h2>
+        <hr class="my-4">
+        {% for item in purchase_items %}
+          <div class="item wrap-border">
+            <div class="brand">
+              <p>{{ item.product.category.brand }}</p>
+            </div>
+            <div class="item-content">
+              <div class="item-img wrap-border">
+                <img src="{{ item.product.product_img.url }}" alt="">
+              </div>
+              <div class="flex flex-col justify-between ml-6">
+                <p class="text-sm">{{ item.product.name }}</p>
+                <div class="flex items-center gap-4 item-price">
+                  <p class="price"><span>{{ item.product.price }}</span>원</p>
+                  <p class="text-xs text-gray-500"><span>{{ item.cnt }}</span>개</p>
+                  {% comment %} <input name="cnts" type="text" value="{{ item.cnt }}" readonly> {% endcomment %}
+                </div>
+              </div>
+              <div class="">
+                <div class="">
+                  {% comment %} <h5 class="card-title">{{ item.product.name }}</h5> {% endcomment %}
+                  {% comment %} <p class="card-text">수량: {{ item.cnt }}</p> {% endcomment %}
+                  <input class="card-text" name="products_1" type="hidden" value="{{ item.product.pk }}" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+        <div class="basis-1/3">
+          <div class="sidebar">
+            <div class="wrap-border p-4 mb-6">
+              <div class="flex font-bold">
+                <p class="grow">최종 결제 금액</p>
+                <span id="total-price"></span>원
+              </div>
+            </div>
+            <input class="card-text" name="cart_pks" type="hidden" value="{{ cart_pks }}" readonly>
+            <button class="main-btn">주문하기</button>
+          </div>
+        </div>
+      </form>
+    </div>
+{% endblock content %}
+
+{% block script %}
+  <script src="{% static '/js/purchase.js' %}"></script>
+{% endblock script %}

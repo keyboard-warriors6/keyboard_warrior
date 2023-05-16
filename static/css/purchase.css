@@ -1,0 +1,130 @@
+main {
+  padding-bottom: 5rem;
+}
+
+.errorlist {
+  color: rgb(255, 109, 109);
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.brand {
+  padding: 0.625rem 1rem;
+  background-color: #f7f8fa;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.item-content {
+  display: flex;
+  padding: 1rem;
+}
+
+.item-img {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+}
+
+.wrap-border {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+.price {
+  position: relative;
+  font-weight: bold;
+}
+
+.price::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 4px;
+  right: -10px;
+  width: 1px;
+  height: 14px;
+  background: #eaebef;
+}
+
+/* [name=cnts] {
+  display: inline;
+  border: none;
+  padding: 0;
+}
+
+[name=cnts]::after {
+  content: "개";
+  display: block;
+} */
+
+.main-btn {
+  width: 100%;
+  padding: 0.875rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  background-color: #99ccff;
+  color: white;
+  cursor: pointer;
+}
+
+.main-btn:hover {
+  background-color: #7dafe1;
+}
+
+[name=info] {
+  border-radius: 0.25rem;
+  border-color: rgb(209 213 219);
+  font-size: 0.875rem;
+}
+
+[name=info]:focus {
+  border-color: #99ccff;
+  --tw-ring-color: #99ccff;
+}
+
+[name=address] {
+  font-size: 0.875rem;
+  flex-basis: 80%;
+  border-radius: 0.25rem;
+  border-color: rgb(209 213 219);
+}
+
+[name=address]:focus {
+  border-color: #99ccff;
+  --tw-ring-color: #99ccff;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.user-label {
+  flex-basis: 4rem;
+  font-size: 0.875rem;
+}
+
+.sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+#total-price {
+  position: relative;
+  padding-right: 0.25rem;
+  font-weight: bold;
+  color: #99ccff;
+}

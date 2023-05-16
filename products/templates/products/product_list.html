@@ -39,7 +39,11 @@
       </button>
     </div>
     <!-- 광고 배너 -->
-    <p class="text-2xl w-full">인기상품</p>
+
+    <div class="flex justify-between">
+      <p class="text-2xl">인기상품</p>
+      <a href=""><p class="text-xl text-a-tag">전체 보기</p></a>
+    </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
       <div class="carousel-wrapper relative h-54 overflow-hidden rounded-lg md:h-96">
@@ -52,7 +56,11 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="w-[270px] h-[270px] border">
-                      <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                      {% if product.product_img %}
+                        <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                      {% else %}
+                        <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                      {% endif %}
                     </div>
                     <p class="text-sm mb-1">{{ product.category.brand }}</p>
                     <p class="text-lg mb-1">{{ product.name }}</p>
@@ -78,7 +86,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -94,7 +106,11 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
@@ -122,7 +138,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -138,13 +158,22 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
                       <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
                       {% if product.reviews.all %}
-                        <p>⭐5.0 리뷰 {{ product.reviews.all|length }}</p>
+                        {% comment %} <p>⭐5.0 리뷰 {{ product.reviews.all|length }}</p> {% endcomment %}
+                        <p class="flex items-center py-3">
+                          <!-- 별점 -->
+                          <svg class="svg1" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          <span class="product-information-star-cnt">5.0&nbsp; &nbsp;리뷰 {{ product.reviews.all|length }}개 리뷰</span>
+                        </p>
                       {% endif %}
                     </a>
                   </div>
@@ -171,7 +200,10 @@
 
 
     <!-- 입문하기 좋은 키보드 -->
-    <p class="text-2xl w-full">입문하기 좋은 키보드</p>
+    <div class="flex justify-between">
+      <p class="text-2xl">입문하기 좋은 키보드</p>
+      <a href=""><p class="text-xl text-a-tag">전체 보기</p></a>
+    </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
       <div class="carousel-wrapper relative h-54 overflow-hidden rounded-lg md:h-96">
@@ -184,7 +216,11 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="w-[270px] h-[270px] border">
-                      <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                      {% if product.product_img %}
+                        <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                      {% else %}
+                        <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                      {% endif %}
                     </div>
                     <p class="text-sm mb-1">{{ product.category.brand }}</p>
                     <p class="text-lg mb-1">{{ product.name }}</p>
@@ -210,7 +246,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -226,7 +266,11 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
@@ -254,7 +298,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -270,7 +318,11 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
@@ -304,7 +356,10 @@
 
 
     <!-- 카테고리별 대표 상품 -->
-    <p class="text-2xl w-full">카테고리별 대표 상품</p>
+    <div class="flex justify-between">
+      <p class="text-2xl text-a-tag">카테고리별 대표 상품</p>
+      <a href=""><p class="text-xl">전체 보기</p></a>
+    </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
       <div class="carousel-wrapper relative h-54 overflow-hidden rounded-lg md:h-96">
@@ -317,7 +372,11 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="w-[270px] h-[270px] border">
-                      <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                      {% if product.product_img %}
+                        <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                      {% else %}
+                        <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                      {% endif %}
                     </div>
                     <p class="text-sm mb-1">{{ product.category.brand }}</p>
                     <p class="text-lg mb-1">{{ product.name }}</p>
@@ -343,7 +402,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -359,7 +422,11 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
@@ -387,7 +454,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -437,7 +508,10 @@
 
 
     <!-- 리뷰 많은 순 -->
-    <p class="text-2xl w-full">후기가 많은 상품</p>
+    <div class="flex justify-between">
+      <p class="text-2xl">후기가 많은 상품</p>
+      <a href=""><p class="text-xl text-a-tag">전체 보기</p></a>
+    </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
       <div class="carousel-wrapper relative h-54 overflow-hidden rounded-lg md:h-96">
@@ -450,7 +524,11 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="w-[270px] h-[270px] border">
-                      <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                      {% if product.product_img %}
+                        <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                      {% else %}
+                        <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                      {% endif %}
                     </div>
                     <p class="text-sm mb-1">{{ product.category.brand }}</p>
                     <p class="text-lg mb-1">{{ product.name }}</p>
@@ -476,7 +554,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -492,7 +574,11 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
@@ -520,7 +606,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -536,7 +626,11 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                      {% if product.product_img %}
+                        <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                      {% else %}
+                        <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                      {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
@@ -570,7 +664,10 @@
 
 
     <!-- 가격 순 -->
-    <p class="text-2xl w-full">가격순</p>
+    <div class="flex justify-between">
+      <p class="text-2xl text-a-tag">가격순</p>
+      <a href=""><p class="text-xl">전체 보기</p></a>
+    </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
       <div class="carousel-wrapper relative h-54 overflow-hidden rounded-lg md:h-96">
@@ -583,7 +680,11 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="w-[270px] h-[270px] border">
-                      <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                      {% if product.product_img %}
+                        <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                      {% else %}
+                        <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                      {% endif %}
                     </div>
                     <p class="text-sm mb-1">{{ product.category.brand }}</p>
                     <p class="text-lg mb-1">{{ product.name }}</p>
@@ -609,7 +710,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -625,7 +730,11 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
@@ -653,7 +762,11 @@
                     <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="w-[270px] h-[270px] border">
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
                         </div>
                         <p class="text-sm mb-1">{{ product.category.brand }}</p>
                         <p class="text-lg mb-1">{{ product.name }}</p>
@@ -669,7 +782,11 @@
                   <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                     <a href="{% url 'products:product_detail' product.pk %}">
                       <div class="w-[270px] h-[270px] border">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
                       </div>
                       <p class="text-sm mb-1">{{ product.category.brand }}</p>
                       <p class="text-lg mb-1">{{ product.name }}</p>
