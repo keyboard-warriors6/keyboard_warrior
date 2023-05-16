@@ -17,7 +17,7 @@
   
     <div class="relative">
       {{ form.content }}
-      <label for="{{ form.content.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.content.label }}</label>
+      <label for="{{ form.content.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-6 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.content.label }}</label>
     </div>
   
     <div class="relative">
@@ -27,44 +27,44 @@
     <div class="flex">
       <div class="relative flex-1 me-1">
         {{ form.price }}
-        <label for="{{ form.price.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.price.label }}</label>
+        <label for="{{ form.price.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-[2rem] peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.price.label }}</label>
       </div>
   
       <div class="relative flex-1 ms-1">
         {{ form.discount_rate }}
-        <label for="{{ form.discount_rate.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.discount_rate.label }}</label>
+        <label for="{{ form.discount_rate.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-[2rem] peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.discount_rate.label }}</label>
       </div>
     </div>
   
     <div class="flex">
       <div class="relative flex-1 me-1">
         {{ category_form.brand }}
-        <label for="{{ category_form.brand.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.brand.label }}</label>
+        <label for="{{ category_form.brand.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-[2rem]  peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.brand.label }}</label>
       </div>
   
       <div class="relative flex-1 ms-1">
         {{ category_form.switch }}
-        <label for="{{ category_form.switch.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.switch.label }}</label>
+        <label for="{{ category_form.switch.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-[2rem] peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.switch.label }}</label>
       </div>
     </div>
   
   
   
   
-    <div class="flex">
+    <div class="flex items-center">
       <div class="relative ">
         {{ category_form.pressure }}
-        <label for="{{ category_form.pressure.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.pressure.label }}</label>
+        <label for="{{ category_form.pressure.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-[2rem] peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.pressure.label }}</label>
       </div>
   
       <div class="relative flex-1 ms-20">
         {{ category_form.bluetooth }}
-        <label for="{{ category_form.bluetooth.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.bluetooth.label }}</label>
+        <label for="{{ category_form.bluetooth.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.bluetooth.label }}</label>
       </div>
   
       <div class="relative flex-1 me-1">
         {{ category_form.tenkey }}
-        <label for="{{ category_form.tenkey.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.tenkey.label }}</label>
+        <label for="{{ category_form.tenkey.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ category_form.tenkey.label }}</label>
       </div>
     </div>
   
