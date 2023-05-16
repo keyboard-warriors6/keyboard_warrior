@@ -1,3 +1,4 @@
+import os
 from django.db.models import F, Sum
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -75,7 +76,7 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
             purchase_item.purchase = self.object
             purchase_item.product = item['product']
             purchase_item.cnt = item['cnt']
-            purchase_item.save()
+            purchase_item.save()   
 
         if len(selected_cart_pks) != len(cart):  # 선택된 장바구니 항목만 삭제
             cart_items = Cart.objects.filter(pk__in=selected_cart_pks)
@@ -83,6 +84,9 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
         else:  # 전체 삭제
             cart_items = cart
             self.delete_cart_items(cart_items)
+
+        self.send_order_confirmation_email(purchase=self.object)
+
         return super().form_valid(form)
         
     def form_invalid(self, form):
@@ -93,6 +97,20 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
         if not self.request.user.is_authenticated:
             return self.handle_no_permission()
         return super().get(request, *args, **kwargs)
+    
+    def send_order_confirmation_email(self, purchase):
+        purchase_items = purchase.purchaseitem_set.all()
+        subject = '주문 명세서'
+        from_email = os.getenv('EMAIL_HOST_USER')
+        to_email = [purchase.user.email]  # 구매자 이메일
+        context = {'purchase': purchase, 'purchase_items': purchase_items}
+        html_message = render_to_string('products/purchase_complete_email.html', context)
+        plain_message = strip_tags(html_message)
+        try:
+            send_mail(subject, plain_message, from_email, to_email, html_message=html_message, fail_silently=False)
+        except Exception as e:
+            print("Email sending failed:", str(e))
+
 
 
 class PurchaseFromDetailView(LoginRequiredMixin, CreateView):
@@ -129,7 +147,7 @@ class PurchaseFromDetailView(LoginRequiredMixin, CreateView):
     def send_order_confirmation_email(self, purchase):
         purchase_items = purchase.purchaseitem_set.all()
         subject = '주문 명세서'
-        from_email = 'heager@naver.com'
+        from_email = os.getenv('EMAIL_HOST_USER')
         to_email = [purchase.user.email]  # 구매자 이메일
         context = {'purchase': purchase, 'purchase_items': purchase_items}
         html_message = render_to_string('products/purchase_complete_email.html', context)
@@ -166,7 +184,8 @@ class PurchaseCompleteView(DetailView):
 
         return context
 
-        
+
+
 # 내가 구매한 상품 목록 조회하기(Read)
 class PurchaseListView(LoginRequiredMixin, ListView):
     model = Purchase
