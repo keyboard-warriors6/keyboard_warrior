@@ -173,6 +173,7 @@ class ProductUpdateView(UserPassesTestMixin, PermissionRequiredMixin, UpdateView
 class ProductDeleteView(UserPassesTestMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('products:product_list')
+    pk_url_kwarg = 'product_pk'
     permission_required = 'products.add_product'
     raise_exception = True
 
