@@ -18,36 +18,60 @@
   <div class="sticky top-0 w-full z-[40]">
     <nav class="border-gray-200 dark:bg-gray-900">
       <div class="max-w-7xl mx-auto px-4">
-        <div class="py-2 flex items-center justify-between">
-          <a href="#">
-              <img src="/static/img/logo.png" alt="logo" style="width: 16rem";>
-          </a>
-        <form class="w-full mx-9" action="{% url 'products:product_search' %}">   
-          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-          <div class="relative">
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <div class="py-4 flex items-center justify-between">
+          <a href="{% url 'products:product_list' %}">
+            <div class="w-32">
+              <img src="{% static 'img/logo.png' %}" alt="logo">
             </div>
-            <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="제품 검색" name="query" required>
-          </div>
-        </form>
-        <div class="flex justify-between items-center md:justify-end">
-            <a href="#" class="px-2 lg:px-4 md:px-6">
-                <img src="/static/img/icon_bookmark.png" alt="icon_bookcart" style="w-8 lg:w-10 md:w-12";>
-            </a>
-            <a href="#" class="px-2 lg:px-4 md:px-6">
-                <img src="/static/img/icon_cart.png" alt="icon_bookcart" style="w-8 lg:w-10 md:w-12";>
-            </a>
-            <a href="{% url 'accounts:profile' user %}" class="px-2 lg:px-4 md:px-6">
-                <img src="/static/img/icon_profile.png" alt="icon_bookcart" style="w-8 lg:w-10 md:w-12";>
-            </a>
-        </div>            
+          </a>
+          <form class="grow ml-12 mr-8">   
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </div>
+              <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="제품 검색" required>
+            </div>
+          </form>
+          {% if user.is_authenticated %}
+            <div class="flex justify-between items-center md:justify-end gap-6">
+              <a href="#">
+                <div class="w-6">
+                  <img src="{% static 'img/icon_bookmark.png' %}" alt="icon_bookcart">
+                </div>
+              </a>
+              <a href="{% url 'products:cart_list' %}">
+                <div class="relative w-6">
+                  <img src="{% static 'img/icon_cart.png' %}" alt="icon_bookcart">
+                  {% if user.cart_set.all %}
+                  <div class="absolute inline-flex items-center justify-center w-4 h-4 text-[0.625rem] font-bold text-white bg-red-400 rounded-full -top-2 -right-2 dark:border-gray-900">{{ user.cart_set.all|length }}</div>
+                  {% endif %}
+                </div>
+                </a>
+              <a href="{% url 'accounts:profile' user %}">
+                {% if user.profile_img %}
+                  <div class="profile-img w-10 h-10 rounded-full overflow-hidden">
+                    <img src="{{ user.profile_img.url }}" alt="{{ user }} 프로필 사진" class="w-full h-full object-cover">
+                  </div>
+                {% else %}
+                  <div class="w-6">
+                    <img src="{% static 'img/icon_profile.png' %}" alt="icon_bookcart">
+                  </div>
+                {% endif %}
+              </a>
+            </div>
+          {% else %}
+            <div class="flex justify-between items-center md:justify-end gap-4">
+              <a href="{% url 'accounts:login' %}">로그인</a>
+              <a href="{% url 'accounts:signup' %}">회원가입</a>
+            </div>
+          {% endif %}
         </div>            
       </div>
     </nav>
   </div>
 
-  <div class="menubar py-4 h-15">
+  {% comment %} <div class="menubar py-4 h-15">
     <div class="menubar-content mx-auto px-4 flex">
       <div class="flex gap-10">
         <a href="#" class="menubar-content-list font-semibold">전체</a>
@@ -61,10 +85,10 @@
         <p>검색어 자리</p>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
   <!-- main -->
-  <main class="mx-auto pt-20">
+  <main class="mx-auto pt-8">
     {% block content %}
     {% endblock content %}
   </main>

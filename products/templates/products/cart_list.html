@@ -46,7 +46,11 @@
                     <input checked type="checkbox" name="cart_pks" value="{{ item.pk }}" class="main item-checkbox w-5 h-5 bg-gray-100 border-gray-300 rounded">
                   </div>
                   <div class="cart-item-image">
-                    <img src="{{ item.product.product_img.url }}" alt="{{ item.product.name }}">
+                    {% if item.product.product_img %}
+                      <img src="{{ item.product.product_img.url }}" alt="{{ item.product.name }}">
+                    {% else %}
+                      <img src="{% static 'img/default_img.svg' %}" alt="{{ item.product.name }}">
+                    {% endif %}
                   </div>
                   <div class="flex flex-col justify-between w-full">
                     <a href="{% url 'products:product_detail' item.product_id %}" class="cart-item-link">

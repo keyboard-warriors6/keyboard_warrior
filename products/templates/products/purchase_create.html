@@ -42,7 +42,11 @@
             </div>
             <div class="item-content">
               <div class="item-img wrap-border">
-                <img src="{{ item.product.product_img.url }}" alt="">
+                {% if item.product.product_img %}
+                  <img src="{{ item.product.product_img.url }}" alt="">
+                {% else %}
+                  <img src="{% static 'img/default_img.svg' %}" alt="">
+                {% endif %}
               </div>
               <div class="flex flex-col justify-between ml-6">
                 <p class="text-sm">{{ item.product.name }}</p>

@@ -22,15 +22,22 @@
       </div>
       <div class="mt-14">
         <p class="user-name">{{ user }}</p>
-        <a href="{% url 'accounts:update' user.username %}">
-          <button class="button-setting mt-10">
-            <p class="text-base">설정</p>
-          </button>
-        </a>
+        <div class="flex items-end gap-4">
+          <a href="{% url 'accounts:update' user.username %}">
+            <button class="button-setting mt-10">
+              <p class="text-base">설정</p>
+            </button>
+          </a>
+          <a href="{% url 'accounts:logout' %}">
+            <button class="logout-button mt-10">
+              <p class="text-base">로그아웃</p>
+            </button>
+          </a>
+        </div>
       </div>
     </div>
 
-    <div><hr class="profile-line"></div>
+    <hr class="profile-line">
     
     <div class="flex flex-row justify-around">
       <div class="text-center m-5">
@@ -542,5 +549,5 @@
 {% endblock content %}
 
 {% block script %}
-  <script src="{% static 'js/profile.js' %}"></script>
+  {% comment %} <script type="module" src="{% static 'js/profile.js' %}"></script> {% endcomment %}
 {% endblock script %}
