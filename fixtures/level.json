@@ -1,0 +1,1 @@
+[{"model": "accounts.level", "pk": 1, "fields": {"grade": "B", "discount": 0}}, {"model": "accounts.level", "pk": 2, "fields": {"grade": "S", "discount": 5}}, {"model": "accounts.level", "pk": 3, "fields": {"grade": "G", "discount": 7}}, {"model": "accounts.level", "pk": 4, "fields": {"grade": "P", "discount": 10}}]
