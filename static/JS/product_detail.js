@@ -6,7 +6,19 @@ const optionsContainer2 = document.querySelector('#options-container2');
 const quantitySelect = document.querySelector('#quantity-select');
 const incrementButtons = document.querySelectorAll('.increment-quantity');
 const decrementButtons = document.querySelectorAll('.decrement-quantity');
+
+// 가격 관련된 요소를 가져옴
+const originPriceTag = document.getElementById('origin_price').children[0]
+const originPriceTags2 = document.querySelectorAll('.origin-price2')
+const originPrice = Number(originPriceTag.textContent)
+
+// 수량 관련된 요소를 가져옴
+const target = document.getElementById('cnt');
+const target2 = document.getElementById('cnt2');
+const cntInputs = document.getElementsByName('cnt');
+const cntInputs2 = document.getElementsByName('cnt2');
     
+
 // 카테고리를 선택할 때마다 호출되는 함수
 function handleCategorySelect() {
   const selectedCategory = categorySelect.value;
@@ -34,20 +46,20 @@ function handleCategorySelect() {
     quantityLabel.textContent = `${selectedCategory2} `;
     quantityLabel2.textContent = `${selectedCategory2} `;
   }
-}
 
-const originPriceTag = document.getElementById('origin_price').children[0]
-const originPriceTag2 = document.getElementById('origin_price2').children[0]
-const originPrice = Number(originPriceTag.textContent)
-const originPrice2 = Number(originPriceTag2.textContent)
+  originPriceTags2.forEach((tag) => {
+    tag.textContent = originPrice
+  })
+
+  cntInputs.forEach(input => {
+    input.value = 1
+  })
+}
 
 function handleQuantityChange(e) {
   const button = e.target;
   const targetId = button.getAttribute('data-target');
-  const target = document.getElementById('cnt');
-  const target2 = document.getElementById('cnt2');
-  const cntInputs = document.getElementsByName('cnt');
-  const cntInputs2 = document.getElementsByName('cnt2');
+  
   const cntPrice = document.querySelectorAll('.counted-price');
   let quantity = Number(target.value);
   // let price = document.getElementById('total_price');
@@ -55,7 +67,11 @@ function handleQuantityChange(e) {
   if (button.classList.contains('increment-quantity')) {
     quantity++;
     originPriceTag.textContent = Number(originPriceTag.textContent) + originPrice;
-    originPriceTag2.textContent = Number(originPriceTag2.textContent) + originPrice2;
+   
+    originPriceTags2.forEach(tag => {
+      tag.textContent = Number(originPriceTag.textContent)
+    });
+
     cntPrice.forEach((price) => {
       price.textContent = Number(price.textContent) + originPrice;
     })
@@ -63,7 +79,11 @@ function handleQuantityChange(e) {
     if (quantity > 1) {
       quantity--;
       originPriceTag.textContent = Number(originPriceTag.textContent) - originPrice;
-      originPriceTag2.textContent = Number(originPriceTag2.textContent) - originPrice2;
+
+      originPriceTags2.forEach(tag => {
+        tag.textContent = Number(originPriceTag.textContent)
+      });
+
       cntPrice.forEach((price) => {
         price.textContent = Number(price.textContent) - originPrice;
       })
