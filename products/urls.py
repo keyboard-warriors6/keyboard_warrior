@@ -15,7 +15,7 @@ urlpatterns = [
     path('<int:product_pk>/review/', ReviewCreateView.as_view(), name='review_create'),
     path('<int:product_pk>/review/<int:review_pk>/delete/', ReviewDeleteView.as_view(), name='review_delete'),
     path('<int:product_pk>/review/<int:review_pk>/update/', ReviewUpdateView.as_view(), name='review_update'),
-    path('review/<int:reveiw_pk>/likes/', ReviewLikeView.as_view(), name='review_like'),
+    path('review/<int:review_pk>/likes/', ReviewLikeView.as_view(), name='review_like'),
 
 
     # 구매

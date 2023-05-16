@@ -1,3 +1,4 @@
+import os
 from django.db import transaction
 from django.db.models import F, Sum
 from django.db.models.query import QuerySet
@@ -130,7 +131,7 @@ class PurchaseListView(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = 'products:purchase_list.html'
     context_object_name = 'purchase_list'
-
+    os.getenv('EMAIL_HOST_USER')
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.filter(user=self.request.user)
