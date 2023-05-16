@@ -1,18 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" href="{% static '/css/product_complete.css' %}">
+{% endblock head %}
 {% block content %}
-  <h1>Purchase Confirmation</h1>
+  <div class="container">
+    <h1>주문결과</h1>
+    <p>주문결제가 완료되었습니다.</p>
+    {% for purchase_item in purchase_items %}
+          {% if purchase_item.product.image %}
+            <img src="{{ purchase_item.product.image.url }}" alt="Product Image">
+          {% else %}
+            <img src="{% static 'img/default_img.svg' %}" class="w-full h-full object-cover">
+          {% endif %}
+          <table class="table-auto">
+            <caption class="caption-top">
+                주문상세정보
+            </caption>
+            <caption class="caption-bottom">
+              주문번호: {{ purchase.pk }} 주문일자: {{ purchase.purchase_date }}
+            </caption>
+            <thead>
+              <tr>
+                <th>상품명</th>
+                <th>수량</th>
+                <th>가격</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ purchase_item.product.name }}</td>
+                <td>{{ purchase_item.cnt }}</td>
+                <td>{{ purchase_item.price }}</td>
+              </tr>
+            </tbody>
+          </table>
+        <p>상품명: </p>
+    {% endfor %}
+  
+    <p>총 가격: {{ total_price }}</p>
+  </div>
 
-  {% for purchase_item in purchase_items %}
-        {% if purchase_item.product.image %}
-        <img src="{{ purchase_item.product.image.url }}" alt="Product Image">
-      {% else %}
-        <p>No Image Available</p>
-      {% endif %}
-      <p>수량: {{ purchase_item.cnt }}</p>
-      <p>가격: {{ purchase_item.price }}</p>
-      <p>상품명: {{ purchase_item.product.name }}</p>
-    </div>
-  {% endfor %}
-
-  <p>총 가격: {{ total_price }}</p>
 {% endblock content %}
