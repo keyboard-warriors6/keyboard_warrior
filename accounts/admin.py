@@ -7,11 +7,7 @@ from .models import Level
 class CustomUserAdmin(UserAdmin):
     model = get_user_model()
     fieldsets = UserAdmin.fieldsets + (
-        (None, {
-            "fields": (
-                ('phone_number', 'user_address', 'level', 'profile_img')
-            ),
-        }),
+        (None, {"fields": ('phone_number', 'user_address', 'level', 'profile_img'),}),
     )
     
 
