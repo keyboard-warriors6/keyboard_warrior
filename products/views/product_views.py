@@ -60,6 +60,18 @@ class ProductDetailView(DetailView):
         return product
 
 
+class ProductSearchView(ListView):
+    model = Product
+    template_name = 'products/category.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+        if query:
+            return Product.objects.filter(name__icontains=query)
+        return Product.objects.none()
+
+
 class ProductCreateView(UserPassesTestMixin, PermissionRequiredMixin, FormMixin, TemplateView):
     model = Product
     second_model = Category

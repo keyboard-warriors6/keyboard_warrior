@@ -6,6 +6,7 @@ urlpatterns = [
     # 상품
     path('', ProductListView.as_view(), name='product_list'),
     path('create/', ProductCreateView.as_view(), name='product_create'),
+    path('search/', ProductSearchView.as_view(), name='product_search'),
     path('<int:product_pk>/', ProductDetailView.as_view(), name='product_detail'),
     path('<int:product_pk>/update/', ProductUpdateView.as_view(), name='product_update'),
     path('<int:product_pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
