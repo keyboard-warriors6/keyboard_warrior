@@ -1,12 +1,11 @@
-from django.http import JsonResponse, Http404, HttpResponseRedirect
+from django.http import JsonResponse
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
-from django.views.generic.edit import ModelFormMixin
+from django.views.generic import CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from products.models import *
 from products.forms import *
