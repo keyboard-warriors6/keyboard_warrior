@@ -1,0 +1,33 @@
+main {
+  margin: 0 auto 5rem;
+}
+
+input {
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: xx-large;
+}
+
+.report {
+    display: flex;
+    justify-content: center;
+    font-size: large;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+}
+.main-color {
+  color: #99CCFF;
+}
+
+.total-price {
+  display: flex;
+  justify-content: end;
+  font-size: large;
+}
