@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}장바구니{% endblock title %}
 
@@ -61,21 +62,21 @@
                       </div>
                     </a>
                     <div class="flex justify-between items-center mt-4 ml-4">
-                      <div class="counter" data-cart-id={{ item.pk }}>
+                      <div class="counter " data-cart-id={{ item.pk }}>
                         <p class="cursor-pointer {% if item.cnt == 1 %}text-gray-400 cursor-default{% endif %}">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
                           </svg>                        
                         </p>
                         <p class="count">{{ item.cnt }}</p>
                         <p class="cursor-pointer">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                           </svg>                        
                         </p>
                       </div>
-                      <span class="hidden" id="origin-price-{{ item.pk }}">{{ item.product.price }}</span>
-                      <p class="font-bold pr-1"><span id="price-{{ item.pk }}">{% widthratio item.cnt 1 item.product.price %}</span>원</p>
+                      <span class="hidden" id="origin-price-{{ item.pk }}">{{ item.product.price}}</span>
+                      <p class="font-bold pr-1"><span id="price-{{ item.pk }}">{% widthratio item.cnt 1 item.product.price as item_price %}{{ item_price|intcomma }}</span>원</p>
                     </div>
                   </div>
                   <div class="close-btn">
@@ -105,10 +106,10 @@
           <div class="sidebar-content">
             <div class="total total-price">
               <p>결제금액</p>
-              <p><span id="total-price">{{ total_price }}</span>원</p>
+              <p><span id="total-price">{{ total_price|intcomma }}</span>원</p>
             </div>
           </div>
-          <button type="submit" value="" id="buy-button" form="purchase-form"><span id="buy-cnt">{{ cart_items|length }}</span>개의 상품 구매하기</button>
+          <button {% if not cart_items %}class="pointer-events-none"{% endif %} type="submit" value="" id="buy-button" form="purchase-form"><span id="buy-cnt">{{ cart_items|length }}</span>개의 상품 구매하기</button>
         </div>
       </div>
     </div>
