@@ -146,7 +146,7 @@ class PurchaseItem(models.Model):
 
     @property
     def price(self):
-        return self.product.price * self.cnt * (1 - self.product.discount_rate)
+        return int(self.product.price * self.cnt * (1 - self.product.discount_rate/100))
     
     
 class Cart(models.Model):

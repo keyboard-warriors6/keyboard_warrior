@@ -1,44 +1,41 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
+
+{% block title %}주문결과{% endblock title %}
+
 {% block head %}
-  <link rel="stylesheet" href="{% static '/css/product_complete.css' %}">
+  <link rel="stylesheet" href="{% static 'css/purchase_complete.css' %}">
 {% endblock head %}
+
 {% block content %}
-  <div class="container">
-    <h1>주문결과</h1>
-    <p>주문결제가 완료되었습니다.</p>
+    <h2 class="title my-5">주문결과</h2>
+    <p class="report">주문결제가 완료되었습니다😄</p>
+    <p class="my-3 info text-slate-500"> 주문번호: {{ purchase.pk }} / 주문일자: {{ purchase.purchase_date }}</p>
+    <hr>
     {% for purchase_item in purchase_items %}
-          {% if purchase_item.product.image %}
-            <img src="{{ purchase_item.product.image.url }}" alt="Product Image">
-          {% else %}
-            <img src="{% static 'img/default_img.svg' %}" class="w-full h-full object-cover">
-          {% endif %}
-          <table class="table-auto">
-            <caption class="caption-top">
-                주문상세정보
-            </caption>
-            <caption class="caption-bottom">
-              주문번호: {{ purchase.pk }} 주문일자: {{ purchase.purchase_date }}
-            </caption>
-            <thead>
-              <tr>
-                <th>상품명</th>
-                <th>수량</th>
-                <th>가격</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{ purchase_item.product.name }}</td>
-                <td>{{ purchase_item.cnt }}</td>
-                <td>{{ purchase_item.price }}</td>
-              </tr>
-            </tbody>
-          </table>
-        <p>상품명: </p>
+      <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-5">
+        <div class="md:flex">
+          <div class="md:shrink-0">
+            {% if purchase_item.product.image %}
+            <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ purchase_item.product.image.url }}" alt="상품사진">
+            {% else %}
+            <img class="h-48 w-full object-cover md:h-full md:w-48" src="{% static 'img/default_img.svg' %}" alt="no_image">
+            {% endif %}
+          </div>
+          <div class="p-10">
+            <div class="uppercase tracking-wide text-sm text-500 main-color font-semibold">{{ purchase_item.product.category.brand }}</div>
+            <a href="{% url 'products:product_detail' purchase_item.product.pk %}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ purchase_item.product.name }}</a>
+            <p class="mt-2 text-slate-500">{{ purchase_item.price|intcomma }}원|{{ purchase_item.cnt }}개</p>
+            <p class="main-color">결제완료</p>
+          </div>
+        </div>
+      </div> 
     {% endfor %}
-  
-    <p>총 가격: {{ total_price }}</p>
-  </div>
+
+    <div class="total-price">총 가격: {{ total_price|intcomma }}원</div>
+
 
 {% endblock content %}
+
+
