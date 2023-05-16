@@ -91,6 +91,7 @@ main {
 .counter {
   display: flex;
   width: 86px;
+  align-items: center;
   justify-content: space-between;
   padding: 0.25rem;
   border: 1px solid #dadde0;
@@ -159,4 +160,8 @@ main {
   align-items: center;
   gap: 1rem;
   margin: 1.5rem 0;
+}
+
+.pointer-events-none {
+  pointer-events: none;
 }
