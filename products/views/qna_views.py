@@ -19,7 +19,7 @@ class InquiryCreateView(LoginRequiredMixin, CreateView):
 
 
     def get_success_url(self):
-        return reverse_lazy('products:product_detail', kwargs={'pk': self.kwargs['product_pk']})
+        return reverse_lazy('products:product_detail', kwargs={'product_pk': self.kwargs['product_pk']})
 
 
 class InquiryUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -81,7 +81,7 @@ class AnswerCreateView(UserPassesTestMixin, CreateView):
 
 
     def test_func(self):
-        return self.request.user.is_admin
+        return self.request.user.is_superuser
 
 
     def form_valid(self, form):
@@ -91,7 +91,7 @@ class AnswerCreateView(UserPassesTestMixin, CreateView):
 
 
     def get_success_url(self):
-        return reverse_lazy('products:product_detail', kwargs={'pk': self.kwargs['product_pk']})
+        return reverse_lazy('products:product_detail', kwargs={'product_pk': self.kwargs['product_pk']})
 
 
 class AnswerUpdateView(UserPassesTestMixin, UpdateView):
@@ -101,7 +101,7 @@ class AnswerUpdateView(UserPassesTestMixin, UpdateView):
 
 
     def test_func(self):
-        return self.request.user.is_admin
+        return self.request.user.is_superuser
 
 
     def get_object(self, queryset=None):
@@ -120,7 +120,7 @@ class AnswerDeleteView(UserPassesTestMixin, DeleteView):
 
 
     def test_func(self):
-        return self.request.user.is_admin
+        return self.request.user.is_superuser
 
     
     def get_object(self, queryset=None):
