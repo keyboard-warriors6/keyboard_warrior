@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Purchase Confirmation</h1>
+
+  {% for purchase_item in purchase_items %}
+        {% if purchase_item.product.image %}
+        <img src="{{ purchase_item.product.image.url }}" alt="Product Image">
+      {% else %}
+        <p>No Image Available</p>
+      {% endif %}
+      <p>수량: {{ purchase_item.cnt }}</p>
+      <p>가격: {{ purchase_item.price }}</p>
+      <p>상품명: {{ purchase_item.product.name }}</p>
+    </div>
+  {% endfor %}
+
+  <p>총 가격: {{ total_price }}</p>
+{% endblock content %}
