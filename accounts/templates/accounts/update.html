@@ -9,11 +9,7 @@
   <h1 class="title mt-14">회원정보 수정하기</h1>
   <form action="{% url 'accounts:update' user.username %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {% if form.errors %}
-      {% for error in form.errors.values %}
-        <p>{{ error }}</p>
-      {% endfor %}
-    {% endif %}
+    {% include 'error.html' %}
 
     <div class="relative">
       {{ form.username }}
