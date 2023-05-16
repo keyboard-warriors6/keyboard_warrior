@@ -25,7 +25,7 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['first_name'].help_text = ''
         self.fields['email'].widget.attrs['class'] = 'signup-form block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white border-1 appearance-none peer'
         self.fields['email'].widget.attrs['placeholder'] = " "
-        self.fields['profile_img'].widget.attrs['class'] = 'signup-form block w-full border border-gray-500 text-sm text-gray-500 file:mr-4 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-[#99ccff] file:text-white hover:file:bg-[#99ccff]'
+        self.fields['profile_img'].widget.attrs['class'] = 'signup-form block w-full border text-sm text-gray-500 file:mr-4 file:py-1 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-[#99ccff] file:text-white hover:file:bg-[#99ccff]'
         self.fields['profile_img'].label = "프로필 사진"
         self.fields['phone_number'].widget.attrs['class'] = 'signup-form block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white border-1 appearance-none peer'
         self.fields['phone_number'].widget.attrs['placeholder'] = " "
