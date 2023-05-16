@@ -1,12 +1,12 @@
 import os
-from django.db import transaction
 from django.db.models import F, Sum
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
+from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import FormView, View, DeleteView, DetailView
-from django.views.generic.edit import CreateView, FormMixin, UpdateView
+from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models.functions import TruncDate
@@ -47,7 +47,6 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
 
         return context
 
-
     def delete_cart_items(self, cart_items):
         for cart_item in cart_items:
             cart_item.delete()
@@ -69,6 +68,9 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
         print(purchase_items)
 
         cart = Cart.objects.all()
+        
+        if not cart.exists():  # 장바구니가 비어있는지 확인
+            raise ValidationError("구매내역을 다시 확인해주세요.") 
         
         self.object = form.save(commit=False)
         self.object.user = self.request.user
@@ -131,6 +133,10 @@ class PurchaseFromDetailView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         product = get_object_or_404(Product, pk=self.kwargs['product_pk'])
         cnt = self.request.POST.get('cnt')
+
+        if not cnt:
+            raise ValidationError("구매할 품목을 선택해주세요.")
+        
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.status = '주문완료'
@@ -145,7 +151,6 @@ class PurchaseFromDetailView(LoginRequiredMixin, CreateView):
         self.send_order_confirmation_email(purchase=self.object)
 
         return redirect('products:purchase_complete', purchase_pk=self.object.pk)
-
 
     def send_order_confirmation_email(self, purchase):
         purchase_items = purchase.purchaseitem_set.all()
@@ -282,7 +287,7 @@ class CartDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def get_object(self, queryset=None):
         if 'delete_all' in self.request.POST:
             queryset = self.get_queryset()
-            obj = queryset.first()  # 첫 번째 Cart 객체를 가져옴
+            obj = queryset.first()  # 첫번째 Cart 객체를 가져옴
             return obj
         else:
             cart_pk = self.kwargs.get('cart_pk')
