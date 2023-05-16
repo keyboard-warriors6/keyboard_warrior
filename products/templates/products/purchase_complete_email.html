@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="email.css">
+  <title>주문 명세서</title>
+</head>
+<body>
+  <div class="container big-box">
+    <div><h2>🔔주문 명세서🔔</h2></div>
+    <div><h3>저희 Keyboard Warrior를 이용해주셔서 정말 감사합니다!</h3></div>
+    <div><h3>그러나 죄송하게도 상품 배달은 어렵습니다.</h3></div>
+    <div><h3>상세 정보는 아래와 같습니다. 좋은 하루되세요!</h3></div>
+    <div><p>주문 번호: {{ purchase.pk }}</p></div>
+    <div><p>주문 일자: {{ purchase.purchase_date }}</p></div>
+    <div><p>구매자: {{ purchase.user.username }}</p></div>
+    <div><p>배송지 주소: {{ purchase.address }}</p></div>
+    <table>
+      <thead>
+        <tr>
+          <th>상품명</th>
+          <th>수량</th>
+          <th>소계</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for purchase_item in purchase_items %}
+        <tr>
+          <td>{{ purchase_item.product.name }}</td>
+          <td>{{ purchase_item.cnt }}</td>
+          <td>{{ purchase_item.price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="summary-section">
+      <div><p>총 주문 금액: {{ purchase.total_price }}</p></div>
+      <div><p>결제 금액: {{ purchase.total_price }}</p></div>
+    </div>
+  </div>
+</body>
+</html>
+
+
