@@ -2,7 +2,7 @@ import os
 from django.db import transaction
 from django.db.models import F, Sum
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
 from django.views.generic import FormView, View, DeleteView, DetailView
@@ -22,7 +22,9 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
     model = Purchase
     fields = ['address']
     template_name = 'products/purchase_create.html'
-    success_url = reverse_lazy('products:purchase_complete')
+
+    def get_success_url(self):
+        return reverse('products:purchase_complete', kwargs={'purchase_pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -64,6 +66,7 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
         purchase_items = []
         for i in range(len(cnts)):
             purchase_items.append({'product': products[i], 'cnt': cnts[i]})
+        print(purchase_items)
 
         cart = Cart.objects.all()
         
@@ -111,7 +114,6 @@ class PurchaseFromCartView(LoginRequiredMixin, CreateView):
             send_mail(subject, plain_message, from_email, to_email, html_message=html_message, fail_silently=False)
         except Exception as e:
             print("Email sending failed:", str(e))
-
 
 
 class PurchaseFromDetailView(LoginRequiredMixin, CreateView):
@@ -192,7 +194,6 @@ class PurchaseListView(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = 'products:purchase_list.html'
     context_object_name = 'purchase_list'
-    os.getenv('EMAIL_HOST_USER')
     def get_queryset(self):
         queryset = super().get_queryset()
         queryset = queryset.filter(user=self.request.user)
