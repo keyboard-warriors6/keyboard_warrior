@@ -223,6 +223,23 @@
               <p class="product-review-content">{{ review.review.content }}</p>
             </div>
 
+            <div class="d-flex">
+              <input type="button" value="수정" class="review-edit-btn" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}">
+              <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="리뷰 삭제">
+              </form>
+            </div>
+            <hr>
+            <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
+              {% csrf_token %}
+              <div id="review-content-{{ review.review.pk }}">
+                {{review_form.as_p}}
+              </div>
+              <input type="submit" value="수정">
+            </form>
+            <button type="button" value="취소" data-review-id="{{ review.review.pk }}">
+
             <!-- 도움이 돼요 버튼 -->
             <form class="like-forms" data-review-id="{{ review.review.pk }}">
               {% csrf_token %}
