@@ -94,6 +94,8 @@ main {
 }
 
 [name=address] {
+  display: block;
+  margin-left: 4.375rem;
   font-size: 0.875rem;
   flex-basis: 80%;
   border-radius: 0.25rem;

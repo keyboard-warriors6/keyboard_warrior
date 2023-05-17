@@ -91,9 +91,9 @@
     <!-- main content bar -->
     <div class="flex product-category_bar py-2 gap-20 z-[10]">
       <ul class="flex">
-        <li><a href="#" onclick="return false;" class="ms-12 product-category_bar-list font-semibold">상품정보</a></li>
-        <li><a href="#" onclick="return false;" class="mx-12 product-category_bar-list font-semibold">리뷰</a></li>
-        <li><a href="#" onclick="return false;" class="product-category_bar-list font-semibold">문의</a></li>
+        <li><button id="button1" class="ms-12 product-category_bar-list font-semibold">상품정보</button></li>
+        <li><button id="button2" class="mx-12 product-category_bar-list font-semibold">리뷰</button></li>
+        <li><button id="button3"  class="product-category_bar-list font-semibold">문의</button></li>
       </ul>
     </div>
 
@@ -101,69 +101,17 @@
     <div class="flex flex-row product-content">
       <!-- 상품 상세정보 -->
       <div class="basis-3/5 m-12">
-        <div class="">
-          {{ product.content }}
-          {% comment %} <img src="https://exit.ohou.se/d89cfa7557cd34a185ec45dcf4bf964f6c11fdf5/instore0410.cafe24.com/img/iak_/COX/COX_BANNER2.jpg" alt="상세정보 사진">
-          <img src="https://exit.ohou.se/e71e8b7d1de3b92a1561ed0db197028a6214eacb/instore0410.cafe24.com/img/iak_/COX/COX_IN_02.jpg" alt="상세정보 사진"> {% endcomment %}
+        <div id="section1">
+          {{ product.content|linebreaksbr }}
         </div>
         <div class="mt-12 border-t-2"></div>
-        <!-- 리뷰 평균 -->
-        <div class="product-review mt-12">
+        <div id="section2" class="product-review mt-12">
           <p class="text-lg font-semibold">리뷰 <span style="color:#99CCFF">{{ reviews|length }}</span></p>
           <!-- 리뷰 쓰기 -->
           <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="font-semibold" style="color:#99CCFF;" type="button">
             리뷰 쓰기
           </button>
         </div>
-        {% comment %} <div class="flex flex-row product-review-box h-40">
-          <div class="basis-1/2 product-review-star1">
-            <p class="flex items-center">
-              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-3" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-3"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-3" fill="#DBDBDB"></use><use clip-path="url(#star-clip-3)" xlink:href="#star-path-3"></use></svg>
-              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-3" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-3"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-3" fill="#DBDBDB"></use><use clip-path="url(#star-clip-3)" xlink:href="#star-path-3"></use></svg>
-              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-3" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-3"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-3" fill="#DBDBDB"></use><use clip-path="url(#star-clip-3)" xlink:href="#star-path-3"></use></svg>
-              <svg class="svg2" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-3" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-3"><rect x="0" y="0" width="24" height="24"></rect></clipPath></defs><use xlink:href="#star-path-3" fill="#DBDBDB"></use><use clip-path="url(#star-clip-3)" xlink:href="#star-path-3"></use></svg>
-              <span class="text-2xl font-bold">&nbsp; 5.0</span>
-            </p>
-          </div>
-          <div class="basis-1/2 product-review-star2">
-            <div class="product-review-star2-status">
-              <p class="text-sm">5점</p>
-              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
-                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 30%"></div>
-              </div>
-              <p>3</p>
-            </div>
-            <div class="product-review-star2-status">
-              <p class="text-sm">4점</p>
-              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
-                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 40%"></div>
-              </div>
-              <p>4</p>
-            </div>
-            <div class="product-review-star2-status">
-              <p class="text-sm">3점</p>
-              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
-                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 20%"></div>
-              </div>
-              <p>2</p>
-            </div>
-            <div class="product-review-star2-status">
-              <p class="text-sm">2점</p>
-              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
-                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 0%"></div>
-              </div>
-              <p>0</p>
-            </div>
-            <div class="product-review-star2-status">
-              <p class="text-sm">1점</p>
-              <div class="w-48 bg-gray-200 rounded-full h-1.5 mt-2 dark:bg-gray-700 mx-3">
-                <div class="bg-blue-600 h-1.5 rounded-full dark:bg-blue-500" style="width: 10%"></div>
-              </div>
-              <p>1</p>
-            </div>
-          </div>
-        </div> {% endcomment %}
 
         <!-- Main modal -->
         <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full z-[999]">
@@ -228,107 +176,80 @@
 
             <!-- 리뷰 내용 -->
             <div>
-              <p class="product-review-content">{{ review.review.content }}</p>
+              <p class="product-review-content">{{ review.review.content|linebreaksbr }}</p>
             </div>
 
-            <div class="d-flex">
-              <input type="button" value="수정" class="review-edit-btn" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}">
+            <div class="flex">
+              <input type="button" value="수정" data-modal-target="staticModal3" data-modal-toggle="staticModal3" class="review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" style="cursor: pointer; height: 32px;">
+              <div id="staticModal3" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full z-[999]">
+                <div class="relative w-full max-w-2xl max-h-full">
+                  <!-- Modal content -->
+                  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                          리뷰 수정
+                      </h3>
+                      <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal3">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                      </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
+                      <div>
+                        <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
+                          {% csrf_token %}
+                          <div id="review-content-{{ review.review.pk }}">
+                            {{ review_form|crispy }}
+                            {{ review_image_form|crispy }}
+                          </div>
+                          <button type="submit" class="text-white font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="background-color:#99CCFF; width: 200px; position: relative; left: 13rem; margin-top: 1rem;">수정하기</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              {% comment %} <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}">
+                {% csrf_token %}
+                <div id="review-content-{{ review.review.pk }}">
+                  {{ review_form|crispy }}
+                  {{ formset.management_form }}
+                  {% for imageform in formset %}
+                  <div class="flex">
+                    {{ imageform|crispy }}
+                  </div>
+                  {% endfor %}
+                  {{ imageaddform|crispy }}
+                </div>
+                <input type="submit" value="수정">
+              </form> {% endcomment %}
+
+
               <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
                 {% csrf_token %}
-                <input type="submit" value="리뷰 삭제">
+                <input type="submit" value="삭제" class="mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold px-4 border border-gray-400 rounded shadow" style="cursor: pointer; height: 32px;">
+              </form>
+              <!-- 도움이 돼요 버튼 -->
+              <form class="like-forms" data-review-id="{{ review.review.pk }}">
+                {% csrf_token %}
+                {% if user in review.likes.all %}
+                  <input type="submit" value="취소" class="product-review-like_btn mb-5" id="like-{{review.review.pk}}" style="cursor: pointer;">
+                {% else %}
+                  <input type="submit" value="도움이 돼요" class="product-review-like_btn mb-5" id="like-{{review.review.pk}}" style="cursor: pointer;">
+                {% endif %}
               </form>
             </div>
-            <hr>
-            <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
-              {% csrf_token %}
-              <div id="review-content-{{ review.review.pk }}">
-                {{review_form.as_p}}
-              </div>
-              <input type="submit" value="수정">
-            </form>
-            <button type="button" value="취소" data-review-id="{{ review.review.pk }}">
-
-            <!-- 도움이 돼요 버튼 -->
-            <form class="like-forms" data-review-id="{{ review.review.pk }}">
-              {% csrf_token %}
-              {% if user in review.likes.all %}
-                <input type="submit" value="취소" class="product-review-like_btn mb-5" id="like-{{review.review.pk}}">
-              {% else %}
-                <input type="submit" value="도움이 돼요" class="product-review-like_btn mb-5" id="like-{{review.review.pk}}">
-              {% endif %}
-            </form>
-
-            {% comment %} <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
-              {% csrf_token %}
-              <input type="submit" value="리뷰 삭제">
-            </form> {% endcomment %}
-
-            {% comment %} <form action="{% url 'products:review_update' product_pk=product.pk review_pk=review.review.pk %}">
-              {% csrf_token %}
-              {{ review_image_form|crispy }}
-              <input type="submit" value="수정">
-            </form> {% endcomment %}
-
-            
-              <div class="flex">
-                <input type="button" value="수정" class="review-edit-btn" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}">
-                <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
-                  {% csrf_token %}
-                  <input type="submit" value="리뷰 삭제">
-                </form>
-              </div>
-              <hr>
-              <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
-                {% csrf_token %}
-                {{review_form.as_p}}
-                <input type="submit" value="수정">
-                <input type="button" value="취소" data-review-id="{{ review.review.pk }}">
-              </form>
-            
-              <hr>
-
-
-
 
             <hr>
+          
           {% endfor %}
         </div>
 
-          <!-- 페이지네이션 -->
-          <div class="product-pagination">
-            <ul class="inline-flex items-center -space-x-px">
-              <li>
-                <a href="#" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                  <span class="sr-only">Previous</span>
-                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-                </a>
-              </li>
-              <li>
-                <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-              </li>
-              <li>
-                <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-              </li>
-              <li>
-                <a href="#" aria-current="page" class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-              </li>
-              <li>
-                <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-              </li>
-              <li>
-                <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-              </li>
-              <li>
-                <a href="#" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                  <span class="sr-only">Next</span>
-                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-                </a>
-              </li>
-            </ul>
-          </div>
-
           <!-- 문의 -->
-          <div class="product-review mt-12">
+          <div id="section3" class="product-review mt-12">
             <p class="text-lg font-semibold">문의 <span style="color:#99CCFF">{{ inquiries|length }}</span></p>
             {% comment %} <button class="font-semibold" style="color:#99CCFF;" type="button">
               <a class="btn btn-[#99ccff] font-semibold ms-64" href="#">전체보기</a>
@@ -388,13 +309,15 @@
                     </div>
                     
                     <!-- answer -->
-                    <p><span class="product-inquiry-qa">A &nbsp;</span><span style="font-weight: 700; color: #424242; font-size: 15px;">주식회사 인스토어 &nbsp;</span><span style="font-size: 12px; color: #bdbdbd;">{{ answer.created_at }}</span></p>
-                    <p class='ms-5'>{{ inquiry.inquiry.answer.content }}</p>
+                    <p><span class="product-inquiry-qa">A &nbsp;</span><span style="font-weight: 700; color: #424242; font-size: 15px;">키보드워리어 &nbsp;</span><span style="font-size: 12px; color: #bdbdbd;">{{ answer.created_at }}</span></p>
+                    <p class='ms-5'>{{ inquiry.inquiry.answer.content|linebreaksbr }}</p>
 
                     <form action="{% url 'products:answer_delete' product_pk=product.pk inquiry_pk=inquiry.inquiry.pk answer_pk=inquiry.inquiry.answer.pk %}" method="POST">
                       {% csrf_token %}
-                      <button type="submit"class="font-semibold mb-10" style="color:#99CCFF;" type="button">답변 삭제</button>
+                      <button type="submit"class="font-semibold mt-3 mb-3" style="color:#99CCFF;" type="button">답변 삭제</button>
                     </form>
+
+                    <hr>
 
                   {% else %}
                     <p class="product-inquiry-header1">
@@ -407,7 +330,7 @@
                     <!-- question -->
                     <div class=" mb-2.5">
                       <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }} | {{ product.category.switch }}</p>
-                      <p class='ms-5 mb-5'>{{ inquiry.inquiry.content }}</p>
+                      <p class='ms-5 mb-5'>{{ inquiry.inquiry.content|linebreaksbr }}</p>
                     </div>
 
                     <button data-modal-target="staticModal_{{ inquiry.inquiry.pk }}" data-modal-toggle="staticModal_{{ inquiry.inquiry.pk }}" class="font-semibold" style="color:#99CCFF;" type="button">
@@ -427,7 +350,7 @@
                     <!-- question -->
                     <div class=" mb-2.5">
                       <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }} | {{ product.category.switch }}</p>
-                      <p class='ms-5 mb-5'>{{ inquiry.inquiry.content }}</p>
+                      <p class='ms-5 mb-5'>{{ inquiry.inquiry.content|linebreaksbr }}</p>
                     </div>
                     
                     {% if request.user == inquiry.inquiry.user %}
@@ -439,7 +362,7 @@
 
                     <!-- answer -->
                     <p><span class="product-inquiry-qa">A &nbsp;</span><span style="font-weight: 700; color: #424242; font-size: 15px;">주식회사 인스토어 &nbsp;</span><span style="font-size: 12px; color: #bdbdbd;">{{ answer.created_at }}</span></p>
-                    <p class='ms-5'>{{ inquiry.inquiry.answer.content }}</p>
+                    <p class='ms-5'>{{ inquiry.inquiry.answer.content|linebreaksbr }}</p>
                   
                   {% else %}
                     <p class="product-inquiry-header1">
@@ -452,7 +375,7 @@
                     <!-- question -->
                     <div class=" mb-2.5">
                       <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }} | {{ product.category.switch }}</p>
-                      <p class='ms-5 mb-5'>{{ inquiry.inquiry.content }}</p>
+                      <p class='ms-5 mb-5'>{{ inquiry.inquiry.content|linebreaksbr }}</p>
                     </div>
 
                     {% if request.user == inquiry.inquiry.user %}
@@ -495,9 +418,9 @@
                 </div>
               </div>
 
-              <div class='mb-20'>
+              {% comment %} <div class='mb-20'>
 
-              </div>
+              </div> {% endcomment %}
             {% endfor %}
           </div>
 
@@ -559,7 +482,6 @@
 
 {% block script %}
 <script type="text/javascript" src="/static/JS/product_detail.js"></script>
-<script src="{% static 'axios.min.js' %}"></script>
 <script>
   // a태그 비동기 처리
   {% comment %} document.querySelectorAll('a[href^="#"]').forEach(anchor => {
