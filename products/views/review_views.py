@@ -100,16 +100,15 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = ReviewForm
     template_name = 'products/product_detail.html'
     context_object_name = 'review'
-    # success_url = reverse_lazy('products:product_detail')
-
+    success_url = reverse_lazy('products:product_detail')
 
     def test_func(self):
         review = self.get_object()
         return self.request.user == review.user
 
     #  2. 템플릿에 사용할 수 있는 추가적인 데이터를 컨텍스트에 추가(이미지 폼) -> 리뷰 폼과 리뷰 이미지 수정 폼을 함께 쓸 수 있게 함
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, kwargs):
+        context = super().get_context_data(kwargs)
         context['review_image_form'] = ReviewImageUpdateForm()
         return context
 
@@ -146,8 +145,13 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     # 1. 해당리뷰의 객체를 가져온다.
     def get_object(self, queryset=None):
+        product_pk = self.kwargs.get('product_pk')
         review_pk = self.kwargs.get('review_pk')
-        return get_object_or_404(Review, pk=review_pk)
+        product = get_object_or_404(Product, pk=product_pk)
+        review = get_object_or_404(Review, pk=review_pk, product=product)
+
+        return review
+
 
     # 4. POST 요청을 처리하기 위해 오버라이딩.
     ## 검증 성공하면 form_valid()메서드 호출하여 리뷰 수정. 
