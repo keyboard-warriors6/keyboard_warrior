@@ -16,7 +16,7 @@
           <p class="title">주문자</p>
           <hr class="my-4">
           <div class="flex justify-between">
-            <div class="relative me-8">
+            <div class="relative grow">
               <div class="user-info">
                 <p class="user-label">이름</p>
                 <input type="text" name="info" value={{ user.last_name }}{{ user.first_name }}>
@@ -30,12 +30,12 @@
                 <input type="text" name="info" value={{ user.phone_number }}>
               </div>
             </div>
-            <div class="relative flex-1">
+            <div class="relative grow">
               <div class="user-info">
                 <div class="user-label">주소</div>
-                  <div class="flex justify-between">
-                    <input type="number" id="postalcode" name="info" class="me-7" placeholder="우편번호" readonly>
-                    <button type="button" id="address" class="bg-[#99ccff] hover:bg-[#000000] text-white font-bold py-2 px-4 rounded">주소찾기</button>
+                  <div class="flex w-full justify-between">
+                    <input type="number" id="postalcode" name="info" class="w-full mr-4" placeholder="우편번호" readonly>
+                    <button type="button" id="address" class="shrink-0 bg-[#99ccff] hover:bg-[#7dafe1] text-white font-bold py-2 px-4 rounded">주소찾기</button>
                   </div>
               </div>
               {{ form.address }}

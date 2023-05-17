@@ -68,6 +68,10 @@ MIDDLEWARE = [
 
 DEBUG = True
 
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)
+
 ROOT_URLCONF = 'kw.urls'
 
 TEMPLATES = [
