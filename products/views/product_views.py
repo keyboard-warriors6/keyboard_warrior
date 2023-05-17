@@ -1,4 +1,4 @@
-import json, os, requests, sys
+import json, os, requests, sys, operator
 import matplotlib.pyplot as plt
 import numpy as np
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
@@ -10,9 +10,9 @@ from django.views.generic import DeleteView, DetailView, ListView, TemplateView,
 from django.views.generic.edit import FormMixin, UpdateView
 from products.forms import *
 from products.models import *
-from PIL import *
+from PIL import Image
 from wordcloud import WordCloud 
-
+from matplotlib import font_manager
 
 class ProductListView(TemplateView):
     template_name = 'products/product_list.html'
@@ -369,8 +369,12 @@ class ProductBookmarkView(LoginRequiredMixin, View):
         return JsonResponse(context)
     
 
-class KeyboardTrendView(TemplateView):
+class KeyboardTrendView(UserPassesTestMixin, PermissionRequiredMixin, TemplateView):
     template_name = 'products/keyboard_trend.html'  # 템플릿 파일 경로
+    raise_exception = True
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
     def get(self, request):
         trend_data1 = self.get_shopping_trend1()
@@ -382,20 +386,37 @@ class KeyboardTrendView(TemplateView):
             title = item["title"]
             ratios = [data["ratio"] for data in item["data"]]
             total_ratio = sum(ratios)
-            result[title] = total_ratio
+            result[title] = int(total_ratio)
         for item in trend_data_2:
             title = item["title"]
             ratios = [data["ratio"] for data in item["data"]]
             total_ratio = sum(ratios)
-            result[title] = total_ratio
-            wordcloud = WordCloud(width=1200, height=400).generate_from_frequencies(result)
-            
-            # 워드 클라우드 이미지를 파일로 저장
-            image_path = '/wordcloud.png'
-            wordcloud.to_file(image_path)
-            
-            # 템플릿 렌더링 및 응답 반환
-            return render(request, 'products/keyboard_trend.html', {'wordcloud_image': image_path})
+            result[title] = int(total_ratio)
+        sorted_result = dict(sorted(result.items(), key=operator.itemgetter(1), reverse=True))
+        image1_path = os.path.join(os.path.dirname(__file__), 'trend.png')
+        trend_mask=np.array(Image.open(image1_path))
+        wordcloud = WordCloud(
+                            background_color="grey",
+                            colormap='Blues',
+                            random_state=0,
+                            min_font_size=20,
+                            max_font_size=150,
+                            prefer_horizontal=1,
+                            collocations=False,
+                            mask = trend_mask,
+                            ).generate_from_frequencies(sorted_result)
+        wordcloud = wordcloud.fit_words(sorted_result)
+
+        font_path = os.path.join(os.path.dirname(__file__), 'NanumSquareNeo-eHv.ttf')
+        fontprop = font_manager.FontProperties(fname=font_path)
+        wordcloud.font_path = font_path
+        # plt.imshow(wordcloud,interpolation='bilinear')
+        # plt.axis('off')    
+        image_path = 'static/img/word_cloud.png'
+        wordcloud.to_file(image_path)
+        
+        # 템플릿 렌더링 및 응답 반환
+        return render(request, 'products/keyboard_trend.html', {'wordcloud_image': image_path})
     
     def get_shopping_trend1(self):
         client_id = os.getenv('NAVER_CLIENT_ID') 
@@ -431,7 +452,6 @@ class KeyboardTrendView(TemplateView):
 
         return result
     
-
     def get_shopping_trend2(self):
         client_id = os.getenv('NAVER_CLIENT_ID') 
         client_secret = os.getenv('NAVER_CLIENT_SECRET')
@@ -465,76 +485,6 @@ class KeyboardTrendView(TemplateView):
         result = response.json()
 
         return result
-    
-
-        # def get_shopping_trend1(self):
-        # client_id = os.getenv('NAVER_CLIENT_ID') 
-        # client_secret = os.getenv('NAVER_CLIENT_SECRET')
-
-        # url = "https://openapi.naver.com/v1/datalab/shopping/category/keywords"
-        # headers = {
-        #     "X-Naver-Client-Id": client_id,
-        #     "X-Naver-Client-Secret": client_secret,
-        #     "Content-Type": "application/json"
-        # }
-
-        # # 검색어 키워드 설정
-        # query = {
-        #     "startDate": "2023-02-01",
-        #     "endDate": "2023-04-30",
-        #     "timeUnit": "month",
-        #     "category": "50001204",
-        #     "keyword": [
-        #         {"name": "커세어", "param": ["커세어"]},
-        #         {"name": "앱코", "param": ["앱코"]},
-        #         {"name": "로지텍", "param": ["로지텍"]},
-        #         {"name": "콕스", "param": ["콕스"]},
-        #         {"name": "레오폴드", "param": ["레오폴드"]},
-        #     ],
-        #     "device": "",
-        #     "ages": [],
-        #     "gender": "",
-        # }
-
-        # response = requests.post(url, headers=headers, data=json.dumps(query))
-        # result = response.json()
-
-        # return result
-    
-
-        # def get_shopping_trend1(self):
-        # client_id = os.getenv('NAVER_CLIENT_ID') 
-        # client_secret = os.getenv('NAVER_CLIENT_SECRET')
-
-        # url = "https://openapi.naver.com/v1/datalab/shopping/category/keywords"
-        # headers = {
-        #     "X-Naver-Client-Id": client_id,
-        #     "X-Naver-Client-Secret": client_secret,
-        #     "Content-Type": "application/json"
-        # }
-
-        # # 검색어 키워드 설정
-        # query = {
-        #     "startDate": "2023-02-01",
-        #     "endDate": "2023-04-30",
-        #     "timeUnit": "month",
-        #     "category": "50001204",
-        #     "keyword": [
-        #         {"name": "커세어", "param": ["커세어"]},
-        #         {"name": "앱코", "param": ["앱코"]},
-        #         {"name": "로지텍", "param": ["로지텍"]},
-        #         {"name": "콕스", "param": ["콕스"]},
-        #         {"name": "레오폴드", "param": ["레오폴드"]},
-        #     ],
-        #     "device": "",
-        #     "ages": [],
-        #     "gender": "",
-        # }
-
-        # response = requests.post(url, headers=headers, data=json.dumps(query))
-        # result = response.json()
-
-        # return result
     
 
 
