@@ -180,3 +180,24 @@ reviewUpdateConfirm.forEach((updateBtn) => {
     })
   })
 })
+
+const button1 = document.getElementById('button1');
+const section1 = document.getElementById('section1');
+
+button1.addEventListener('click', () => {
+  window.scrollBy({top: section1.getBoundingClientRect().top-180, behavior: 'smooth'});
+});
+
+const button2 = document.getElementById('button2');
+const section2 = document.getElementById('section2');
+
+button2.addEventListener('click', () => {
+  window.scrollBy({top: section2.getBoundingClientRect().top-180, behavior: 'smooth'});
+});
+
+const button3 = document.getElementById('button3');
+const section3 = document.getElementById('section3');
+
+button3.addEventListener('click', () => {
+  window.scrollBy({top: section3.getBoundingClientRect().top-180, behavior: 'smooth'});
+});
