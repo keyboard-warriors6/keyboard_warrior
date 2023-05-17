@@ -42,8 +42,8 @@
     <!-- 광고 배너 -->
 
     <div class="flex justify-between">
-      <p class="text-xl font-bold">인기상품</p>
-      <a href=""><p class="text-md text-a-tag">더보기</p></a>
+      <p class="text-2xl">인기상품</p>
+      <a href="{% url 'products:product_category' %}?filter=purchased"><p class="text-xl text-a-tag">전체 보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -52,9 +52,9 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-              {% for product in object_list|slice:"0:4" %}
-                <div class="product p-4">
+            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              {% for product in most_purchased_products|slice:"0:4" %}
+                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
@@ -81,15 +81,15 @@
           </div>
         </div>
 
-        {% if object_list.count > 4 %}
+        {% if most_purchased_products.count > 4 %}
           <!-- Item 2 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-                {% if object_list.count < 8 %}
-                  {% for product in object_list|slice:"4:" %}
-                    <div class="product p-4">
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% if most_purchased_products.count < 8 %}
+                  {% for product in most_purchased_products|slice:"4:" %}
+                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
@@ -113,29 +113,27 @@
                     </div>
                   {% endfor %}
                 {% else %}
-                  {% for product in object_list|slice:"4:8" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
+                  {% for product in most_purchased_products|slice:"4:8" %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -143,16 +141,16 @@
           </div>
         {% endif %}
 
-        {% if object_list.count > 8 %}
+        {% if most_purchased_products.count > 8 %}
           <!-- Item 3 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-                {% if object_list.count < 12 %}
-                  {% for product in object_list|slice:"8:" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% if most_purchased_products.count < 12 %}
+                  {% for product in most_purchased_products|slice:"8:" %}
+                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                     <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
@@ -175,29 +173,27 @@
                     </div>
                   {% endfor %}
                 {% else %}
-                  {% for product in object_list|slice:"8:12" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
+                  {% for product in most_purchased_products|slice:"8:12" %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -220,10 +216,10 @@
     </div>
 
 
-    <!-- 입문하기 좋은 키보드 -->
+    <!-- 가성비 좋은 키보드 -->
     <div class="flex justify-between">
-      <p class="text-xl font-bold">가성비 좋은 상품</p>
-      <a href=""><p class="text-md text-a-tag">더보기</p></a>
+      <p class="text-2xl">가성비 좋은 키보드</p>
+      <a href="{% url 'products:product_category' %}?filter=affordable"><p class="text-xl text-a-tag">전체 보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -232,9 +228,9 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-              {% for product in object_list|slice:"0:4" %}
-                <div class="product p-4">
+            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              {% for product in affordable_products|slice:"0:4" %}
+                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
@@ -261,15 +257,15 @@
           </div>
         </div>
 
-        {% if object_list.count > 4 %}
+        {% if affordable_products.count > 4 %}
           <!-- Item 2 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-                {% if object_list.count < 8 %}
-                  {% for product in object_list|slice:"4:" %}
-                    <div class="product p-4">
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% if affordable_products.count < 8 %}
+                  {% for product in affordable_products|slice:"4:" %}
+                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
@@ -293,29 +289,27 @@
                     </div>
                   {% endfor %}
                 {% else %}
-                  {% for product in object_list|slice:"4:8" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
+                  {% for product in affordable_products|slice:"4:8" %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -323,15 +317,15 @@
           </div>
         {% endif %}
 
-        {% if object_list.count > 8 %}
+        {% if affordable_products.count > 8 %}
           <!-- Item 3 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-                {% if object_list.count < 12 %}
-                  {% for product in object_list|slice:"8:" %}
-                    <div class="product p-4">
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% if affordable_products.count < 12 %}
+                  {% for product in affordable_products|slice:"8:" %}
+                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
@@ -355,29 +349,27 @@
                     </div>
                   {% endfor %}
                 {% else %}
-                  {% for product in object_list|slice:"8:12" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
+                  {% for product in affordable_products|slice:"8:12" %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -413,9 +405,9 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-              {% for product in object_list|slice:"0:4" %}
-                <div class="product p-4">
+            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              {% for product in cox_selling_product %}
+                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
@@ -442,129 +434,67 @@
           </div>
         </div>
 
-        {% if object_list.count > 4 %}
           <!-- Item 2 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
-                {% if object_list.count < 8 %}
-                  {% for product in object_list|slice:"4:" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
-                  {% endfor %}
-                {% else %}
-                  {% for product in object_list|slice:"4:8" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
-                  {% endfor %}
-                {% endif %}
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% for product in corsair_selling_products %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
+                {% endfor %}
               </div>
             </div>
           </div>
-        {% endif %}
-
-        {% if object_list.count > 8 %}
+      
           <!-- Item 3 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-                {% if object_list.count < 12 %}
-                  {% for product in object_list|slice:"8:" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
-                  {% endfor %}
-                {% else %}
-                  {% for product in object_list|slice:"8:12" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
-                  {% endfor %}
-                {% endif %}
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% for product in leopold_selling_products %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
+                {% endfor %}
               </div>
             </div>
           </div>
-        {% endif %}
       </div>
       <button type="button" class="absolute top-32 -left-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
         <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
@@ -584,8 +514,8 @@
 
     <!-- 리뷰 많은 순 -->
     <div class="flex justify-between">
-      <p class="text-xl font-bold">후기가 많은 상품</p>
-      <a href=""><p class="text-md text-a-tag">더보기</p></a>
+      <p class="text-2xl">후기가 많은 상품</p>
+      <a href="{% url 'products:product_category' %}?filter=popular"><p class="text-xl text-a-tag">전체 보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -594,9 +524,9 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-              {% for product in object_list|slice:"0:4" %}
-                <div class="product p-4">
+            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              {% for product in most_reviewed_products|slice:"0:4" %}
+                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
@@ -623,15 +553,15 @@
           </div>
         </div>
 
-        {% if object_list.count > 4 %}
+        {% if most_reviewed_products.count > 4 %}
           <!-- Item 2 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
-                {% if object_list.count < 8 %}
-                  {% for product in object_list|slice:"4:" %}
-                    <div class="product p-4">
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% if most_reviewed_products.count < 8 %}
+                  {% for product in most_reviewed_products|slice:"4:" %}
+                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
@@ -655,29 +585,27 @@
                     </div>
                   {% endfor %}
                 {% else %}
-                  {% for product in object_list|slice:"4:8" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
+                  {% for product in most_reviewed_products|slice:"4:8" %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -685,15 +613,15 @@
           </div>
         {% endif %}
 
-        {% if object_list.count > 8 %}
+        {% if most_reviewed_products.count > 8 %}
           <!-- Item 3 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
-                {% if object_list.count < 12 %}
-                  {% for product in object_list|slice:"8:" %}
-                    <div class="product p-4">
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% if most_reviewed_products.count < 12 %}
+                  {% for product in most_reviewed_products|slice:"8:" %}
+                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
@@ -717,29 +645,27 @@
                     </div>
                   {% endfor %}
                 {% else %}
-                  {% for product in object_list|slice:"8:12" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
+                  {% for product in most_reviewed_products|slice:"8:12" %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                      {% if product.product_img %}
+                        <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                      {% else %}
+                        <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                      {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -765,8 +691,8 @@
 
     <!-- 가격 순 -->
     <div class="flex justify-between">
-      <p class="text-xl font-bold text-a-tag">가격순</p>
-      <a href=""><p class="text-md">더보기</p></a>
+      <p class="text-2xl text-a-tag">가격순</p>
+      <a href="{% url 'products:product_category' %}?filter=low_price"><p class="text-xl">전체 보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -775,9 +701,9 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
-              {% for product in object_list|slice:"0:4" %}
-                <div class="product p-4">
+            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              {% for product in low_price_products|slice:"0:4" %}
+                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
                     <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
@@ -804,15 +730,15 @@
           </div>
         </div>
 
-        {% if object_list.count > 4 %}
+        {% if low_price_products.count > 4 %}
           <!-- Item 2 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
-                {% if object_list.count < 8 %}
-                  {% for product in object_list|slice:"4:" %}
-                    <div class="product p-4">
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% if low_price_products.count < 8 %}
+                  {% for product in low_price_products|slice:"4:" %}
+                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
@@ -836,29 +762,27 @@
                     </div>
                   {% endfor %}
                 {% else %}
-                  {% for product in object_list|slice:"4:8" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
+                  {% for product in low_price_products|slice:"4:8" %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -866,15 +790,15 @@
           </div>
         {% endif %}
 
-        {% if object_list.count > 8 %}
+        {% if low_price_products.count > 8 %}
           <!-- Item 3 -->
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
-                {% if object_list.count < 12 %}
-                  {% for product in object_list|slice:"8:" %}
-                    <div class="product p-4">
+              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+                {% if low_price_products.count < 12 %}
+                  {% for product in low_price_products|slice:"8:" %}
+                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
                         <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
@@ -898,29 +822,27 @@
                     </div>
                   {% endfor %}
                 {% else %}
-                  {% for product in object_list|slice:"8:12" %}
-                    <div class="product p-4">
-                      <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                          {% if product.product_img %}
-                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                          {% else %}
-                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                          {% endif %}
-                        </div>
-                        <div class="product-description">
-                          <p class="product-brand">{{ product.category.brand }}</p>
-                          <p class="product-name">{{ product.name }}</p>
-                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
-                          {% if product.reviews.all %}
-                            <p class="product-review">
-                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </a>
-                    </div>
+                  {% for product in low_price_products|slice:"8:12" %}
+                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <a href="{% url 'products:product_detail' product.pk %}">
+                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        {% if product.product_img %}
+                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                        {% else %}
+                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                        {% endif %}
+                      </div>
+                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
+                      <p class="text-lg mb-1">{{ product.name }}</p>
+                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p>
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          5.0 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </a>
+                  </div>
                   {% endfor %}
                 {% endif %}
               </div>
