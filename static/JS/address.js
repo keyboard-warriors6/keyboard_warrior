@@ -1,7 +1,12 @@
-const address = document.getElementById('id_user_address')
-address.readOnly = true
+const postalcode = document.getElementById('postalcode')
+const addr = document.getElementById('id_address')
+addr.classList.add('w-5/6')
+addr.readOnly = true
 
-document.getElementById('user_address').addEventListener('click', search)
+addr.value = user_address
+
+document.getElementById('address').addEventListener('click', search)
+
 
 function search() {
   new daum.Postcode({
@@ -19,7 +24,7 @@ function search() {
       }
 
       document.getElementById('postalcode').value = data.zonecode
-      document.getElementById("id_user_address").value = roadAddr + extraRoadAddr
+      document.getElementById("id_address").value = roadAddr + extraRoadAddr
     },
     theme: {
       bgColor: "#F5F5F5",
