@@ -118,46 +118,62 @@ class ProductCategoryView(ListView):
             output_field=FloatField())).order_by('-affordability')
         elif filter_option == 'low_price':
             # Sort by low price
-            queryset = queryset.order_by('price')    
+            queryset = queryset.order_by('price')
+        elif filter_option == 'all':
+            queryset = queryset   
 
-        brand = self.request.GET.get('brand')
-        bluetooth = self.request.GET.get('bluetooth')
-        switch = self.request.GET.get('switch')
-        pressure = self.request.GET.get('pressure')
-        tenkey = self.request.GET.get('tenkey')
+        brand = self.request.GET.getlist('brand')  # 다중 선택된 브랜드 값들을 배열로 받음
+        bluetooth = self.request.GET.getlist('bluetooth')
+        switch = self.request.GET.getlist('switch')
+        pressure = self.request.GET.getlist('pressure')
+        tenkey = self.request.GET.getlist('tenkey')
 
         # 필터링 조건에 해당하는 Q 객체 생성
         filter_conditions = Q()
 
         if brand:
-            filter_conditions &= Q(category__brand=brand)
+            brand_conditions = Q()
+            for b in brand:
+                brand_conditions |= Q(category__brand=b)
+            filter_conditions &= brand_conditions
         if bluetooth:
-            filter_conditions &= Q(category__bluetooth=bluetooth)
+            bluetooth_conditions = Q()
+            for b in bluetooth:
+                bluetooth_conditions |= Q(category__bluetooth=b)
+            filter_conditions &= bluetooth_conditions
+
         if switch:
-            filter_conditions &= Q(category__switch=switch)
+            switch_conditions = Q()
+            for s in switch:
+                switch_conditions |= Q(category__switch=s)
+            filter_conditions &= switch_conditions
+
         if pressure:
-            if pressure.endswith('~'):
-                min_pressure = pressure[:-1].strip()
-                filter_conditions &= Q(category__pressure__gte=min_pressure)
-            else:
-                min_pressure, max_pressure = pressure.split('~')
-                filter_conditions &= Q(category__pressure__range=(min_pressure.strip(), max_pressure.strip()))
+            pressure_conditions = Q()
+            for pressure_range in pressure:
+                pressure_range = pressure_range.strip()
+                if pressure_range.endswith(','):
+                    min_pressure = pressure_range[:-1].strip()
+                    pressure_conditions |= Q(category__pressure__gte=min_pressure)
+                else:
+                    min_pressure, max_pressure = pressure_range.split(',')
+                    pressure_conditions |= Q(category__pressure__range=(min_pressure.strip(), max_pressure.strip()))
+            filter_conditions &= pressure_conditions
+
         if tenkey:
-            filter_conditions &= Q(category__tenkey=tenkey)
+            tenkey_conditions = Q()
+            for t in tenkey:
+                tenkey_conditions |= Q(category__tenkey=t)
+            filter_conditions &= tenkey_conditions
 
         # 조건에 맞는 제품 리스트 반환
         return queryset.filter(filter_conditions)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        filter_option = self.request.GET.get('filter')
         queryset = self.get_queryset()
-
         ratingset = Product.objects.filter(pk__in=queryset).annotate(avg_rating=Avg('reviews__rating'))
         context['ratingset'] = ratingset
-
-        if not filter_option:
-            context['show_all'] = True  # 전체보기를 표시하기 위한 변수 설정
         
         return context
     
