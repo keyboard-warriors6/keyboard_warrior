@@ -7,16 +7,16 @@
 
 {% block content %}
   <h2 class="title my-5">로그인</h2>
-  <form action="{% url 'accounts:login' %}" method="POST">
+  <form action="{% url 'accounts:login' %}" method="POST" class="group" novalidate>
     {% csrf_token %}
     {% include 'error.html' %}
     {% for field in form %}
     <div class="relative mb-3">
-      <input type="{% if field.name == 'password' %}password{% else %}text{% endif %}" name="{{ field.name }}" id="id_{{ field.name }}" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#99ccff] peer" placeholder=" " required />
+      <input type="{% if field.name == 'password' %}password{% else %}text{% endif %}" name="{{ field.name }}" id="id_{{ field.name }}" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-[#99ccff] invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer" {% if field.name == 'password' %}pattern=".{8,}"{% endif %} placeholder=" " required />
       <label for="id_{{ field.name }}" class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ field.label }}</label>
     </div>
     {% endfor %}
-    <input type="submit" value="로그인" class="login-btn" style="background-color: #99ccff;">
+    <input type="submit" value="로그인" class="login-btn group-invalid:pointer-events-none group-invalid:opacity-30" style="background-color: #99ccff;">
   </form>
   <p class="mt-6 text-center text-sm">계정이 없으신가요? <a href="{% url 'accounts:signup' %}" class="font-bold underline underline-offset-2">회원가입</a></p>
 {% endblock content %}
