@@ -9,41 +9,41 @@
 {% block content %}
   <div class="mx-auto max-w-screen-xl">
     <!-- 광고 배너 -->
-    <div id="animation-carousel" class="relative w-full my-20" data-carousel="static">
+    <div id="animation-carousel" class="relative w-full mb-20" data-carousel="slide">
       <!-- Carousel wrapper -->
       <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
            <!-- Item 1 -->
-          <div class="hidden duration-200 ease-linear" data-carousel-item>
-              <img src="/static/img/logo_2.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item="active">
+              <img src="{% static 'img/logo_2.png' %}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
           </div>
           <!-- Item 2 -->
-          <div class="hidden duration-200 ease-linear" data-carousel-item>
-              <img src="/static/img/logo_2.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+              <img src="{% static 'img/logo_2.png' %}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
           </div>
           <!-- Item 3 -->
-          <div class="hidden duration-200 ease-linear" data-carousel-item="active">
-              <img src="/static/img/logo_2.png" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+          <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+              <img src="{% static 'img/logo_2.png' %}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alttext-md text-a-tag="...">
           </div>
       </div>
       <!-- Slider controls -->
       <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-              <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-              <span class="sr-only">Previous</span>
-          </span>
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            <span class="sr-only">Previous</span>
+        </span>
       </button>
       <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-              <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-              <span class="sr-only">Next</span>
-          </span>
+        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            <span class="sr-only">Next</span>
+        </span>
       </button>
     </div>
     <!-- 광고 배너 -->
 
     <div class="flex justify-between">
-      <p class="text-2xl">인기상품</p>
-      <a href=""><p class="text-xl text-a-tag">전체 보기</p></a>
+      <p class="text-xl font-bold">인기상품</p>
+      <a href=""><p class="text-md text-a-tag">더보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -52,26 +52,28 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
               {% for product in object_list|slice:"0:4" %}
-                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                <div class="product p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
-                    <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                    <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
                         <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                       {% else %}
                         <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                       {% endif %}
                     </div>
-                    <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                    <p class="text-lg mb-1">{{ product.name }}</p>
-                    <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                    {% if product.reviews.all %}
-                      <p>
-                        <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                        5.0 리뷰 {{ product.reviews.all|length }}
-                      </p>
-                    {% endif %}
+                    <div class="product-description">
+                      <p class="product-brand">{{ product.category.brand }}</p>
+                      <p class="product-name">{{ product.name }}</p>
+                      <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p class="product-review">
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </div>
                   </a>
                 </div>
               {% endfor %}
@@ -84,52 +86,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
                 {% if object_list.count < 8 %}
                   {% for product in object_list|slice:"4:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"4:8" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -142,52 +148,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
                 {% if object_list.count < 12 %}
                   {% for product in object_list|slice:"8:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"8:12" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -195,13 +205,13 @@
           </div>
         {% endif %}
       </div>
-      <button type="button" class="absolute top-44 left-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+      <button type="button" class="absolute top-32 -left-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
         <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
             <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             <span class="sr-only">Previous</span>
         </span>
       </button>
-      <button type="button" class="absolute top-44 right-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+      <button type="button" class="absolute top-32 -right-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
           <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
               <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
               <span class="sr-only">Next</span>
@@ -212,8 +222,8 @@
 
     <!-- 입문하기 좋은 키보드 -->
     <div class="flex justify-between">
-      <p class="text-2xl">입문하기 좋은 키보드</p>
-      <a href=""><p class="text-xl text-a-tag">전체 보기</p></a>
+      <p class="text-xl font-bold">가성비 좋은 상품</p>
+      <a href=""><p class="text-md text-a-tag">더보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -222,26 +232,28 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
               {% for product in object_list|slice:"0:4" %}
-                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                <div class="product p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
-                    <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                    <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
                         <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                       {% else %}
                         <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                       {% endif %}
                     </div>
-                    <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                    <p class="text-lg mb-1">{{ product.name }}</p>
-                    <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                    {% if product.reviews.all %}
-                      <p>
-                        <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                        5.0 리뷰 {{ product.reviews.all|length }}
-                      </p>
-                    {% endif %}
+                    <div class="product-description">
+                      <p class="product-brand">{{ product.category.brand }}</p>
+                      <p class="product-name">{{ product.name }}</p>
+                      <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p class="product-review">
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </div>
                   </a>
                 </div>
               {% endfor %}
@@ -254,52 +266,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
                 {% if object_list.count < 8 %}
                   {% for product in object_list|slice:"4:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"4:8" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -312,52 +328,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
                 {% if object_list.count < 12 %}
                   {% for product in object_list|slice:"8:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"8:12" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -365,13 +385,13 @@
           </div>
         {% endif %}
       </div>
-      <button type="button" class="absolute top-44 left-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+      <button type="button" class="absolute top-32 -left-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
         <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
             <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             <span class="sr-only">Previous</span>
         </span>
       </button>
-      <button type="button" class="absolute top-44 right-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+      <button type="button" class="absolute top-32 -right-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
           <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
               <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
               <span class="sr-only">Next</span>
@@ -383,8 +403,8 @@
 
     <!-- 카테고리별 대표 상품 -->
     <div class="flex justify-between">
-      <p class="text-2xl text-a-tag">카테고리별 대표 상품</p>
-      <a href=""><p class="text-xl">전체 보기</p></a>
+      <p class="text-xl font-bold text-a-tag">브랜드별 대표 상품</p>
+      <a href=""><p class="text-md">더보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -393,26 +413,28 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
               {% for product in object_list|slice:"0:4" %}
-                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                <div class="product p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
-                    <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                    <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
                         <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                       {% else %}
                         <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                       {% endif %}
                     </div>
-                    <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                    <p class="text-lg mb-1">{{ product.name }}</p>
-                    <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                    {% if product.reviews.all %}
-                      <p>
-                        <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                        5.0 리뷰 {{ product.reviews.all|length }}
-                      </p>
-                    {% endif %}
+                    <div class="product-description">
+                      <p class="product-brand">{{ product.category.brand }}</p>
+                      <p class="product-name">{{ product.name }}</p>
+                      <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p class="product-review">
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </div>
                   </a>
                 </div>
               {% endfor %}
@@ -425,52 +447,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
                 {% if object_list.count < 8 %}
                   {% for product in object_list|slice:"4:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"4:8" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -483,48 +509,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
                 {% if object_list.count < 12 %}
                   {% for product in object_list|slice:"8:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"8:12" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name}}" class="w-full h-full object-cover">
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -532,13 +566,13 @@
           </div>
         {% endif %}
       </div>
-      <button type="button" class="absolute top-44 left-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+      <button type="button" class="absolute top-32 -left-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
         <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
             <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             <span class="sr-only">Previous</span>
         </span>
       </button>
-      <button type="button" class="absolute top-44 right-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+      <button type="button" class="absolute top-32 -right-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
           <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
               <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
               <span class="sr-only">Next</span>
@@ -550,8 +584,8 @@
 
     <!-- 리뷰 많은 순 -->
     <div class="flex justify-between">
-      <p class="text-2xl">후기가 많은 상품</p>
-      <a href=""><p class="text-xl text-a-tag">전체 보기</p></a>
+      <p class="text-xl font-bold">후기가 많은 상품</p>
+      <a href=""><p class="text-md text-a-tag">더보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -560,26 +594,28 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
               {% for product in object_list|slice:"0:4" %}
-                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                <div class="product p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
-                    <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                    <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
                         <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                       {% else %}
                         <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                       {% endif %}
                     </div>
-                    <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                    <p class="text-lg mb-1">{{ product.name }}</p>
-                    <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                    {% if product.reviews.all %}
-                      <p>
-                        <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                        5.0 리뷰 {{ product.reviews.all|length }}
-                      </p>
-                    {% endif %}
+                    <div class="product-description">
+                      <p class="product-brand">{{ product.category.brand }}</p>
+                      <p class="product-name">{{ product.name }}</p>
+                      <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p class="product-review">
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </div>
                   </a>
                 </div>
               {% endfor %}
@@ -592,52 +628,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
                 {% if object_list.count < 8 %}
                   {% for product in object_list|slice:"4:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"4:8" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -650,52 +690,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
                 {% if object_list.count < 12 %}
                   {% for product in object_list|slice:"8:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"8:12" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                      {% if product.product_img %}
-                        <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                      {% else %}
-                        <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                      {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -703,13 +747,13 @@
           </div>
         {% endif %}
       </div>
-      <button type="button" class="absolute top-44 left-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+      <button type="button" class="absolute top-32 -left-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
         <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
             <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             <span class="sr-only">Previous</span>
         </span>
       </button>
-      <button type="button" class="absolute top-44 right-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+      <button type="button" class="absolute top-32 -right-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
           <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
               <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
               <span class="sr-only">Next</span>
@@ -721,8 +765,8 @@
 
     <!-- 가격 순 -->
     <div class="flex justify-between">
-      <p class="text-2xl text-a-tag">가격순</p>
-      <a href=""><p class="text-xl">전체 보기</p></a>
+      <p class="text-xl font-bold text-a-tag">가격순</p>
+      <a href=""><p class="text-md">더보기</p></a>
     </div>
     <div id="indicators-carousel" class="relative w-full" data-carousel="static">
       <!-- Carousel wrapper -->
@@ -731,26 +775,28 @@
         <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
           <!-- 인기 상품 -->
           <div class="bg-white dark:bg-gray-900">
-            <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+            <div class="mx-auto w-full max-w-screen-xl  flex flex-wrap">
               {% for product in object_list|slice:"0:4" %}
-                <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                <div class="product p-4">
                   <a href="{% url 'products:product_detail' product.pk %}">
-                    <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                    <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                       {% if product.product_img %}
                         <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                       {% else %}
                         <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                       {% endif %}
                     </div>
-                    <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                    <p class="text-lg mb-1">{{ product.name }}</p>
-                    <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                    {% if product.reviews.all %}
-                      <p>
-                        <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                        5.0 리뷰 {{ product.reviews.all|length }}
-                      </p>
-                    {% endif %}
+                    <div class="product-description">
+                      <p class="product-brand">{{ product.category.brand }}</p>
+                      <p class="product-name">{{ product.name }}</p>
+                      <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                      {% if product.reviews.all %}
+                        <p class="product-review">
+                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                          <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                        </p>
+                      {% endif %}
+                    </div>
                   </a>
                 </div>
               {% endfor %}
@@ -763,52 +809,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
                 {% if object_list.count < 8 %}
                   {% for product in object_list|slice:"4:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                        </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"4:8" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -821,52 +871,56 @@
           <div class="hidden duration-700 ease-in-out" data-carousel-item>
             <!-- 인기 상품 -->
             <div class="bg-white dark:bg-gray-900">
-              <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 flex flex-wrap">
+              <div class="mx-auto w-full max-w-screen-xl flex flex-wrap">
                 {% if object_list.count < 12 %}
                   {% for product in object_list|slice:"8:" %}
-                    <div class="w-full md:w-1/3 lg:w-1/4 p-4">
+                    <div class="product p-4">
                       <a href="{% url 'products:product_detail' product.pk %}">
-                        <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
                           {% if product.product_img %}
                             <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
                           {% else %}
                             <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
                           {% endif %}
                         </div>
-                        <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                        <p class="text-lg mb-1">{{ product.name }}</p>
-                        <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                        {% if product.reviews.all %}
-                          <p>
-                            <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                            5.0 리뷰 {{ product.reviews.all|length }}
-                          </p>
-                        {% endif %}
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
                       </a>
                     </div>
                   {% endfor %}
                 {% else %}
                   {% for product in object_list|slice:"8:12" %}
-                  <div class="w-full md:w-1/3 lg:w-1/4 p-4">
-                    <a href="{% url 'products:product_detail' product.pk %}">
-                      <div class="w-[270px] h-[270px] border {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
-                        {% if product.product_img %}
-                          <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
-                        {% else %}
-                          <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
-                        {% endif %}
-                      </div>
-                      <p class="text-sm mb-1">{{ product.category.brand }}</p>
-                      <p class="text-lg mb-1">{{ product.name }}</p>
-                      <p class="text-xl mb-1">{% if product.discount_rate %}<span class="text-[#99ccff]">28%</span>{% endif %} {{ product.price|intcomma }}</p>
-                      {% if product.reviews.all %}
-                        <p>
-                          <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
-                          5.0 리뷰 {{ product.reviews.all|length }}
-                        </p>
-                      {% endif %}
-                    </a>
-                  </div>
+                    <div class="product p-4">
+                      <a href="{% url 'products:product_detail' product.pk %}">
+                        <div class="product-image {% if not product.product_img %}bg-[#f5f5f5]{% endif %}">
+                          {% if product.product_img %}
+                            <img src="{{ product.product_img.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                          {% else %}
+                            <img src="{% static 'img/default_img.svg' %}" alt="" class="w-full h-full object-cover">
+                          {% endif %}
+                        </div>
+                        <div class="product-description">
+                          <p class="product-brand">{{ product.category.brand }}</p>
+                          <p class="product-name">{{ product.name }}</p>
+                          <p class="product-price">{% if product.discount_rate %}<span class="product-discount">{{ product.discount_rate }}%</span>{% endif %} {{ product.discounted_price|intcomma }}</p>
+                          {% if product.reviews.all %}
+                            <p class="product-review">
+                              <svg class="svg1 inline" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
+                              <span class="product-avg">5.0</span> 리뷰 {{ product.reviews.all|length }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </a>
+                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -874,13 +928,13 @@
           </div>
         {% endif %}
       </div>
-      <button type="button" class="absolute top-44 left-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+      <button type="button" class="absolute top-32 -left-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
         <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
             <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
             <span class="sr-only">Previous</span>
         </span>
       </button>
-      <button type="button" class="absolute top-44 right-[-10px] z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+      <button type="button" class="absolute top-32 -right-10 z-30 flex items-center justify-center px-4 cursor-pointer group focus:outline-none" data-carousel-next>
           <span class="carousel-button inline-flex items-center justify-center w-12 h-12 rounded-full bg-white">
               <svg aria-hidden="true" class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
               <span class="sr-only">Next</span>

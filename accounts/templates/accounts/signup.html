@@ -39,7 +39,7 @@
     </div>
     <div class="flex justify-between items-baseline">
       <div class="relative flex-1 me-1">
-        <input type="text" id="postalcode" class="block px-2.5 pb-2.5 pt-4 mb-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="우편번호" readonly>
+        <input type="text" id="postalcode" class="signup-form block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white border-1 appearance-none focus:ring-0 peer" placeholder="우편번호" readonly>
       </div>
       <div class="relative ms-1">
         <button type="button" id="user_address" class="bg-[#99ccff] hover:bg-[#000000] text-white font-bold py-2 px-4 rounded">주소찾기</button>
@@ -67,7 +67,7 @@
     {% endfor %} {% endcomment %}
     <input type="submit" value="회원가입하기" class="signup-btn bg-[#99ccff] mt-6">
   </form>
-  <p class="mt-6 text-center text-sm">이미 계정이 있으신가요? <a href="" class="font-bold underline underline-offset-2">로그인</a></p>
+  <p class="mt-6 text-center text-sm">이미 계정이 있으신가요? <a href="{% url 'accounts:login' %}" class="font-bold underline underline-offset-2">로그인</a></p>
 {% endblock content %}
 
 {% block script %}
