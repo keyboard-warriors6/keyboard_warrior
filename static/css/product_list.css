@@ -1,5 +1,5 @@
 .carousel-wrapper {
-  height: 475px !important; 
+  height: 450px !important; 
 }
 
 .carousel-button {
@@ -13,22 +13,23 @@
 
 .text-a-tag {
   color: #99ccff;
+  font-size: 0.875rem;
 }
 
 .product {
-  width: calc(28.175% - 2rem);
+  width: calc(28.275% - 2rem);
+  padding: 0 1rem;
 }
 
 .product:nth-child(1) {
-  width: calc(28.175% - 3rem);
+  width: calc(28.275% - 3rem);
   padding-left: 0;
 }
 
 .product:last-child {
-  width: calc(28.175% - 3rem);
+  width: calc(28.275% - 3rem);
   padding-right: 0;
 }
-
 
 .product-image {
   position: relative;

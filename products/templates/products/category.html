@@ -15,151 +15,162 @@
   </div>
 
   <div class="relative flex mt-4 mb-32">
-
-    <div class="sidebar">
-      <div id="accordion-flush" data-accordion="open" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
-        <h2 id="accordion-flush-heading-1">
-          <button type="button" class="flex items-center justify-between w-full pb-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
-            <span class="hover:opacity-70">제조사</span>
-            <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-          </button>
-        </h2>
-        <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
-          <div class="category-list">
-            <div class="flex flex-col items-start mb-4 gap-4">
-              <div class="category-item">
-                <input type="checkbox" name="brand" value="덱" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">덱</label>
-              </div>
-              <div class="category-item">
-                <input type="checkbox" name="brand" value="레오폴드" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">레오폴드</label>
-              </div>
-              <div class="category-item">
-                <input type="checkbox" name="brand" value="로지텍" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">로지텍</label>
-              </div>
-              <div class="category-item">
-                <input type="checkbox" name="brand" value="리얼포스" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">리얼포스</label>
-              </div>
-              <div class="category-item">
-                <input type="checkbox" name="brand" value="애크론" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">애크론</label>
-              </div>
-              <div class="category-item">
-                <input type="checkbox" name="brand" value="앱코" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">앱코</label>
-              </div>
-              <div class="category-item">
-                <input type="checkbox" name="brand" value="커세어" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">커세어</label>
-              </div>
-              <div class="category-item">
-                <input type="checkbox" name="brand" value="콕스" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">콕스</label>
-              </div>
+    <div class="sidebar-wrap shrink-0 pt-4">
+      <div class="flex sticky -top-4 justify-between text-sm">
+        <p class="font-bold">필터</p>
+        <button class="reset-button flex items-center text-xs">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>            
+          <p>필터 초기화</p>
+        </button>
+      </div>
+      <hr class="mt-4">
+      <div class="sidebar">
+        <div id="accordion-flush" data-accordion="open" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+          <h2 id="accordion-flush-heading-1">
+            <button type="button" class="flex items-center justify-between w-full pb-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+              <span class="hover:opacity-70">제조사</span>
+              <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+          </h2>
+          <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+            <div class="category-list">
+              <div class="flex flex-col items-start mb-4 gap-4">
+                <div class="category-item">
+                  <input type="checkbox" name="brand" value="덱" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">덱</label>
+                </div>
+                <div class="category-item">
+                  <input type="checkbox" name="brand" value="레오폴드" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">레오폴드</label>
+                </div>
+                <div class="category-item">
+                  <input type="checkbox" name="brand" value="로지텍" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">로지텍</label>
+                </div>
+                <div class="category-item">
+                  <input type="checkbox" name="brand" value="리얼포스" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">리얼포스</label>
+                </div>
+                <div class="category-item">
+                  <input type="checkbox" name="brand" value="애크론" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">애크론</label>
+                </div>
+                <div class="category-item">
+                  <input type="checkbox" name="brand" value="앱코" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">앱코</label>
+                </div>
+                <div class="category-item">
+                  <input type="checkbox" name="brand" value="커세어" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">커세어</label>
+                </div>
+                <div class="category-item">
+                  <input type="checkbox" name="brand" value="콕스" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">콕스</label>
+                </div>
+            </div>
+            </div>
           </div>
-          </div>
-        </div>
-        <h2 id="accordion-flush-heading-2">
-          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="true" aria-controls="accordion-flush-body-2">
-            <span class="hover:opacity-70">유선/무선</span>
-            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-          </button>
-        </h2>
-        <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-1">
-          <div class="category-list">
-            <div class="flex flex-col items-start mb-4 gap-4">
-              <div>
-                <input type="checkbox" name="bluetooth" value="False" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">유선</label>
-              </div>
-              <div>
-                <input type="checkbox" name="bluetooth" value="True" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">무선</label>
+          <h2 id="accordion-flush-heading-2">
+            <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-2" aria-expanded="true" aria-controls="accordion-flush-body-2">
+              <span class="hover:opacity-70">유선/무선</span>
+              <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+          </h2>
+          <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-1">
+            <div class="category-list">
+              <div class="flex flex-col items-start mb-4 gap-4">
+                <div>
+                  <input type="checkbox" name="bluetooth" value="False" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">유선</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="bluetooth" value="True" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">무선</label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <h2 id="accordion-flush-heading-3">
-          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="true" aria-controls="accordion-flush-body-3">
-            <span class="hover:opacity-70">스위치</span>
-            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-          </button>
-        </h2>
-        <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-1">
-          <div class="category-list">
-            <div class="flex flex-col items-start mb-4 gap-4">
-              <div>
-                <input type="checkbox" name="switch" value="저소음 적축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">저소음 적축</label>
-              </div>
-              <div>
-                <input type="checkbox" name="switch" value="적축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">적축</label>
-              </div>
-              <div>
-                <input type="checkbox" name="switch" value="갈축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">갈축</label>
-              </div>
-              <div>
-                <input type="checkbox" name="switch" value="청축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">청축</label>
-              </div>
-              <div>
-                <input type="checkbox" name="switch" value="흑축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">흑축</label>
-              </div>
+          <h2 id="accordion-flush-heading-3">
+            <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-3" aria-expanded="true" aria-controls="accordion-flush-body-3">
+              <span class="hover:opacity-70">스위치</span>
+              <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+          </h2>
+          <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-1">
+            <div class="category-list">
+              <div class="flex flex-col items-start mb-4 gap-4">
+                <div>
+                  <input type="checkbox" name="switch" value="저소음 적축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">저소음 적축</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="switch" value="적축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">적축</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="switch" value="갈축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">갈축</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="switch" value="청축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">청축</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="switch" value="흑축" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">흑축</label>
+                </div>
+            </div>
+            </div>
           </div>
+          <h2 id="accordion-flush-heading-4">
+            <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-4" aria-expanded="true" aria-controls="accordion-flush-body-4">
+              <span class="hover:opacity-70">키압</span>
+              <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+          </h2>
+          <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-1">
+            <div class="category-list">
+              <div class="flex flex-col items-start mb-4 gap-4">
+                <div>
+                  <input type="checkbox" name="pressure" value="30,39" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">30g ~ 39g</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="pressure" value="40,49" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">40g ~ 49g</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="pressure" value="50,59" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">50g ~ 59g</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="pressure" value="60," class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">60g ~</label>
+                </div>
+            </div>
+            </div>
           </div>
-        </div>
-        <h2 id="accordion-flush-heading-4">
-          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-4" aria-expanded="true" aria-controls="accordion-flush-body-4">
-            <span class="hover:opacity-70">키압</span>
-            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-          </button>
-        </h2>
-        <div id="accordion-flush-body-4" class="hidden" aria-labelledby="accordion-flush-heading-1">
-          <div class="category-list">
-            <div class="flex flex-col items-start mb-4 gap-4">
-              <div>
-                <input type="checkbox" name="pressure" value="30,39" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">30g ~ 39g</label>
-              </div>
-              <div>
-                <input type="checkbox" name="pressure" value="40,49" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">40g ~ 49g</label>
-              </div>
-              <div>
-                <input type="checkbox" name="pressure" value="50,59" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">50g ~ 59g</label>
-              </div>
-              <div>
-                <input type="checkbox" name="pressure" value="60," class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">60g ~</label>
-              </div>
-          </div>
-          </div>
-        </div>
-        <h2 id="accordion-flush-heading-5">
-          <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-5" aria-expanded="true" aria-controls="accordion-flush-body-5">
-            <span class="hover:opacity-70">키배열</span>
-            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-          </button>
-        </h2>
-        <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-1">
-          <div class="category-list">
-            <div class="flex flex-col items-start mb-4 gap-4">
-              <div>
-                <input type="checkbox" name="tenkey" value="True" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">텐키리스</label>
-              </div>
-              <div>
-                <input type="checkbox" name="tenkey" value="False" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
-                <label for="main-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">풀배열</label>
-              </div>
-          </div>
+          <h2 id="accordion-flush-heading-5">
+            <button type="button" class="flex items-center justify-between w-full py-3 text-sm text-left text-gray-500 dark:text-gray-400" data-accordion-target="#accordion-flush-body-5" aria-expanded="true" aria-controls="accordion-flush-body-5">
+              <span class="hover:opacity-70">키배열</span>
+              <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+          </h2>
+          <div id="accordion-flush-body-5" class="hidden" aria-labelledby="accordion-flush-heading-1">
+            <div class="category-list">
+              <div class="flex flex-col items-start mb-4 gap-4">
+                <div>
+                  <input type="checkbox" name="tenkey" value="True" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">텐키리스</label>
+                </div>
+                <div>
+                  <input type="checkbox" name="tenkey" value="False" class="main-checkbox w-4 h-4 bg-gray-100 border-gray-300 rounded">
+                  <label for="main-checkbox" class="ml-2 font-medium text-gray-900 dark:text-gray-300">풀배열</label>
+                </div>
+            </div>
+            </div>
           </div>
         </div>
       </div>
@@ -182,9 +193,6 @@
           <li>
             <button name="filter" value="low_price">낮은 가격순</button>
           </li>
-          {% comment %} <li>
-            <button name="filter" value="high_price">높은 가격순</button>
-          </li> {% endcomment %}
         </ul>
       </div>
       {% if object_list %}
@@ -228,12 +236,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
           </svg>            
           <p class="mt-4 text-gray-400">선택하신 필터와 일치하는 상품이 없습니다.</p>
-          <div id="reset-button">
+          <button class="reset-button-style reset-button">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
             </svg>            
             <p>필터 초기화</p>
-          </div>
+          </button>
         </div>
       {% endif %}
     </div>
