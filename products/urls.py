@@ -26,8 +26,6 @@ urlpatterns = [
     path('purchase_create/', PurchaseFromCartView.as_view(), name='purchase_from_cart'),
     ## 상세페이지 구매
     path('<int:product_pk>/purchase/', PurchaseFromDetailView.as_view(), name='purchase_from_detail'),
-    ## 구매내역
-    path('purchase_list/', PurchaseListView.as_view(), name='purchase_list'),
     ## 구매완료
     path('purchase_complete/<int:purchase_pk>/', PurchaseCompleteView.as_view(), name='purchase_complete'),
 

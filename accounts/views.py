@@ -5,9 +5,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from django.db.models import F, Sum
+from django.db.models.functions import TruncDate
 from django.views.generic import FormView, RedirectView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from products.models import *
 
 
 class SignupView(CreateView):
@@ -47,6 +50,16 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         user = self.object
         inquiries = user.inquiry_set.filter(user=self.request.user)
         context['inquiries'] = inquiries
+
+        purchase_list = Purchase.objects.filter(user=self.request.user)
+        purchase_list = purchase_list.order_by('-purchase_date')
+        purchase_list = purchase_list.annotate(date=TruncDate('purchase_date'))
+
+        for purchase in purchase_list:
+            purchase_items = PurchaseItem.objects.filter(purchase__user=self.request.user, purchase__purchase_date__date=purchase.date)
+            purchase.purchase_items = purchase_items
+
+        context['purchase_list'] = purchase_list
         return context
     
     

@@ -192,31 +192,7 @@ class PurchaseCompleteView(DetailView):
 
         return context
 
-
-
-# 내가 구매한 상품 목록 조회하기(Read)
-class PurchaseListView(LoginRequiredMixin, ListView):
-    model = Purchase
-    template_name = 'accounts/profile.html'
-    context_object_name = 'purchase_list'
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = queryset.filter(user=self.request.user)
-        queryset = queryset.order_by('-purchase_date')
-        queryset = queryset.annotate(date=TruncDate('purchase_date'))
-        queryset = queryset.values('date').annotate(total_price=Sum(F('purchaseitem__product__price') * F('purchaseitem__cnt')))
-
-        return queryset
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        for purchase in context['purchase_list']:
-            purchase_items = purchase.purchaseitem_set.all()
-            purchase.purchase_items = purchase_items
-
-        return context
-    
-
 # 장바구니 생성
 class CartCreateView(LoginRequiredMixin, FormView):
     form_class = CartForm
