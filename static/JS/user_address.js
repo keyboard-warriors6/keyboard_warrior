@@ -20,6 +20,12 @@ function search() {
 
       document.getElementById('postalcode').value = data.zonecode
       document.getElementById("id_user_address").value = roadAddr + extraRoadAddr
+    },
+    theme: {
+      bgColor: "#F5F5F5",
+      pageBgColor: "#FFFFCC",
+      emphTextColor: "#99CCFF",
+      outlineColor: "#99CCFF"
     }
   }).open();
 }
