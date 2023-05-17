@@ -48,6 +48,8 @@ class ProductDetailView(DetailView):
 
         context['category'] = product.category
         context['review_form'] = ReviewForm()
+        context['inquiry_form'] = InquiryForm()
+        context['answer_form'] = AnswerForm()
         context['review_image_form'] = ReviewImageForm() 
         context['reviews'] = review_data
         context['inquiries'] = inquiry_data

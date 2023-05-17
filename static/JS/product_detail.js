@@ -141,6 +141,7 @@ reviewUpdate.forEach((review) => {
 })
 
 const reviewUpdateConfirm = document.querySelectorAll('.review-edit-form')
+
 reviewUpdateConfirm.forEach((updateBtn) => {
   updateBtn.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -148,14 +149,31 @@ reviewUpdateConfirm.forEach((updateBtn) => {
     console.log(productId)
     const reviewId = event.target.dataset.reviewId
     console.log(reviewId)
+
+
+    const reviewContentTag = document.getElementById(`review-content-${reviewId}`)
+
+    const reviewContent = reviewContentTag.children[0].children[1].value
+
+    const reviewRating = reviewContentTag.children[1].children[1].value
+
+    console.log(reviewRating)
+
+    const form = new FormData()
+    form.append('content', reviewContent)
+    form.append('rating', reviewRating)
+    
+
     axios({
       method: 'post',
       url: `http://127.0.0.1:8000/products/${productId}/review/${reviewId}/update/`,
-      headers:{'X-CSRFToken': csrftoken},
-      // data: FormData,
+      headers:{'X-CSRFToken': csrftoken},   
+      data: form,
     })
     .then((response) => {
       updateBtn.hidden = true
+      location.reload()
+
     })
     .catch((error) => {
       console.log(error.response)

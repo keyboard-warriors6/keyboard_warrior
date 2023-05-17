@@ -49,7 +49,8 @@ class InquiryDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
     def test_func(self):
-        return self.request.user.is_superuser
+        obj = self.get_object()
+        return (self.request.user.is_superuser) or (obj.user == self.request.user)
 
 
     def dispatch(self, request, *args, **kwargs):

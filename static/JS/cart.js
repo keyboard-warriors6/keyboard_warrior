@@ -3,6 +3,7 @@ const itemCheckboxes = document.querySelectorAll('.item-checkbox')
 const buyCntTag = document.querySelector('#buy-cnt')
 let cnt = itemCheckboxes.length
 
+
 // 모든 체크박스가 체크되면 전체 선택 체크박스를 체크
 for (let i=0; i < itemCheckboxes.length; i++) {
   itemCheckboxes[i].addEventListener('click', function(event) {
@@ -38,9 +39,20 @@ allCheckbox.addEventListener('click', function (event) {
   })
 })
 
-// 수량 수정 비동기 처리
+// 수량 수정, 가격 수정 js
 const counters = document.querySelectorAll('.counter')
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+// 콤마 넣어주는 함수
+function AddComma(num){
+  const regexp = /\B(?=(\d{3})+(?!\d))/g;
+  return num.toString().replace(regexp, ',');
+}
+
+// 콤마 찍힌 수를 정수로 변환하는 함수
+function stringNumberToInt(stringNumber){
+  return parseInt(stringNumber.replace(/,/g , ''));
+}
 
 counters.forEach(function(counter) {
   const minusBtn = counter.children[0]
@@ -51,7 +63,6 @@ counters.forEach(function(counter) {
   const priceTag = document.getElementById(`price-${cartId}`)
   const originPrice = Number(document.getElementById(`origin-price-${cartId}`).textContent)
   const totalPriceTag = document.getElementById('total-price')
-
 
   // 장바구니 아이템 개별 삭제
   closeBtn.addEventListener('click', function (event) {
@@ -69,19 +80,25 @@ counters.forEach(function(counter) {
   // 장바구니 아이템 수량 줄이기
   minusBtn.addEventListener('click', function(event) {    
     event.preventDefault()
-    priceTag.textContent = Number(priceTag.textContent) - originPrice
-    totalPriceTag.textContent = Number(totalPriceTag.textContent) - originPrice
+
+    priceTag.textContent = AddComma(stringNumberToInt(priceTag.textContent) - originPrice)
+    
+    totalPriceTag.textContent = AddComma(stringNumberToInt(totalPriceTag.textContent) - originPrice)
+
     cntTag.textContent = Number(cntTag.textContent) - 1
-    const form = document.getElementById(`form-${cartId}`)
-    form.setAttribute('value', cntTag.textContent)
-    const formData = new FormData()
-    formData.append('cnt', cntTag.textContent)
 
     if (cntTag.textContent == 1) {
       minusBtn.classList.add('text-gray-400')
       minusBtn.classList.add('cursor-default')
       minusBtn.style.pointerEvents = 'none'
     }
+
+    
+    const form = document.getElementById(`form-${cartId}`)
+    form.setAttribute('value', cntTag.textContent)
+    const formData = new FormData()
+    formData.append('cnt', cntTag.textContent)
+
     axios({
       method: 'post',
       url: `/products/cart/${cartId}/update/`,
@@ -93,19 +110,23 @@ counters.forEach(function(counter) {
   // 장바구니 아이템 수량 늘리기
   plusBtn.addEventListener('click', function(event) {
     event.preventDefault()
-    priceTag.textContent = Number(priceTag.textContent) + originPrice
-    totalPriceTag.textContent = Number(totalPriceTag.textContent) + originPrice
+    priceTag.textContent = AddComma(stringNumberToInt(priceTag.textContent) + originPrice)
+
+    totalPriceTag.textContent =  AddComma(stringNumberToInt(totalPriceTag.textContent) + originPrice)
+
     cntTag.textContent = Number(cntTag.textContent) + 1
-    const form = document.getElementById(`form-${cartId}`)
-    form.setAttribute('value', cntTag.textContent)
-    const formData = new FormData()
-    formData.append('cnt', cntTag.textContent)
 
     if (cntTag.textContent > 1) {
       minusBtn.classList.remove('text-gray-400')
       minusBtn.classList.remove('cursor-default')
       minusBtn.style.pointerEvents = 'auto'
     }
+
+    const form = document.getElementById(`form-${cartId}`)
+    form.setAttribute('value', cntTag.textContent)
+    const formData = new FormData()
+    formData.append('cnt', cntTag.textContent)
+
     axios({
       method: 'post',
       url: `/products/cart/${cartId}/update/`,

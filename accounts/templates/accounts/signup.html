@@ -3,6 +3,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 {% endblock head %}
 
 {% block content %}
@@ -36,6 +37,14 @@
       {{ form.phone_number }}
       <label for="{{ form.phone_number.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.phone_number.label }}</label>
     </div>
+    <div class="flex justify-between items-baseline">
+      <div class="relative flex-1 me-1">
+        <input type="text" id="postalcode" class="block px-2.5 pb-2.5 pt-4 mb-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="우편번호" readonly>
+      </div>
+      <div class="relative ms-1">
+        <button type="button" id="user_address" class="bg-[#99ccff] hover:bg-[#000000] text-white font-bold py-2 px-4 rounded">주소찾기</button>
+      </div>
+    </div>
     <div class="relative">
       {{ form.user_address }}
       <label for="{{ form.user_address.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.user_address.label }}</label>
@@ -60,3 +69,7 @@
   </form>
   <p class="mt-6 text-center text-sm">이미 계정이 있으신가요? <a href="" class="font-bold underline underline-offset-2">로그인</a></p>
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/user_address.js' %}" type="module"></script>
+{% endblock script %}
