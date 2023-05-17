@@ -2,16 +2,129 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
+from django.db.models import ExpressionWrapper, FloatField, Count, F, Q
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView, View
 from django.views.generic.edit import FormMixin, UpdateView
 from products.forms import *
 from products.models import *
 
 
-class ProductListView(ListView):
+class ProductListView(TemplateView):
+    template_name = 'products/product_list.html'
+
+    def get_top_selling_products_by_brand(self, category):
+        top_selling_product = Product.objects.filter(category__brand=category.brand).annotate(num_purchases=Count('purchaseitem')).order_by('-num_purchases')[:4]
+        return top_selling_product
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # 구매량 많은 순으로 상위 12개 제품 가져오기
+        most_purchased_products = Product.objects.annotate(num_purchases=Count('purchaseitem')).order_by('-num_purchases')[:12]
+        context['most_purchased_products'] = most_purchased_products
+
+        # 가성비 좋은 순으로 상위 5개 제품 가져오기
+        affordable_products = Product.objects.annotate(affordability=ExpressionWrapper(
+        Count('purchaseitem') / F('price'),
+        output_field=FloatField()
+        )).order_by('-affordability')[:12]
+        context['affordable_products'] = affordable_products
+
+        # 후기가 많은 순으로 상위 12개 제품 가져오기
+        most_reviewed_products = Product.objects.annotate(num_reviews=Count('reviews')).order_by('-num_reviews')[:12]
+        context['most_reviewed_products'] = most_reviewed_products
+
+        # 브랜드별 판매량 상위 4개 상품 가져오기
+        category_cox = Category.objects.filter(brand='콕스').first()
+        if category_cox is not None:
+            cox_selling_products = self.get_top_selling_products_by_brand(category_cox)
+            context['cox_selling_products'] = cox_selling_products
+        else:
+            context['cox_selling_products'] = None
+
+        category_corsair = Category.objects.filter(brand='커세어').first()
+        if category_corsair is not None:
+            corsair_selling_products = self.get_top_selling_products_by_brand(category_corsair)
+            context['corsair_selling_products'] = corsair_selling_products
+        else:
+            context['corsair_selling_products'] = None
+
+        category_leopold = Category.objects.filter(brand='레오폴드').first()
+        if category_leopold is not None:
+            leopold_selling_products = self.get_top_selling_products_by_brand(category_leopold)
+            context['leopold_selling_products'] = leopold_selling_products
+        else:
+            context['leopold_selling_products'] = None
+
+        # 가격이 낮은 순으로 상위 12개 제품 가져오기
+        low_price_products = Product.objects.order_by('price')[:12]
+        context['low_price_products'] = low_price_products
+    
+        return context
+        
+        
+class ProductCategoryView(ListView):
     model = Product
+    context_object_name = 'products'
+    template_name = 'products/category.html'  
     # paginate_by = 12  # pagination이 필요한 경우 사용
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        filter_option = self.request.GET.get('filter')
+            # 필터 옵션에 따라 쿼리셋 필터링
+        if filter_option == 'purchased':
+            # 구매를 많이 한 순으로 정렬
+            queryset = queryset.annotate(num_purchases=Count('purchases')).order_by('-num_purchases')
+        elif filter_option == 'popular':
+            # 후기 많은 순으로 정렬
+            queryset = queryset.annotate(num_reviews=Count('reviews')).order_by('-num_reviews')
+        elif filter_option == 'affordable':
+            # 가성비 좋은 순으로 정렬 (구매량/가격)
+            queryset = queryset.annotate(affordability=ExpressionWrapper(
+            Count('purchaseitem') / F('price'),
+            output_field=FloatField())).order_by('-affordability')
+        elif filter_option == 'low_price':
+            # Sort by low price
+            queryset = queryset.order_by('price')    
+
+        brand = self.request.GET.get('brand')
+        bluetooth = self.request.GET.get('bluetooth')
+        switch = self.request.GET.get('switch')
+        pressure = self.request.GET.get('pressure')
+        tenkey = self.request.GET.get('tenkey')
+
+        # 필터링 조건에 해당하는 Q 객체 생성
+        filter_conditions = Q()
+
+        if brand:
+            filter_conditions &= Q(category__brand=brand)
+        if bluetooth:
+            filter_conditions &= Q(category__bluetooth=bluetooth)
+        if switch:
+            filter_conditions &= Q(category__switch=switch)
+        if pressure:
+            if pressure.endswith('~'):
+                min_pressure = pressure[:-1].strip()
+                filter_conditions &= Q(category__pressure__gte=min_pressure)
+            else:
+                min_pressure, max_pressure = pressure.split('~')
+                filter_conditions &= Q(category__pressure__range=(min_pressure.strip(), max_pressure.strip()))
+        if tenkey:
+            filter_conditions &= Q(category__tenkey=tenkey)
+
+        # 조건에 맞는 제품 리스트 반환
+        return queryset.filter(filter_conditions)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        filter_option = self.request.GET.get('filter')
+
+        if not filter_option:
+            context['show_all'] = True  # 전체보기를 표시하기 위한 변수 설정
+        
+        return context
+    
 
 class ProductDetailView(DetailView):
     model = Product
