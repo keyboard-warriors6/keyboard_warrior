@@ -29,3 +29,10 @@ function search() {
     }
   }).open();
 }
+
+const pw1 = document.getElementById('id_password1')
+const pw2 = document.getElementById('id_password2')
+
+pw1.addEventListener('change', (e) => {
+  pw2.setAttribute('pattern', pw1.value)
+})

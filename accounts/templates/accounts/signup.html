@@ -8,7 +8,7 @@
 
 {% block content %}
   <h1 class="title mt-14">회원가입</h1>
-  <form action="{% url 'accounts:signup' %}" method="POST" enctype="multipart/form-data">
+  <form action="{% url 'accounts:signup' %}" method="POST" class="group" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     {% include 'error.html' %}
     <div class="relative">
@@ -59,17 +59,11 @@
         <label for="{{ form.password2.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/3 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.password2.label }}</label>
       </div>
     </div>
-    {% comment %} {% for field in form %}
-      <div class="relative">
-        {{ field }}
-        <label for="{{ field.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ field.label }}</label>
-      </div>
-    {% endfor %} {% endcomment %}
-    <input type="submit" value="회원가입하기" class="signup-btn bg-[#99ccff] mt-6">
+    <input type="submit" value="회원가입하기" class="signup-btn bg-[#99ccff] mt-6 group-invalid:pointer-events-none group-invalid:opacity-30">
   </form>
   <p class="mt-6 text-center text-sm">이미 계정이 있으신가요? <a href="{% url 'accounts:login' %}" class="font-bold underline underline-offset-2">로그인</a></p>
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'js/user_address.js' %}" type="module"></script>
+<script src="{% static 'js/userinfo.js' %}" type="module"></script>
 {% endblock script %}
