@@ -1,12 +1,20 @@
+import os
+import sys
+import requests
+import json
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
-from django.http import JsonResponse
-from django.shortcuts import redirect
+from django.http import JsonResponse, HttpResponse
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.db.models import ExpressionWrapper, FloatField, Count, F, Q
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView, View
 from django.views.generic.edit import FormMixin, UpdateView
 from products.forms import *
 from products.models import *
+from wordcloud import WordCloud 
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import *
 
 
 class ProductListView(TemplateView):
@@ -75,7 +83,7 @@ class ProductCategoryView(ListView):
             # 필터 옵션에 따라 쿼리셋 필터링
         if filter_option == 'purchased':
             # 구매를 많이 한 순으로 정렬
-            queryset = queryset.annotate(num_purchases=Count('purchases')).order_by('-num_purchases')
+            queryset = queryset.annotate(num_purchases=Count('purchaseitem')).order_by('-num_purchases')
         elif filter_option == 'popular':
             # 후기 많은 순으로 정렬
             queryset = queryset.annotate(num_reviews=Count('reviews')).order_by('-num_reviews')
@@ -315,3 +323,174 @@ class ProductBookmarkView(LoginRequiredMixin, View):
             'bookmark': bookmark,
         }
         return JsonResponse(context)
+    
+
+class KeyboardTrendView(TemplateView):
+    template_name = 'products/keyboard_trend.html'  # 템플릿 파일 경로
+
+    def get(self, request):
+        trend_data1 = self.get_shopping_trend1()
+        trend_data2 = self.get_shopping_trend2()
+        trend_data_1 = trend_data1["results"]
+        trend_data_2 = trend_data2["results"]
+        result = {}
+        for item in trend_data_1:
+            title = item["title"]
+            ratios = [data["ratio"] for data in item["data"]]
+            total_ratio = sum(ratios)
+            result[title] = total_ratio
+        for item in trend_data_2:
+            title = item["title"]
+            ratios = [data["ratio"] for data in item["data"]]
+            total_ratio = sum(ratios)
+            result[title] = total_ratio
+            wordcloud = WordCloud(width=1200, height=400).generate_from_frequencies(result)
+            
+            # 워드 클라우드 이미지를 파일로 저장
+            image_path = '/wordcloud.png'
+            wordcloud.to_file(image_path)
+            
+            # 템플릿 렌더링 및 응답 반환
+            return render(request, 'products/keyboard_trend.html', {'wordcloud_image': image_path})
+    
+    def get_shopping_trend1(self):
+        client_id = os.getenv('NAVER_CLIENT_ID') 
+        client_secret = os.getenv('NAVER_CLIENT_SECRET')
+
+        url = "https://openapi.naver.com/v1/datalab/shopping/category/keywords"
+        headers = {
+            "X-Naver-Client-Id": client_id,
+            "X-Naver-Client-Secret": client_secret,
+            "Content-Type": "application/json"
+        }
+
+        # 검색어 키워드 설정
+        query = {
+            "startDate": "2023-02-01",
+            "endDate": "2023-04-30",
+            "timeUnit": "month",
+            "category": "50001204",
+            "keyword": [
+                {"name": "커세어", "param": ["커세어"]},
+                {"name": "앱코", "param": ["앱코"]},
+                {"name": "로지텍", "param": ["로지텍"]},
+                {"name": "콕스", "param": ["콕스"]},
+                {"name": "레오폴드", "param": ["레오폴드"]},
+            ],
+            "device": "",
+            "ages": [],
+            "gender": "",
+        }
+
+        response = requests.post(url, headers=headers, data=json.dumps(query))
+        result = response.json()
+
+        return result
+    
+
+    def get_shopping_trend2(self):
+        client_id = os.getenv('NAVER_CLIENT_ID') 
+        client_secret = os.getenv('NAVER_CLIENT_SECRET')
+
+        url = "https://openapi.naver.com/v1/datalab/shopping/category/keywords"
+        headers = {
+            "X-Naver-Client-Id": client_id,
+            "X-Naver-Client-Secret": client_secret,
+            "Content-Type": "application/json"
+        }
+
+        # 검색어 키워드 설정
+        query = {
+            "startDate": "2023-02-01",
+            "endDate": "2023-04-30",
+            "timeUnit": "month",
+            "category": "50001204",
+            "keyword": [
+                {"name": "리얼포스", "param": ["리얼포스"]},
+                {"name": "덱", "param": ["덱"]},
+                {"name": "듀가드", "param": ["듀가드"]},
+                {"name": "키크론", "param": ["키크론"]},
+                {"name": "씽크웨이", "param": ["씽크웨이"]},
+            ],
+            "device": "",
+            "ages": [],
+            "gender": "",
+        }
+
+        response = requests.post(url, headers=headers, data=json.dumps(query))
+        result = response.json()
+
+        return result
+    
+
+        # def get_shopping_trend1(self):
+        # client_id = os.getenv('NAVER_CLIENT_ID') 
+        # client_secret = os.getenv('NAVER_CLIENT_SECRET')
+
+        # url = "https://openapi.naver.com/v1/datalab/shopping/category/keywords"
+        # headers = {
+        #     "X-Naver-Client-Id": client_id,
+        #     "X-Naver-Client-Secret": client_secret,
+        #     "Content-Type": "application/json"
+        # }
+
+        # # 검색어 키워드 설정
+        # query = {
+        #     "startDate": "2023-02-01",
+        #     "endDate": "2023-04-30",
+        #     "timeUnit": "month",
+        #     "category": "50001204",
+        #     "keyword": [
+        #         {"name": "커세어", "param": ["커세어"]},
+        #         {"name": "앱코", "param": ["앱코"]},
+        #         {"name": "로지텍", "param": ["로지텍"]},
+        #         {"name": "콕스", "param": ["콕스"]},
+        #         {"name": "레오폴드", "param": ["레오폴드"]},
+        #     ],
+        #     "device": "",
+        #     "ages": [],
+        #     "gender": "",
+        # }
+
+        # response = requests.post(url, headers=headers, data=json.dumps(query))
+        # result = response.json()
+
+        # return result
+    
+
+        # def get_shopping_trend1(self):
+        # client_id = os.getenv('NAVER_CLIENT_ID') 
+        # client_secret = os.getenv('NAVER_CLIENT_SECRET')
+
+        # url = "https://openapi.naver.com/v1/datalab/shopping/category/keywords"
+        # headers = {
+        #     "X-Naver-Client-Id": client_id,
+        #     "X-Naver-Client-Secret": client_secret,
+        #     "Content-Type": "application/json"
+        # }
+
+        # # 검색어 키워드 설정
+        # query = {
+        #     "startDate": "2023-02-01",
+        #     "endDate": "2023-04-30",
+        #     "timeUnit": "month",
+        #     "category": "50001204",
+        #     "keyword": [
+        #         {"name": "커세어", "param": ["커세어"]},
+        #         {"name": "앱코", "param": ["앱코"]},
+        #         {"name": "로지텍", "param": ["로지텍"]},
+        #         {"name": "콕스", "param": ["콕스"]},
+        #         {"name": "레오폴드", "param": ["레오폴드"]},
+        #     ],
+        #     "device": "",
+        #     "ages": [],
+        #     "gender": "",
+        # }
+
+        # response = requests.post(url, headers=headers, data=json.dumps(query))
+        # result = response.json()
+
+        # return result
+    
+
+
