@@ -5,8 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.db.models import F, Sum
-from django.db.models.functions import TruncDate
+from django.db.models import F, Sum, DateTimeField, Count
+from django.db.models.functions import TruncDate, Trunc
 from django.views.generic import FormView, RedirectView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -61,9 +61,8 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
         context['purchase_list'] = purchase_list
         return context
-    
-    
-    
+
+        
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = CustomUserChangeForm
