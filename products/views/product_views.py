@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.db.models import ExpressionWrapper, FloatField, Count, F, Q, Avg
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
-from django.db.models import ExpressionWrapper, FloatField, Count, F, Q
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView, View
 from django.views.generic.edit import FormMixin, UpdateView
 from products.forms import *
@@ -23,6 +23,11 @@ class ProductListView(TemplateView):
         most_purchased_products = Product.objects.annotate(num_purchases=Count('purchaseitem')).order_by('-num_purchases')[:12]
         context['most_purchased_products'] = most_purchased_products
 
+        # 구매량 많은 상위 12개 제품의 별점 평균
+        # raw_rating = Review.objects.annotate(avg_rating=Avg('rating'))
+        most_purchased_rating = Product.objects.filter(pk__in=most_purchased_products).annotate(avg_rating=Avg('reviews__rating'))
+        context['most_purchased_rating'] = most_purchased_rating
+
         # 가성비 좋은 순으로 상위 5개 제품 가져오기
         affordable_products = Product.objects.annotate(affordability=ExpressionWrapper(
         Count('purchaseitem') / F('price'),
@@ -30,9 +35,17 @@ class ProductListView(TemplateView):
         )).order_by('-affordability')[:12]
         context['affordable_products'] = affordable_products
 
+        # 가성비 좋은 상위 5개 제품의 별점 평균
+        affordable_rating = Product.objects.filter(pk__in=affordable_products).annotate(avg_rating=Avg('reviews__rating'))
+        context['affordable_rating'] = affordable_rating
+
         # 후기가 많은 순으로 상위 12개 제품 가져오기
         most_reviewed_products = Product.objects.annotate(num_reviews=Count('reviews')).order_by('-num_reviews')[:12]
         context['most_reviewed_products'] = most_reviewed_products
+
+        # 후기가 많은 상위 12개 제품의 별점 평균
+        most_reviewed_rating = Product.objects.filter(pk__in=most_reviewed_products).annotate(avg_rating=Avg('reviews__rating'))
+        context['most_reviewed_rating'] = most_reviewed_rating
 
         # 브랜드별 판매량 상위 4개 상품 가져오기
         category_cox = Category.objects.filter(brand='콕스').first()
@@ -56,10 +69,24 @@ class ProductListView(TemplateView):
         else:
             context['leopold_selling_products'] = None
 
+        # 브랜드별 판매량 상위 4개 제품의 별점 평균
+        cox_rating = Product.objects.filter(pk__in=category_cox).annotate(avg_rating=Avg('reviews__rating'))
+        context['cox_rating'] = cox_rating
+
+        corsair_rating = Product.objects.filter(pk__in=category_corsair).annotate(avg_rating=Avg('reviews__rating'))
+        context['corsair_rating'] = corsair_rating
+
+        leopold_rating = Product.objects.filter(pk__in=category_leopold).annotate(avg_rating=Avg('reviews__rating'))
+        context['leopold_rating'] = leopold_rating
+
         # 가격이 낮은 순으로 상위 12개 제품 가져오기
         low_price_products = Product.objects.order_by('price')[:12]
         context['low_price_products'] = low_price_products
-    
+
+        # 가격이 낮은 순으로 상위 12개 제품의 별점 평균
+        low_price_rating = Product.objects.filter(pk__in=low_price_products).annotate(avg_rating=Avg('reviews__rating'))
+        context['low_price_rating'] = low_price_rating
+
         return context
         
         
@@ -119,6 +146,10 @@ class ProductCategoryView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         filter_option = self.request.GET.get('filter')
+        queryset = self.get_queryset()
+
+        ratingset = Product.objects.filter(pk__in=queryset).annotate(avg_rating=Avg('reviews__rating'))
+        context['ratingset'] = ratingset
 
         if not filter_option:
             context['show_all'] = True  # 전체보기를 표시하기 위한 변수 설정
