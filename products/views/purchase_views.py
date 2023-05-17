@@ -197,7 +197,7 @@ class PurchaseCompleteView(DetailView):
 # 내가 구매한 상품 목록 조회하기(Read)
 class PurchaseListView(LoginRequiredMixin, ListView):
     model = Purchase
-    template_name = 'products:purchase_list.html'
+    template_name = 'accounts/profile.html'
     context_object_name = 'purchase_list'
     def get_queryset(self):
         queryset = super().get_queryset()
