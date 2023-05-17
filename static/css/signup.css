@@ -29,6 +29,7 @@ input {
 .signup-form:focus {
   border-color: #99ccff;
   --tw-ring-color: #99ccff;
+  box-shadow: none;
 }
 
 .signup-btn {
