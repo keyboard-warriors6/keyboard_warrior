@@ -52,37 +52,36 @@ class ProductListView(TemplateView):
         most_reviewed_rating = Product.objects.filter(pk__in=most_reviewed_products).annotate(avg_rating=Avg('reviews__rating'))
         context['most_reviewed_rating'] = most_reviewed_rating
 
-        # 브랜드별 판매량 상위 4개 상품 가져오기
+        # 브랜드별 판매량 상위 4개 제품 및 별점 평균 가져오기
         category_cox = Category.objects.filter(brand='콕스').first()
         if category_cox is not None:
             cox_selling_products = self.get_top_selling_products_by_brand(category_cox)
             context['cox_selling_products'] = cox_selling_products
+            cox_rating = Product.objects.filter(category=category_cox).annotate(avg_rating=Avg('reviews__rating'))
+            context['cox_rating'] = cox_rating
         else:
             context['cox_selling_products'] = None
+            context['cox_rating'] = None
 
         category_corsair = Category.objects.filter(brand='커세어').first()
         if category_corsair is not None:
             corsair_selling_products = self.get_top_selling_products_by_brand(category_corsair)
             context['corsair_selling_products'] = corsair_selling_products
+            corsair_rating = Product.objects.filter(category=category_corsair).annotate(avg_rating=Avg('reviews__rating'))
+            context['corsair_rating'] = corsair_rating
         else:
             context['corsair_selling_products'] = None
+            context['corsair_rating'] = None
 
         category_leopold = Category.objects.filter(brand='레오폴드').first()
         if category_leopold is not None:
             leopold_selling_products = self.get_top_selling_products_by_brand(category_leopold)
             context['leopold_selling_products'] = leopold_selling_products
+            leopold_rating = Product.objects.filter(category=category_leopold).annotate(avg_rating=Avg('reviews__rating'))
+            context['leopold_rating'] = leopold_rating
         else:
             context['leopold_selling_products'] = None
-
-        # 브랜드별 판매량 상위 4개 제품의 별점 평균
-        cox_rating = Product.objects.filter(pk__in=category_cox).annotate(avg_rating=Avg('reviews__rating'))
-        context['cox_rating'] = cox_rating
-
-        corsair_rating = Product.objects.filter(pk__in=category_corsair).annotate(avg_rating=Avg('reviews__rating'))
-        context['corsair_rating'] = corsair_rating
-
-        leopold_rating = Product.objects.filter(pk__in=category_leopold).annotate(avg_rating=Avg('reviews__rating'))
-        context['leopold_rating'] = leopold_rating
+            context['leopold_rating'] = None
 
         # 가격이 낮은 순으로 상위 12개 제품 가져오기
         low_price_products = Product.objects.order_by('price')[:12]
