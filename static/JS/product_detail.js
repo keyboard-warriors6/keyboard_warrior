@@ -121,3 +121,44 @@ categorySelect2.addEventListener('change', handleCategorySelect);
 //   const selectedQuantity = quantitySelect.value;
 //   alert(`${selectedCategory} ${selectedQuantity}개를 장바구니에 추가했습니다.`);
 // });
+
+// 리뷰 수정
+// const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+const reviewUpdate = document.querySelectorAll('.review-edit-btn')
+
+reviewUpdate.forEach((review) => {
+  review.addEventListener('click', (event) => {
+    const reviewId = event.target.dataset.reviewId
+    // console.log(reviewId)
+    const reviewUpdateDiv = document.querySelector(`#review-edit-form-${reviewId}`)
+    // console.log(reviewUpdateDiv)
+    if (reviewUpdateDiv.hidden == true) {
+      reviewUpdateDiv.hidden = false
+    } else {
+      reviewUpdateDiv.hidden = true
+    }
+  })
+})
+
+const reviewUpdateConfirm = document.querySelectorAll('.review-edit-form')
+reviewUpdateConfirm.forEach((updateBtn) => {
+  updateBtn.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const productId = event.target.dataset.productId
+    console.log(productId)
+    const reviewId = event.target.dataset.reviewId
+    console.log(reviewId)
+    axios({
+      method: 'post',
+      url: `http://127.0.0.1:8000/products/${productId}/review/${reviewId}/update/`,
+      headers:{'X-CSRFToken': csrftoken},
+      // data: FormData,
+    })
+    .then((response) => {
+      updateBtn.hidden = true
+    })
+    .catch((error) => {
+      console.log(error.response)
+    })
+  })
+})

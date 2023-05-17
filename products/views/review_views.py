@@ -101,7 +101,7 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = ReviewForm
     template_name = 'products/product_detail.html'
     context_object_name = 'review'
-    # success_url = reverse_lazy('products:product_detail')
+    success_url = reverse_lazy('products:product_detail')
 
 
     def test_func(self):

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% load tailwind_filters %}
 
 {% block head %}
@@ -34,8 +35,8 @@
           <svg class="svg1" fill="#99CCFF" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><defs><path id="star-path-4" d="M11.9996 19.7201L6.32294 22.1251C5.5626 22.4472 5.005 22.0311 5.0755 21.2188L5.60855 15.0767L1.5671 10.421C1.02579 9.79745 1.24924 9.13855 2.04358 8.95458L8.04973 7.56354L11.2287 2.28121C11.6545 1.57369 12.3502 1.5826 12.7706 2.28121L15.9496 7.56354L21.9557 8.95458C22.7602 9.1409 22.9667 9.8053 22.4322 10.421L18.3907 15.0767L18.9238 21.2188C18.9952 22.0414 18.4271 22.4432 17.6764 22.1251L11.9996 19.7201Z"></path><clipPath id="star-clip-4"><rect x="0" y="0" width="22.400000000000006" height="24"></rect></clipPath></defs><use xlink:href="#star-path-4" fill="#DBDBDB"></use><use clip-path="url(#star-clip-4)" xlink:href="#star-path-4"></use></svg>
           <span class="product-information-star-cnt">&nbsp; &nbsp; {{ reviews|length }}개 리뷰</span>
         </p>
-        <p>{{ product.discount_rate }}% <span class="product-price-num">{{product.price}}</span></p>
-        <p class="py-3 text-xl font-semibold">{{ product.discounted_price }}원</p>
+        <p>{{ product.discount_rate }}% <span class="product-price-num">{{product.price|intcomma}}</span></p>
+        <p class="py-3 text-xl font-semibold">{{ product.discounted_price|intcomma }}원</p>
         <p class="py-3">
           배송 <span class="font-semibold">3,000원</span> 선결제 <br>
           일반택배 <br>
@@ -44,9 +45,9 @@
         <div>
           <select id="category-select" class="border-[#99CCFF] mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
             <option selected disabled>스위치</option>
-            <option value="청축">청축({{ product.discounted_price }}원)</option>
-            <option value="갈축">갈축({{ product.discounted_price }}원)</option>
-            <option value="적축">적축({{ product.discounted_price }}원)</option>
+            <option value="청축">청축({{ product.discounted_price|intcomma }}원)</option>
+            <option value="갈축">갈축({{ product.discounted_price|intcomma }}원)</option>
+            <option value="적축">적축({{ product.discounted_price|intcomma }}원)</option>
           </select>
           
           <div id="options-container" class="hidden product-select">
@@ -112,6 +113,7 @@
         <!-- 리뷰 평균 -->
         <div class="product-review mt-12">
           <p class="text-lg font-semibold">리뷰 <span style="color:#99CCFF">{{ reviews|length }}</span></p>
+          <!-- 리뷰 쓰기 -->
           <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="font-semibold" style="color:#99CCFF;" type="button">
             리뷰 쓰기
           </button>
@@ -188,7 +190,7 @@
                     {{ review_form|crispy }}
                     {{ review_image_form|crispy }}
                     {% comment %} <input type="submit" value="작성하기"> {% endcomment %}
-                    <button type="submit" class="text-white font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="background-color:#99CCFF;">작성하기</button>
+                    <button type="submit" class="text-white font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="background-color:#99CCFF; width: 200px; position: relative; left: 13rem; margin-top: 1rem;">작성하기</button>
                   </form>
                 </div>
               </div>
@@ -197,13 +199,19 @@
         </div>
 
 
-        <!-- 리뷰 쓰기 -->
+        <!-- 리뷰 목록 -->
         <div class="mt-9 pb-10">
           {% for review in reviews %}
             <div class="flex flex-row mt-3">
               <div class="basis-1/2 product-review-header">
                 <!-- 유저 프로필 이미지 -->
-                <img src="{% static '/img/user_image.png' %}" alt="프로필 사진" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
+                {% if user.profile_img %}
+                  <img src="{{ user.profile_img.url }}" alt="profile_img" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
+                {% else %}
+                  <img src="https://i.pinimg.com/564x/d2/98/4e/d2984ec4b65a8568eab3dc2b640fc58e.jpg" alt="no_img" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
+                {% endif %}
+
+                {% comment %} <img src="{{ user.profile_img.url }}" alt="profile_img" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;"> {% endcomment %}
                 <div>
                   <p class="product-review-header-font">{{ review.review.user }}</p>
                   <div class="flex">
@@ -235,6 +243,38 @@
                 <input type="submit" value="도움이 돼요" class="product-review-like_btn mb-5" id="like-{{review.review.pk}}">
               {% endif %}
             </form>
+
+            {% comment %} <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
+              {% csrf_token %}
+              <input type="submit" value="리뷰 삭제">
+            </form> {% endcomment %}
+
+            {% comment %} <form action="{% url 'products:review_update' product_pk=product.pk review_pk=review.review.pk %}">
+              {% csrf_token %}
+              {{ review_image_form|crispy }}
+              <input type="submit" value="수정">
+            </form> {% endcomment %}
+
+            
+              <div class="flex">
+                <input type="button" value="수정" class="review-edit-btn" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}">
+                <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
+                  {% csrf_token %}
+                  <input type="submit" value="리뷰 삭제">
+                </form>
+              </div>
+              <hr>
+              <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
+                {% csrf_token %}
+                {{review_form.as_p}}
+                <input type="submit" value="수정">
+                <input type="button" value="취소" data-review-id="{{ review.review.pk }}">
+              </form>
+            
+              <hr>
+
+
+
 
             <hr>
           {% endfor %}
@@ -281,9 +321,9 @@
           <div class="mt-12">
             <select id="category-select2" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
               <option selected disabled>스위치</option>
-              <option value="청축">청축({{ product.discounted_price }}원)</option>
-              <option value="갈축">갈축({{ product.discounted_price }}원)</option>
-              <option value="적축">적축({{ product.discounted_price }}원)</option>
+              <option value="청축">청축({{ product.discounted_price|intcomma }}원)</option>
+              <option value="갈축">갈축({{ product.discounted_price|intcomma }}원)</option>
+              <option value="적축">적축({{ product.discounted_price|intcomma }}원)</option>
             </select>
             
             <div id="options-container2" class="hidden product-select">
