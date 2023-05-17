@@ -1,20 +1,23 @@
-.sidebar {
+.sidebar-wrap {
   position: sticky;
   top: 6rem;
-  flex-shrink: 0;
-  width: 12rem;
-  max-height: 40rem;
-  margin-right: 5rem;
-  margin-top: 1.25rem;
-  overflow: hidden scroll;
+  height: 40rem;
+  margin-right: 4rem;
 }
 
 .sidebar::-webkit-scrollbar {
   display: none;
 }
 
+.sidebar {
+  width: 12rem;
+  margin-top: 1.25rem;
+  max-height: 40rem;
+  overflow: scroll;
+}
+
 .category-list {
-  font-size: 0.815rem;
+  font-size: 0.825rem;
 }
 
 .main-checkbox {
@@ -123,7 +126,7 @@
   color: black;
 }
 
-#reset-button {
+.reset-button-style {
   display: flex;
   margin-top: 1.25rem;
   padding: 0.625rem 1.25rem;

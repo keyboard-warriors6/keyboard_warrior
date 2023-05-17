@@ -55,8 +55,18 @@ filters.forEach(filterBtn => {
   })
 })
 
-// const resetBtn = document.getElementById('reset-button')
+const resetBtns = document.querySelectorAll('.reset-button')
 
-// resetBtn.addEventListener('click', (event) => {
-//   window.location.href = '/products/category/'
-// })
+resetBtns.forEach(resetBtn => {
+  if (nowUrl.includes(`&`) || !nowUrl.includes('all')) {
+      resetBtn.classList.remove('text-gray-400')
+      resetBtn.removeAttribute('disabled')
+    } else {
+      resetBtn.classList.add('text-gray-400')
+      resetBtn.setAttribute('disabled', '')
+    }
+    console.log(resetBtn)
+    resetBtn.addEventListener('click', (event) => {
+      window.location.href = '/products/category/?filter=all'
+  })
+})
