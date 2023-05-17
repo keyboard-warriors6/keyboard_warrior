@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load humanize %}
 {% load static %}
+{% load humanize %}
 
 {% block head %}
   <link rel="stylesheet" href="{% static '/css/purchase.css' %}">
@@ -63,7 +64,7 @@
                 <div class="flex items-center gap-4 item-price">
                   <p class="price"><span>{{ item.product.price }}</span>원</p>
                   <p class="text-xs text-gray-500"><span>{{ item.cnt }}</span>개</p>
-                  {% comment %} <input name="cnts" type="text" value="{{ item.cnt }}" readonly> {% endcomment %}
+                  <input name="cnts" type="hidden" value="{{ item.cnt }}" readonly>
                 </div>
               </div>
               <div class="">
