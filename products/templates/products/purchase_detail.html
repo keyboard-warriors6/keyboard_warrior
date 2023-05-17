@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load humanize %}
 
 {% block head %}
   <link rel="stylesheet" href="{% static '/css/purchase.css' %}">
 {% endblock head %}
 
 {% block content %}
-  <form method="POST" action="{% url 'products:purchase_from_cart' %}">
+  <form method="POST" action="{% url 'products:purchase_from_detail' product.pk %}">
     {% csrf_token %}
     <div class="flex gap-10">
       <div class="basis-2/3">
@@ -35,39 +34,37 @@
             </div>
           {% endfor %}
         </div>
-        <h2 class="title">주문상품 <span class="text-sm font-normal text-gray-500 pl-2">{{ purchase_items|length }}건</span></h2>
+        <h2 class="title">주문상품 <span class="text-sm font-normal text-gray-500 pl-2">1건</span></h2>
         <hr class="my-4">
-        {% for item in purchase_items %}
-          <div class="item wrap-border">
-            <div class="brand">
-              <p>{{ item.product.category.brand }}</p>
+        <div class="item wrap-border">
+          <div class="brand">
+            <p>{{ product.category.brand }}</p>
+          </div>
+          <div class="item-content">
+            <div class="item-img wrap-border">
+              {% if product.product_img %}
+                <img src="{{ product.product_img.url }}" alt="">
+              {% else %}
+                <img src="{% static 'img/default_img.svg' %}" alt="">
+              {% endif %}
             </div>
-            <div class="item-content">
-              <div class="item-img wrap-border">
-                {% if item.product.product_img %}
-                  <img src="{{ item.product.product_img.url }}" alt="">
-                {% else %}
-                  <img src="{% static 'img/default_img.svg' %}" alt="">
-                {% endif %}
+            <div class="flex flex-col justify-between ml-6">
+              <p class="text-sm">{{ product.name }}</p>
+              <div class="flex items-center gap-4 item-price">
+                <p class="price"><span>{{ product.price }}</span>원</p>
+                <p class="text-xs text-gray-500"><span>{{ cnt }}</span>개</p>
+                <input name="cnt" type="hidden" value="{{ cnt }}" readonly>
               </div>
-              <div class="flex flex-col justify-between ml-6">
-                <p class="text-sm">{{ item.product.name }}</p>
-                <div class="flex items-center gap-4 item-price">
-                  <p class="price"><span>{{ item.product.price }}</span>원</p>
-                  <p class="text-xs text-gray-500"><span>{{ item.cnt }}</span>개</p>
-                  <input name="cnts" type="hidden" value="{{ item.cnt }}" readonly>
-                </div>
-              </div>
+            </div>
+            <div class="">
               <div class="">
-                <div class="">
-                  {% comment %} <h5 class="card-title">{{ item.product.name }}</h5> {% endcomment %}
-                  {% comment %} <p class="card-text">수량: {{ item.cnt }}</p> {% endcomment %}
-                  <input class="card-text" name="products_1" type="hidden" value="{{ item.product.pk }}" readonly>
-                </div>
+                {% comment %} <h5 class="card-title">{{ item.product.name }}</h5> {% endcomment %}
+                {% comment %} <p class="card-text">수량: {{ item.cnt }}</p> {% endcomment %}
+                <input class="card-text" name="products_1" type="hidden" value="{{ product.pk }}" readonly>
               </div>
             </div>
           </div>
-        {% endfor %}
+        </div>
       </div>
         <div class="basis-1/3">
           <div class="sidebar">
