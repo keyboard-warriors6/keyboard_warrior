@@ -97,12 +97,21 @@ class InquiryForm(forms.ModelForm):
     class Meta:
         model = Inquiry
         fields = ('content',)
-
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.fields['content'].label = '문의 내용'
 
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
         fields = ('content',)
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.fields['content'].label = '답변 내용'
 
 
 class PurchaseForm(forms.ModelForm):
