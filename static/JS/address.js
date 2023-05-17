@@ -1,9 +1,9 @@
 const postalcode = document.getElementById('postalcode')
-const address = document.getElementById('id_address')
-address.classList.add('w-5/6')
-address.readOnly = true
+const addr = document.getElementById('id_address')
+addr.classList.add('w-5/6')
+addr.readOnly = true
 
-address.value = user_address
+addr.value = user_address
 
 document.getElementById('address').addEventListener('click', search)
 
