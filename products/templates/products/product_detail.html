@@ -268,7 +268,7 @@
               </form> {% endcomment %}
 
               <div class="flex">
-                <input type="button" value="수정" class="review-edit-btn review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" style="cursor: pointer; height: 32px;">
+                {% comment %} <input type="button" value="수정" class="review-edit-btn review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" style="cursor: pointer; height: 32px;"> {% endcomment %}
 
                 <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
                   {% csrf_token %}
@@ -285,14 +285,14 @@
                 </form>
               </div>
               </div>
-              <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
+              {% comment %} <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
                 {% csrf_token %}
                 <div id="review-content-{{ review.review.pk }}">
                   {{review_form}} &nbsp; &nbsp;
                   {{review_image_form}}
                 </div>
                 <input type="submit" value="수정하기" class="mt-3 review-edit-btn review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" style="cursor: pointer; height: 32px;">
-              </form>
+              </form> {% endcomment %}
 
 
               {% comment %} <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
