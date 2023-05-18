@@ -43,11 +43,9 @@
           ✔ 지역별 차등배송비 ✔ 제주도/도서산간 지역 5,000원
         </p>
         <div>
-          <select id="category-select" class="border-[#99CCFF] mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
-            <option selected disabled>스위치</option>
-            <option value="청축">청축({{ product.discounted_price|intcomma }}원)</option>
-            <option value="갈축">갈축({{ product.discounted_price|intcomma }}원)</option>
-            <option value="적축">적축({{ product.discounted_price|intcomma }}원)</option>
+          {% comment %} <select id="category-select" class="border-[#99CCFF] mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
+            <option selected disabled>수량</option>
+            <option value="수량">수량</option>
           </select>
           
           <div id="options-container" class="hidden product-select">
@@ -60,11 +58,27 @@
               </div>
               <p id="origin_price" style="display: flex; align-items: end; font-size: 18px;"><span>{{ product.discounted_price }}</span> 원</p>
             </div>
+          </div> {% endcomment %}
+
+          <div id="options-container" class="product-select">
+            <p>수량</p>
+            <div class="select" style="display: flex; justify-content: space-between;">
+              <div class="product-select-cnt">
+                <button class="decrement-quantity">-</button>
+                <input type="text" id="cnt" class="quantity product-category-select" value="1" readonly>
+                <button class="increment-quantity">+</button>
+              </div>
+              <p id="origin_price" style="display: flex; align-items: end; font-size: 18px;"><span>{{ product.discounted_price }}</span> 원</p>
+            </div>
           </div>
+          
+          
+
+
 
           <div class="flex product-price mb-6">
             <span>주문금액</span>
-            <p id="origin_price2"><span>{{ product.discounted_price }}</span> 원</p>
+            <p><span class="counted-price">{{ product.discounted_price }}</span> 원</p>
           </div>
 
           <div class="flex flex-row mt-2" style="justify-content: space-around;">
@@ -179,9 +193,11 @@
               <p class="product-review-content">{{ review.review.content|linebreaksbr }}</p>
             </div>
 
+            <!-- 리뷰 수정 -->
+            {% include 'products/modal.html' %}
             <div class="flex">
-              <input type="button" value="수정" data-modal-target="staticModal3" data-modal-toggle="staticModal3" class="review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" style="cursor: pointer; height: 32px;">
-              <div id="staticModal3" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full z-[999]">
+              <input type="button" value="수정" data-modal-target="Modal" data-modal-toggle="Modal" class="review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" style="cursor: pointer; height: 32px;">
+              {% comment %} <div id="staticModal3" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full z-[999]">
                 <div class="relative w-full max-w-2xl max-h-full">
                   <!-- Modal content -->
                   <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -201,7 +217,13 @@
                           {% csrf_token %}
                           <div id="review-content-{{ review.review.pk }}">
                             {{ review_form|crispy }}
-                            {{ review_image_form|crispy }}
+                            {{ formset.management_form }}
+                            {% for imageform in formset %}
+                            <div class="flex">
+                              {{ imageform|crispy }}
+                            </div>
+                            {% endfor %}
+                            {{ imageaddform|crispy }}
                           </div>
                           <button type="submit" class="text-white font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="background-color:#99CCFF; width: 200px; position: relative; left: 13rem; margin-top: 1rem;">수정하기</button>
                         </form>
@@ -209,7 +231,19 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> {% endcomment %}
+
+              {% comment %} <input type="button" value="수정" class="review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" style="cursor: pointer; height: 32px;">
+              <div>
+                <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
+                  {% csrf_token %}
+                  <div id="review-content-{{ review.review.pk }}">
+                    {{ review_form|crispy }}
+                    {{ review_image_form|crispy }}
+                  </div>
+                  <button type="submit" class="text-white font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" style="background-color:#99CCFF; width: 200px; position: relative; left: 13rem; margin-top: 1rem;">수정하기</button>
+                </form>
+              </div> {% endcomment %}
 
 
               {% comment %} <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}">
@@ -339,7 +373,7 @@
       
                     <!-- question -->
                     <div class=" mb-2.5">
-                      <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }} | {{ product.category.switch }}</p>
+                      <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }}</p>
                       <p class='ms-5 mb-5'>{{ inquiry.inquiry.content }}</p>
                     </div>
                     
@@ -364,7 +398,7 @@
       
                     <!-- question -->
                     <div class=" mb-2.5">
-                      <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }} | {{ product.category.switch }}</p>
+                      <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }}</p>
                       <p class='ms-5 mb-5'>{{ inquiry.inquiry.content|linebreaksbr }}</p>
                     </div>
 
@@ -384,7 +418,7 @@
       
                     <!-- question -->
                     <div class=" mb-2.5">
-                      <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }} | {{ product.category.switch }}</p>
+                      <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }}</p>
                       <p class='ms-5 mb-5'>{{ inquiry.inquiry.content|linebreaksbr }}</p>
                     </div>
                     
@@ -409,7 +443,7 @@
 
                     <!-- question -->
                     <div class=" mb-2.5">
-                      <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }} | {{ product.category.switch }}</p>
+                      <p style="color: #bdbdbd; font-size: 12px;" class='mt-3'><span class="product-inquiry-qa">Q &nbsp;</span>{{ product.name }}</p>
                       <p class='ms-5 mb-5'>{{ inquiry.inquiry.content|linebreaksbr }}</p>
                     </div>
 
@@ -468,11 +502,9 @@
         <!-- 구매창 -->
         <div class="basis-2/5 mx-12 product-sidebar" style="">
           <div class="mt-12">
-            <select id="category-select2" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
-              <option selected disabled>스위치</option>
-              <option value="청축">청축({{ product.discounted_price|intcomma }}원)</option>
-              <option value="갈축">갈축({{ product.discounted_price|intcomma }}원)</option>
-              <option value="적축">적축({{ product.discounted_price|intcomma }}원)</option>
+            {% comment %} <select id="category-select2" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" style="border: 1px solid #99CCFF">
+              <option selected disabled>수량</option>
+              <option value="수량">수량</option>
             </select>
             
             <div id="options-container2" class="hidden product-select">
@@ -485,11 +517,23 @@
                 </div>
                 <p  style="display: flex; align-items: end; font-size: 18px;"><span class="counted-price">{{ product.discounted_price }}</span> 원</p>
               </div>
+            </div> {% endcomment %}
+
+            <div id="options-container2" class="product-select">
+              <p>수량</p>
+              <div class="select" style="display: flex; justify-content: space-between;">
+                <div class="product-select-cnt">
+                  <button class="decrement-quantity">-</button>
+                  <input type="text" id="cnt2" class="quantity product-category-select" value="1" readonly>
+                  <button class="increment-quantity">+</button>
+                </div>
+                <p id="origin_price2" style="display: flex; align-items: end; font-size: 18px;"><span>{{ product.discounted_price }}</span> 원</p>
+              </div>
             </div>
           </div>
           <div class="flex product-price mb-6">
             <span>주문금액</span>
-            <p><span class="counted-price">{{ product.discounted_price }}</span> 원</p>
+            <p><span class="counted-price2">{{ product.discounted_price }}</span> 원</p>
           </div>
           <div class="flex flex-row mt-2" style="justify-content: space-around;">
             {% comment %} <button id="add-to-cart-button" class="basis-1/2 rounded-none product-cart-btn m-1" style="border-radius: 4px;">장바구니</button> {% endcomment %}

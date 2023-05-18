@@ -209,7 +209,7 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if form.is_valid() and formset.is_valid():
             return self.form_valid(form, formset, new_images)
         else:
-            return self.form_invalid(form, formset, new_images)
+            return self.form_invalid(form)
     
 
 # 좋아요
