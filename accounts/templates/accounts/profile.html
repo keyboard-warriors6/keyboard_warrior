@@ -51,26 +51,6 @@
         </div>
       </div>
     </div>
-
-    <hr class="profile-line">
-
-    <div class="flex flex-row justify-around">
-      <div class="text-center m-5">
-        <img src="/static/img/icon_bookmark.png" alt="icon_bookmark" class="profile-icon">
-        <p>스크랩북</p>
-        {% comment %} <p>0</p> {% endcomment %}
-      </div>
-      <div class="text-center m-5">
-        <img src="/static/img/icon_heart.png" alt="icon_heart" class="profile-icon">
-        <p>리뷰스크랩</p>
-        {% comment %} <p>0</p> {% endcomment %}
-      </div>      <div class="text-center m-5">
-        <img src="/static/img/icon_coupon.png" alt="icon_coupon" class="profile-icon">
-        <p>쿠폰</p>
-        {% comment %} <p>0</p> {% endcomment %}
-      </div>
-    </div>
-    <section id="example-1">
   </div>
   
 
@@ -115,7 +95,7 @@
           <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 {{ purchase.purchase_date|date:"n월 j일" }}</span> - 도착완료</p>
           <div class="flex flex-row">
             <div class="purchased_item-image m-10">
-              <img src="/static/img/products_sample.png" alt="icon_profile">
+              <img src={{ purchase.products.first.product_img.url }}>
             </div>
 
             <div class="mt-10" style="width: 15rem;">
@@ -150,7 +130,6 @@
           </div>
         {% endfor %}  
       {% endfor %}
-      <section id="example-2">
     </div>
 
     {% else %}
@@ -240,8 +219,6 @@
       <p class='text-xl text-center mb-20'>리뷰를 작성하신 내역이 없습니다.</p>
     </div>
   {% endif %}
-  <section id="example-3">
-
 
   
   <!-- 나의 문의 -->
