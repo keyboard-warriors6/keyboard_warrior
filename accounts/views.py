@@ -52,6 +52,15 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         inquiries = user.inquiry_set.filter(user=self.request.user)
         context['inquiries'] = inquiries
 
+        review_list = Review.objects.filter(user=self.request.user).prefetch_related('images').order_by('-created_at')
+        review_list = review_list.order_by('-created_at')
+
+        context['review_list'] = review_list
+        
+        purchase_list = Purchase.objects.filter(user=self.request.user)
+        purchase_list = purchase_list.order_by('-purchase_date')
+        purchase_list = purchase_list.annotate(date=TruncDate('purchase_date'))
+
         # 주문 현황 가져오기
         purchases = Purchase.objects.filter(user=user).annotate(item_count=Count('products')).order_by('-purchase_date')
 
@@ -59,6 +68,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         grouped_purchases = []
         for purchase in purchases:
             grouped_purchases.append((purchase.purchase_date.date(), purchase))
+
 
         grouped_purchases.sort(key=itemgetter(0), reverse=True)
         grouped_purchases_by_date = {
