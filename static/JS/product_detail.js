@@ -195,7 +195,33 @@ decrementButtons.forEach((button) => {
 optionsContainer.classList.remove('hidden');
 
 
-
+const forms = document.querySelectorAll('.like-forms')
+  forms.forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+      const reviewId = event.target.dataset.reviewId
+      console.log(reviewId)
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/products/review/${reviewId}/likes/`,
+        headers:{'X-CSRFToken': csrftoken},
+      })
+      .then((response) => {
+        const isLiked = response.data.liked
+        console.log(isLiked)
+        const likeBtn = document.querySelector(`#like-${reviewId}`)
+        if (isLiked === true) {
+          likeBtn.value = '취소'
+          console.log(likeBtn.value)
+        } else {
+          likeBtn.value = '도움이 돼요'
+        }
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+    })
+  })
 
 // 리뷰 수정
 // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value

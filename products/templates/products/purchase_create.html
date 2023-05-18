@@ -29,7 +29,7 @@
               </div>
               <div class="user-info">
                 <p class="user-label">휴대전화</p>
-                <input type="text" name="info" value={{ user.phone_number }}>
+                <input type="text" name="info" {% if user.phone_number %}value={{ user.phone_number }}{% endif %}>
               </div>
             </div>
             <div class="relative grow">
@@ -62,7 +62,7 @@
               <div class="flex flex-col justify-between ml-6">
                 <p class="text-sm">{{ item.product.name }}</p>
                 <div class="flex items-center gap-4 item-price">
-                  <p class="price"><span>{{ item.product.price }}</span>원</p>
+                  <p class="price"><span>{{ item.product.discounted_price }}</span>원</p>
                   <p class="text-xs text-gray-500"><span>{{ item.cnt }}</span>개</p>
                   <input name="cnts" type="hidden" value="{{ item.cnt }}" readonly>
                 </div>

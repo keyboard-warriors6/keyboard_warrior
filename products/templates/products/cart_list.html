@@ -75,8 +75,8 @@
                           </svg>                        
                         </p>
                       </div>
-                      <span class="hidden" id="origin-price-{{ item.pk }}">{{ item.product.price}}</span>
-                      <p class="font-bold pr-1"><span id="price-{{ item.pk }}">{% widthratio item.cnt 1 item.product.price as item_price %}{{ item_price|intcomma }}</span>원</p>
+                      <span class="hidden" id="origin-price-{{ item.pk }}">{{ item.product.discounted_price}}</span>
+                      <p class="font-bold pr-1"><span id="price-{{ item.pk }}">{% widthratio item.cnt 1 item.product.discounted_price as item_price %}{{ item_price|intcomma }}</span>원</p>
                     </div>
                   </div>
                   <div class="close-btn">
