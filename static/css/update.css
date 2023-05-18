@@ -44,3 +44,17 @@ input {
 .signup-btn:hover {
   background-color: #7dafe1;
 }
+
+.delete-btn {
+  width: 100%;
+  padding: 0.875rem;
+  font-size: 1.125rem;
+  font-weight: bold;
+  border-radius: 0.25rem;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #616161;
+}

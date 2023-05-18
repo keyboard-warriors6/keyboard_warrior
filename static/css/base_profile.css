@@ -36,6 +36,13 @@ nav, .menubar {
   justify-content: space-around;
 }
 
+.menubar-content-list {
+  padding: 14px 15px 10px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
 .menubar-content-list:active {
   border-bottom: 3px solid #99CCFF;
   z-index: 1;
@@ -59,5 +66,23 @@ nav, .menubar {
 
 footer {
     height: 8rem; /* footer 높이 */
+}
+
+.product-category_bar-list {
+  /* box-sizing: border-box;
+  border: 1px solid black; */
+  padding: 14px 15px 10px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.product-category_bar-list:active {
+  border-bottom: 3px solid #99CCFF;
+  z-index: 1;
+}
+
+.product-category_bar-list:hover {
+  color: #99CCFF;
 }
 
