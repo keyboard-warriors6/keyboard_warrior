@@ -206,7 +206,7 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         new_images = request.FILES.getlist('img')
 
         # 폼 검증
-        if form.is_valid() and formset.is_valid():
+        if form.is_valid():
             return self.form_valid(form, formset, new_images)
         else:
             return self.form_invalid(form)

@@ -294,8 +294,8 @@
 
 
 {% block script %}
-<script type="text/javascript" src="/static/JS/product_detail.js"></script>
-<script>
+{% comment %} <script type="text/javascript" src="/static/JS/product_detail.js"></script> {% endcomment %}
+{% comment %} <script>
   const starsEl = document.querySelectorAll(".stars");
   starsEl.forEach((stars) => {
     const numStars = Number(stars.textContent); // 출력할 별점 개수
@@ -306,5 +306,5 @@
     }
     stars.classList.add('flex', 'items-center')
   })
-</script>
+</script> {% endcomment %}
 {% endblock script %}
