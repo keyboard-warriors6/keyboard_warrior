@@ -25,8 +25,13 @@
             </div>
             <div class="p-10">
               <div class="uppercase tracking-wide text-sm text-500 main-color font-semibold">{{ product.category.brand }}</div>
-              <a href="{% url 'products:product_detail' product.pk %}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ product.name }}</a>
-              <p class="mt-2 text-slate-500">{{ product.price|intcomma }}원</p>
+              <a href="{% url 'products:product_detail' product.pk %}" class="block my-1 text-lg leading-tight font-medium text-black hover:underline">{{ product.name }}</a>
+              {% if product.discount_rate %}
+                <p class="text-sm">{{ product.discount_rate }}% <span class="product-price-num2" style="color: #bdbdbd;
+                  text-decoration: line-through;">{{product.price|intcomma}}</span></p>
+              {% else %}
+              {% endif %}  
+              <p class="mt-2 text-slate-500">{{ product.discounted_price|intcomma }}원</p>
             </div>
           </div>
         </div> 

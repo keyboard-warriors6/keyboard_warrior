@@ -37,3 +37,8 @@ input {
   gap: 1rem;
   margin: 1.5rem 0;
 }
+
+.product-price-num2 {
+  color: #bdbdbd;
+  text-decoration: line-through;
+}
