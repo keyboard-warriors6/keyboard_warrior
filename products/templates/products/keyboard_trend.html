@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <title>Keyboard Trend</title>
 </head>
 <body>
     <h1>Keyboard Trend</h1>
-    <img src="{{ wordcloud_image }}" alt="WordCloud Image">
+    <img src="{% static 'img/word_cloud.png' %}" alt="WordCloud Image">
 </body>
 </html>

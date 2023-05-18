@@ -125,7 +125,7 @@ class Answer(models.Model):
 
 
 class Purchase(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='purchase')
     products = models.ManyToManyField(Product, through='PurchaseItem')
     purchase_date = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=255)

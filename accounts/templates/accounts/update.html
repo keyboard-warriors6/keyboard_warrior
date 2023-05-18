@@ -3,25 +3,24 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/update.css' %}">
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 {% endblock head %}
 
 {% block content %}
   <h1 class="title mt-14">회원정보 수정하기</h1>
-  <form action="{% url 'accounts:update' user.username %}" method="POST" enctype="multipart/form-data">
+  <form action="{% url 'accounts:update' user.username %}" method="POST" class="group" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
     {% include 'error.html' %}
-
     <div class="relative">
       {{ form.username }}
       <label for="{{ form.username.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.username.label }}</label>
     </div>
-
     <div class="relative">
       {{ form.email }}
       <label for="{{ form.email.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.email.label }}</label>
     </div>
-
     <div class="relative">
+      <label for="{{ form.profile_img.auto_id }}" class="block mb-1 text-sm font-medium text-gray-500 dark:text-white">{{ form.profile_img.label }}</label>
       {{ form.profile_img }}
     </div>
 
@@ -30,12 +29,24 @@
       <label for="{{ form.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.phone_number.label }}</label>
     </div>
 
+    <div class="flex justify-between items-baseline">
+      <div class="relative flex-1 me-1">
+        <input type="text" id="postalcode" class="signup-form block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-white border-1 appearance-none focus:ring-0 peer" placeholder="우편번호" readonly>
+      </div>
+      <div class="relative ms-1">
+        <button type="button" id="user_address" class="bg-[#99ccff] hover:bg-[#000000] text-white font-bold py-2 px-4 rounded">주소찾기</button>
+      </div>
+    </div>
     <div class="relative">
       {{ form.user_address }}
       <label for="{{ form.user_address.auto_id }}" class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-[#99ccff] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">{{ form.user_address.label }}</label>
     </div>
 
   
-    <input type="submit" value="회원정보 수정하기" class="signup-btn bg-[#99ccff] mt-6">
+    <input type="submit" value="회원정보 수정하기" class="signup-btn bg-[#99ccff] mt-6 group-invalid:pointer-events-none group-invalid:opacity-30">
   </form>
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/userinfo.js' %}" type="module"></script>
+{% endblock script %}

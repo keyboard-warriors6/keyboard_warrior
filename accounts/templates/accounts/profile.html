@@ -1,5 +1,6 @@
 {% extends 'base_profile.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
@@ -35,6 +36,7 @@
           </a>
         </div>
       </div>
+      <section id="example-1">
     </div>
     <section id="example-1">
     {% comment %} <hr class="profile-line">
@@ -42,7 +44,6 @@
     <div class="flex flex-row justify-around">
       <div class="text-center m-5">
         <img src="/static/img/icon_bookmark.png" alt="icon_bookmark" class="profile-icon">
-        <section id="example-1">
 
         <p>스크랩북</p>
         <p>0</p>
@@ -122,118 +123,72 @@
       </ul>
     </div>
 
-    <p class="text-xl ms-5 p-3">2023.05.12</p>
-    <hr class="purchase-line">
 
-    <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 5/12(금)</span> - 도착완료</p>
-    <div class="flex flex-row">
-      <div class="purchased_item-image m-10">
-        <img src="/static/img/products_sample.png" alt="icon_profile">
-      </div>
-
-      <div class="mt-10">
-        <p class="text-sm mb-1">라이프썸</p>
-        <p class="text-lg mb-1">슬림 블루투스 업무용 저소음 키보드</p>
-        <p class="text-lg mb-1">(LFS-HA39) 7종 택1</p>
-        {{purchase_list}}
-        <ul>
-          {% for purchase in purchase_list %}
+      {% comment %} {% for purchase in purchase_list %}
+        {% for product in purchase.products.all %}
+            {{ product.category.brand }}
+        {% endfor %}
+      {% endfor %} {% endcomment %}
+      
+      {% for purchase in purchase_list %}
+      <ul>
+        {{ purchase.products.first.category.brand }} -
+        {{ purchase.products.first.name }}
+        {{ purchase.products.first.product_img }}
+        <br>
+      </ul>
+ 
+          {% comment %} {% for purchase_item in purchase.purchase_items %}
             <li>
-              <h3>Date: {{ purchase.date }}</h3>
-              <p>Total Price: {{ purchase.total_price }}</p>
-              <ul>
-                {% for purchase_item in purchase.purchase_items %}
-                  <li>
-                    Product: {{ purchase_item.product }}
-                    Quantity: {{ purchase_item.cnt }}
-                  </li>
-                {% endfor %}
-              </ul>
+              Product: {{ purchase_item.product }}
+              Quantity: {{ purchase_item.cnt }}
+            </li>
+          {% endfor %} {% endcomment %}
+      {% endfor %}
+    </ul>
+    <br>
+    {% for purchase in purchase_list %}
+      <p class="text-xl ms-5 p-3">{{ purchase.date|date:'Y-m-d' }}</p>
+      <hr class="purchase-line">
+
+      <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 {{ purchase.date|date:"n월 j일" }}</span> - 도착완료</p>
+      <div class="flex flex-row">
+        <div class="purchased_item-image m-10">
+          <img src="/static/img/products_sample.png" alt="icon_profile">
+        </div>
+
+        <div class="mt-10" style="width: 15rem;">
+          <p class="text-sm mb-1">{{ purchase.products.first.category.brand }}</p>
+          <p class="text-lg mb-1">{{ purchase.products.first.name }}</p>
+        </div>
+
+        <div class="ms-24 mt-10">
+          <p class="text-xl mb-1">{{ purchase.products.first.discounted_price|intcomma }}원 1개</p>          
+          {% for purchase_item in purchase.purchase_items %}
+            <li>
+              Quantity: {{ purchase_item.cnt }}
             </li>
           {% endfor %}
-        </ul>
+
+          <p class="text-[#99ccff]">일반택배</p>
+        </div>
+
+        <div class="ms-36 flex flex-column">
+          <button class="button-big button-color-delivery mt-5">
+            <p class="text-base">배송 추적</p> <!-- 기능 변경 필요, 배송 현황은 알 수 없을 것 같아서 예를 들면 상품 보러가기 라던지 -->
+          </button>
+          <a href="/products/{{ product.product.pk }}">
+            <button class="button-big button-color-review mt-8">
+              <p class="text-base">리뷰 작성</p>
+            </button>
+          </a>
+          </ahref=>
+        </div>
       </div>
-
-      <div class="ms-24 mt-10">
-        <p class="text-lg mb-1">청축</p>
-        <p class="text-xl mb-1">49,000원 1개</p>
-        <p class="text-[#99ccff]">일반택배</p>
-      </div>
-
-      <div class="ms-32 flex flex-column">
-        <button class="button-big button-color-delivery mt-5">
-          <p class="text-base">배송 추적</p> <!-- 기능 변경 필요, 배송 현황은 알 수 없을 것 같아서 예를 들면 상품 보러가기 라던지 -->
-        </button>
-        <button class="button-big button-color-review mt-8">
-          <p class="text-base">리뷰 작성</p>
-        </button>
-      </div>
-    </div>
-
-    <p class="text-xl ms-5 p-3">2023.05.11</p>
-    <hr class="purchase-line">
-
-    <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 5/11(목)</span> - 도착완료</p>
-    <div class="flex flex-row">
-      <div class="purchased_item-image m-10">
-        <img src="/static/img/products_sample.png" alt="icon_profile">
-      </div>
-
-      <div class="mt-10">
-        <p class="text-sm mb-1">라이프썸</p>
-        <p class="text-lg mb-1">슬림 블루투스 업무용 저소음 키보드</p>
-        <p class="text-lg mb-1">(LFS-HA39) 7종 택1</p>
-      </div>
-
-      <div class="ms-24 mt-10">
-        <p class="text-lg mb-1">청축</p>
-        <p class="text-xl mb-1">49,000원 1개</p>
-        <p class="text-[#99ccff]">일반택배</p>
-      </div>
-
-      <div class="ms-32 flex flex-column">
-        <button class="button-big button-color-delivery mt-5">
-          <p class="text-base">배송 추적</p>
-        </button>
-        <button class="button-big button-color-review mt-8">
-          <p class="text-base">리뷰 작성</p>
-        </button>
-      </div>
-    </div>
-
+    {% endfor %}
     <section id="example-2">
-    <div aria-label="Page navigation example" class="text-center m-5">
-      <ul class="inline-flex items-center -space-x-px">
-        <li>
-          <a href="#" class="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-[#99ccff] hover:text-gray-700">
-            <span class="sr-only">Previous</span>
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">1</a>
-        </li>
-        <li>
-          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">2</a>
-        </li>
-        <li>
-          <a href="#" aria-current="page" class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-[#99ccff] hover:bg-[#409fff] hover:text-blue-700">3</a>
-        </li>
-        <li>
-          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">4</a>
-        </li>
-        <li>
-          <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#99ccff] hover:text-gray-700">5</a>
-        </li>
-        <li>
-          <a href="#" class="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-[#99ccff] hover:text-gray-700">
-            <span class="sr-only">Next</span>
-            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-          </a>
-        </li>
-      </ul>
-    </div>
   </div>
+
 
 
   <!-- 나의 리뷰 -->
