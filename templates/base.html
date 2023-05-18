@@ -35,7 +35,7 @@
           </form>
           {% if user.is_authenticated %}
             <div class="flex justify-between items-center md:justify-end gap-6">
-              <a href="#">
+              <a href="{% url 'products:bookmarked_products' %}">
                 <div class="w-6">
                   <img src="{% static 'img/icon_bookmark.png' %}" alt="icon_bookcart">
                 </div>

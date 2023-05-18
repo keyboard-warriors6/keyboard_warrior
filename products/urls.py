@@ -13,7 +13,8 @@ urlpatterns = [
     path('<int:product_pk>/delete/', ProductDeleteView.as_view(), name='product_delete'),
     path('<int:product_pk>/bookmark/', ProductBookmarkView.as_view(), name='product_bookmark'),
     path('keyboard_trend/', KeyboardTrendView.as_view(), name='keyboard_trend'),
-  
+    path('my_bookmark/', BookmarkedProductListView.as_view(), name='bookmarked_products'),
+    
     # 후기
     path('<int:product_pk>/review/', ReviewCreateView.as_view(), name='review_create'),
     path('<int:product_pk>/review/<int:review_pk>/delete/', ReviewDeleteView.as_view(), name='review_delete'),

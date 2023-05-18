@@ -1,0 +1,39 @@
+main {
+  min-height: 590px;
+  padding-top: 3rem;
+}
+
+input {
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  font-size: xx-large;
+}
+
+.report {
+    display: flex;
+    justify-content: center;
+    font-size: large;
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+}
+
+.main-color {
+  color: #99CCFF;
+}
+
+.no-item {
+  min-height: 468px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}

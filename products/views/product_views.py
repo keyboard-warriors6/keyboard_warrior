@@ -1,13 +1,11 @@
-import json, os, requests, sys, operator
-import matplotlib.pyplot as plt
+import json, os, requests, operator
 import numpy as np
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.db.models import ExpressionWrapper, FloatField, Count, F, Q, Avg
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
-from urllib.parse import urlencode, quote
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView, View
 from django.views.generic.edit import FormMixin, UpdateView
 from products.forms import *
@@ -493,4 +491,11 @@ class KeyboardTrendView(UserPassesTestMixin, TemplateView):
         return result
     
 
-
+class BookmarkedProductListView(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = 'products/my_bookmark.html'
+    context_object_name = 'bookmarked_products'
+    
+    def get_queryset(self):
+        # 현재 로그인한 사용자의 북마크한 상품들만 조회합니다.
+        return self.request.user.bookmark.all()
