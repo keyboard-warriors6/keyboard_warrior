@@ -14,6 +14,11 @@ from PIL import Image
 from wordcloud import WordCloud 
 from matplotlib import font_manager
 
+
+def index_redirect(request):
+    return redirect('products:product_list')
+
+
 class ProductListView(TemplateView):
     template_name = 'products/product_list.html'
 
