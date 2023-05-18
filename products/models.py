@@ -135,6 +135,10 @@ class Purchase(models.Model):
     @property
     def total_price(self):
         return sum(product.price for product in self.products.all())
+    
+
+    def __str__(self):
+        return f'{self.purchase_date.date()} - {self.user}'
 
 
 # 구매-상품 중계테이블
@@ -153,3 +157,7 @@ class Cart(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     cnt = models.PositiveIntegerField(default=1)
+
+
+    def __str__(self):
+        return self.user.username
