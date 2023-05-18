@@ -3,9 +3,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.db.models import ExpressionWrapper, FloatField, Count, F, Q, Avg
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
+from urllib.parse import urlencode, quote
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView, View
 from django.views.generic.edit import FormMixin, UpdateView
 from products.forms import *
@@ -93,20 +94,25 @@ class ProductListView(TemplateView):
 
         return context
         
-        
+
 class ProductCategoryView(ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'products/category.html'  
     # paginate_by = 12  # pagination이 필요한 경우 사용
-
+    
     def get_queryset(self):
+        query = self.request.GET.get('query')
         queryset = super().get_queryset()
         filter_option = self.request.GET.get('filter')
+        if query:
+            queryset = queryset.filter(name__icontains=query)
             # 필터 옵션에 따라 쿼리셋 필터링
         if filter_option == 'purchased':
             # 구매를 많이 한 순으로 정렬
             queryset = queryset.annotate(num_purchases=Count('purchaseitem')).order_by('-num_purchases')
+        elif filter_option == 'rating':
+            queryset = queryset.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')     
         elif filter_option == 'popular':
             # 후기 많은 순으로 정렬
             queryset = queryset.annotate(num_reviews=Count('reviews')).order_by('-num_reviews')
@@ -127,7 +133,7 @@ class ProductCategoryView(ListView):
         pressure = self.request.GET.getlist('pressure')
         tenkey = self.request.GET.getlist('tenkey')
 
-        # 필터링 조건에 해당하는 Q 객체 생성
+    # 필터링 조건에 해당하는 Q 객체 생성
         filter_conditions = Q()
 
         if brand:
