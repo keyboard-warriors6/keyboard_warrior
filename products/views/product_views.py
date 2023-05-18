@@ -1,6 +1,7 @@
 import json, os, requests, sys, operator
 import matplotlib.pyplot as plt
 import numpy as np
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.db.models import ExpressionWrapper, FloatField, Count, F, Q, Avg
 from django.http import JsonResponse, HttpResponseRedirect
@@ -374,7 +375,7 @@ class ProductBookmarkView(LoginRequiredMixin, View):
         return JsonResponse(context)
     
 
-class KeyboardTrendView(UserPassesTestMixin, PermissionRequiredMixin, TemplateView):
+class KeyboardTrendView(UserPassesTestMixin, TemplateView):
     template_name = 'products/keyboard_trend.html'  # 템플릿 파일 경로
     raise_exception = True
 
@@ -398,7 +399,7 @@ class KeyboardTrendView(UserPassesTestMixin, PermissionRequiredMixin, TemplateVi
             total_ratio = sum(ratios)
             result[title] = int(total_ratio)
         sorted_result = dict(sorted(result.items(), key=operator.itemgetter(1), reverse=True))
-        image1_path = os.path.join(os.path.dirname(__file__), 'trend.png')
+        image1_path = os.path.join(settings.BASE_DIR, 'static', 'img', 'trend.png')
         trend_mask=np.array(Image.open(image1_path))
         wordcloud = WordCloud(
                             background_color="grey",
@@ -412,7 +413,7 @@ class KeyboardTrendView(UserPassesTestMixin, PermissionRequiredMixin, TemplateVi
                             ).generate_from_frequencies(sorted_result)
         wordcloud = wordcloud.fit_words(sorted_result)
 
-        font_path = os.path.join(os.path.dirname(__file__), 'NanumSquareNeo-eHv.ttf')
+        font_path = os.path.join(settings.BASE_DIR, 'static', 'etc', 'NanumSquareNeo-eHv.ttf')
         fontprop = font_manager.FontProperties(fname=font_path)
         wordcloud.font_path = font_path
         # plt.imshow(wordcloud,interpolation='bilinear')
