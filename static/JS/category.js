@@ -1,3 +1,4 @@
+// 상품 필터
 const checkboxes = document.querySelectorAll('.main-checkbox')
 const nowUrl = window.location.href
 
@@ -31,6 +32,7 @@ checkboxes.forEach(btn => {
   })
 })
 
+// 상품 정렬
 const filters = document.querySelectorAll('[name=filter]')
 
 filters.forEach(filterBtn => {
@@ -55,6 +57,7 @@ filters.forEach(filterBtn => {
   })
 })
 
+// 필터 초기화 버튼
 const resetBtns = document.querySelectorAll('.reset-button')
 
 resetBtns.forEach(resetBtn => {
@@ -65,8 +68,36 @@ resetBtns.forEach(resetBtn => {
       resetBtn.classList.add('text-gray-400')
       resetBtn.setAttribute('disabled', '')
     }
-    console.log(resetBtn)
     resetBtn.addEventListener('click', (event) => {
       window.location.href = '/products/category/?filter=all'
+  })
+})
+
+// 북마크 기능
+const bookmarkForms = document.querySelectorAll('.bookmark')
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+bookmarkForms.forEach(function(form) {
+  form.addEventListener('submit', function (event) {
+    event.preventDefault()
+    const productId = event.target.dataset.productId
+    
+    axios({
+      method: "post",
+      url: `/products/${productId}/bookmark/`,
+      headers:{'X-CSRFToken': csrftoken},
+    })
+    .then((response) => {
+      const isBookmarked = response.data.bookmark
+      console.log(response.data)
+      const bookmarkIcon = form.children[1].children[0].children[0]
+      if (isBookmarked) {
+        bookmarkIcon.classList.add('fill-main')
+        bookmarkIcon.classList.remove('fill-white')
+      } else {
+        bookmarkIcon.classList.add('fill-white')
+        bookmarkIcon.classList.remove('fill-main')
+      }
+    })
   })
 })

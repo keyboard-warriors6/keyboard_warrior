@@ -43,6 +43,7 @@
 
 .product-item {
   display: block;
+  position: relative;
   width: 29.75%;
   margin-right: 3rem;
 }
@@ -135,4 +136,24 @@
   color: white;
   font-weight: bold;
   font-size: 0.875rem;
+}
+
+.bookmark {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+  color: #99CCFF;
+}
+
+.bookmark:hover {
+  opacity: 0.7;
+}
+
+.fill-main {
+  fill: #99CCFF;
+}
+
+.fill-white {
+  fill: white;
 }

@@ -2,37 +2,36 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %}내가 찜한 상품{% endblock title %}
+{% block title %}{{ user }}님이 찜한 상품{% endblock title %}
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/my_bookmark.css' %}">
 {% endblock head %}
 
 {% block content %}
-    <h2 class="title my-5">내가 찜한 상품</h2>
+    <h2 class="title my-5">{{ user }}님이 찜한 상품</h2>
     <p class="report my-5">다시 한 번 둘러보시고 나만의 멋진 키보드를 구매하세요!😄</p>
     <hr>
     {% if bookmarked_products %}
       {% for product in bookmarked_products %}
         <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-5">
-          <div class="md:flex">
-            <div class="md:shrink-0">
-              {% if product.image %}
-              <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ product.image.url }}" alt="상품사진">
+          <div class="flex items-center px-4">
+            <div class="w-32 h-32">
+              {% if product.product_img %}
+              <img class="h-full w-full object-cover md:h-full md:w-48" src="{{ product.product_img.url }}" alt="상품사진">
               {% else %}
-              <img class="h-48 w-full object-cover md:h-full md:w-48" src="{% static 'img/default_img.svg' %}" alt="no_image">
+              <img class="h-full w-full object-cover md:h-full md:w-48" src="{% static 'img/default_img.svg' %}" alt="no_image">
               {% endif %}
             </div>
             <div class="p-10">
               <div class="uppercase tracking-wide text-sm text-500 main-color font-semibold">{{ product.category.brand }}</div>
-              <a href="{% url 'products:product_detail' purchase_item.product.pk %}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ product.name }}</a>
+              <a href="{% url 'products:product_detail' product.pk %}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ product.name }}</a>
               <p class="mt-2 text-slate-500">{{ product.price|intcomma }}원</p>
             </div>
           </div>
         </div> 
       {% endfor %}
-    {% endif %}
-      
+    {% else %}
       <p class="text-gray-400"></p>
       <div class="cart basis-2/3 px-2.5">
         <div class="no-item">
@@ -42,5 +41,7 @@
           <p class="text-gray-400">내가 찜한 상품이 없어요😢</p>          
         </div>
       </div>
+    {% endif %}
+      
 {% endblock content %}
 
