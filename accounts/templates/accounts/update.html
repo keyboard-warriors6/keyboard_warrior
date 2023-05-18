@@ -45,6 +45,12 @@
   
     <input type="submit" value="회원정보 수정하기" class="signup-btn bg-[#99ccff] mt-6 group-invalid:pointer-events-none group-invalid:opacity-30">
   </form>
+  
+  <a href="{% url 'accounts:delete' %}">
+    <button value="회원탈퇴" class="delete-btn bg-[#9e9e9e] mt-6">
+      회원 탈퇴하기
+    </button>
+  </a>
 {% endblock content %}
 
 {% block script %}

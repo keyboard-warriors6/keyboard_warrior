@@ -4,11 +4,12 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {% endblock head %}
 
 {% block content %}
   <!-- 프로필 -->
-  <div class="title-container">
+  <div id='sec1' class="title-container">
     <p class="text-4xl">프로필</p>
   </div>
 
@@ -22,7 +23,20 @@
         {% endif %}
       </div>
       <div class="mt-14">
-        <p class="user-name">{{ user }}</p>
+        <p class="user-name">
+            {% if user.level.grade == 'B' %}
+              🥉
+            {% elif user.level.grade == 'S' %}
+              🥈
+            {% elif user.level.grade == 'G' %}
+              🥇
+            {% else %}
+              💎
+            {% endif %}
+          </span>
+          {{ user }}
+          <span>
+        </p>
         <div class="flex items-end gap-4">
           <a href="{% url 'accounts:update' user.username %}">
             <button class="button-setting mt-10">
@@ -36,192 +50,177 @@
           </a>
         </div>
       </div>
-      <section id="example-1">
     </div>
-    <section id="example-1">
-    {% comment %} <hr class="profile-line">
-    
+
+    <hr class="profile-line">
+
     <div class="flex flex-row justify-around">
       <div class="text-center m-5">
         <img src="/static/img/icon_bookmark.png" alt="icon_bookmark" class="profile-icon">
-
         <p>스크랩북</p>
-        <p>0</p>
+        {% comment %} <p>0</p> {% endcomment %}
       </div>
       <div class="text-center m-5">
         <img src="/static/img/icon_heart.png" alt="icon_heart" class="profile-icon">
         <p>리뷰스크랩</p>
-        <p>0</p>
+        {% comment %} <p>0</p> {% endcomment %}
       </div>      <div class="text-center m-5">
         <img src="/static/img/icon_coupon.png" alt="icon_coupon" class="profile-icon">
         <p>쿠폰</p>
-        <p>0</p>
+        {% comment %} <p>0</p> {% endcomment %}
       </div>
-    </div> {% endcomment %}
+    </div>
+    <section id="example-1">
   </div>
   
 
   <!-- 나의 쇼핑 -->
-  <div></div>
-  <div class="title-container mt-36">
-    <p class="text-4xl">나의 쇼핑</p>
+  <div id='sec2' class="title-container mt-36">
+    <p class="text-4xl">나의 쇼핑<span class='ms-3 me-1 text-[#99ccff]'></p>
   </div>
-
-  <!-- 조회 결과 없을 때, 차후에 if문으로 변경할 것 -->
-  <div class="purchased_item-container">
-    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-[#99ccff] hover:bg-[#409fff] font-medium rounded-lg text-sm px-4 py-2.5 m-10 text-center inline-flex items-center" type="button">조회 기간<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-    <!-- Dropdown menu -->
-    <div id="dropdown" class="z-10 hidden bg-white divide-y rounded-lg shadow w-44">
-      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1개월 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3개월 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">6개월 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1년 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">2년 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3년 전</a>
-        </li>
-      </ul>
-    </div>
-    <p class='text-xl text-center mb-20'>주문하신 내역이 없습니다.</p>
-  </div>
-
+  {% if purchases.items %}
     <!-- 조회 결과가 1건이라도 있을 때 -->
-  <div class="purchased_item-container">
-    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-[#99ccff] hover:bg-[#409fff] font-medium rounded-lg text-sm px-4 py-2.5 m-10 text-center inline-flex items-center" type="button">조회 기간<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-    <!-- Dropdown menu -->
-    <div id="dropdown" class="z-10 hidden bg-white divide-y rounded-lg shadow w-44">
-      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1개월 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3개월 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">6개월 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1년 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">2년 전</a>
-        </li>
-        <li>
-          <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3년 전</a>
-        </li>
-      </ul>
+    <div class="purchased_item-container">
+      <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-[#99ccff] hover:bg-[#409fff] font-medium rounded-lg text-sm px-4 py-2.5 m-10 text-center inline-flex items-center" type="button">조회 기간<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+      <!-- Dropdown menu -->
+      <div id="dropdown" class="z-10 hidden bg-white divide-y rounded-lg shadow w-44">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+          <li>
+            <a href="{% url 'accounts:profile' username=user.username %}?sort=1hour" class="block px-4 py-2 hover:bg-[#99ccff]">1개월 전</a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:profile' username=user.username %}?sort=12hour" class="block px-4 py-2 hover:bg-[#99ccff]">3개월 전</a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:profile' username=user.username %}?sort=12hour" class="block px-4 py-2 hover:bg-[#99ccff]">6개월 전</a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:profile' username=user.username %}?sort=1hour" class="block px-4 py-2 hover:bg-[#99ccff]">1년 전</a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:profile' username=user.username %}?sort=1hour" class="block px-4 py-2 hover:bg-[#99ccff]">2년 전</a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:profile' username=user.username %}?sort=1hour" class="block px-4 py-2 hover:bg-[#99ccff]">3년 전</a>
+          </li>
+        </ul>
+      </div>
+
+      <br>
+      {% for date, purchases in purchases.items %}
+        <p class="text-xl ms-5 p-3">{{ date|date:'Y-m-d' }}</p>
+        <hr class="purchase-line">
+        
+        {% for purchase in purchases %}
+          <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 {{ purchase.purchase_date|date:"n월 j일" }}</span> - 도착완료</p>
+          <div class="flex flex-row">
+            <div class="purchased_item-image m-10">
+              <img src="/static/img/products_sample.png" alt="icon_profile">
+            </div>
+
+            <div class="mt-10" style="width: 15rem;">
+              <p class="text-sm mb-1">{{ purchase.products.first.category.brand }}</p>
+              <p class="text-lg mb-1">{{ purchase.products.first.name }}</p>
+            </div>
+
+            <div class="ms-24 mt-10" style="width: 15rem;">
+              <p class="text-xl mb-1">{{ purchase.products.first.discounted_price|intcomma }}원</p>          
+              {% for purchase_item in purchase.purchaseitem_set.all %}
+                <p class="text-base mb-5">수량: {{ purchase_item.cnt }}개</p> 
+
+                <p class="text-xl mb-1">총 가격: {{ purchase_item.price|intcomma }}원</p>          
+  
+              {% endfor %}
+
+              <p class="text-sm text-[#99ccff]">일반택배</p>
+            </div>
+
+            <div class="ms-10 flex flex-column">
+              <a data-te-nav-link-ref class="bg-transparent px-[5px] font-semibold text-neutral-600 shadow-none" href="/products/{{ purchase.products.first.pk }}/#example-4">
+                <button class="button-big button-color-delivery mt-5">
+                  <p class="text-base">상품 문의</p>
+                </button>
+              </a>
+              <a data-te-nav-link-ref class="bg-transparent px-[5px]  font-semibold text-neutral-600 shadow-none" href="/products/{{ purchase.products.first.pk }}">
+                <button class="button-big button-color-review mt-8">
+                  <p class="text-base">리뷰 작성</p>
+                </button>
+              </a>
+            </div>
+          </div>
+        {% endfor %}  
+      {% endfor %}
+      <section id="example-2">
     </div>
 
-
-      {% comment %} {% for purchase in purchase_list %}
-        {% for product in purchase.products.all %}
-            {{ product.category.brand }}
-        {% endfor %}
-      {% endfor %} {% endcomment %}
-      
-      {% for purchase in purchase_list %}
-      <ul>
-        {{ purchase.products.first.category.brand }} -
-        {{ purchase.products.first.name }}
-        {{ purchase.products.first.product_img }}
-        <br>
-      </ul>
- 
-          {% comment %} {% for purchase_item in purchase.purchase_items %}
-            <li>
-              Product: {{ purchase_item.product }}
-              Quantity: {{ purchase_item.cnt }}
-            </li>
-          {% endfor %} {% endcomment %}
-      {% endfor %}
-    </ul>
-    <br>
-    {% for purchase in purchase_list %}
-      <p class="text-xl ms-5 p-3">{{ purchase.date|date:'Y-m-d' }}</p>
-      <hr class="purchase-line">
-
-      <p class="text-xl ms-10 mt-5 "><span class="text-[#99ccff]">구매확정 {{ purchase.date|date:"n월 j일" }}</span> - 도착완료</p>
-      <div class="flex flex-row">
-        <div class="purchased_item-image m-10">
-          <img src="/static/img/products_sample.png" alt="icon_profile">
-        </div>
-
-        <div class="mt-10" style="width: 15rem;">
-          <p class="text-sm mb-1">{{ purchase.products.first.category.brand }}</p>
-          <p class="text-lg mb-1">{{ purchase.products.first.name }}</p>
-        </div>
-
-        <div class="ms-24 mt-10">
-          <p class="text-xl mb-1">{{ purchase.products.first.discounted_price|intcomma }}원 1개</p>          
-          {% for purchase_item in purchase.purchase_items %}
-            <li>
-              Quantity: {{ purchase_item.cnt }}
-            </li>
-          {% endfor %}
-
-          <p class="text-[#99ccff]">일반택배</p>
-        </div>
-
-        <div class="ms-36 flex flex-column">
-          <button class="button-big button-color-delivery mt-5">
-            <p class="text-base">배송 추적</p> <!-- 기능 변경 필요, 배송 현황은 알 수 없을 것 같아서 예를 들면 상품 보러가기 라던지 -->
-          </button>
-          <a href="/products/{{ product.product.pk }}">
-            <button class="button-big button-color-review mt-8">
-              <p class="text-base">리뷰 작성</p>
-            </button>
-          </a>
-          </ahref=>
-        </div>
+    {% else %}
+    <!-- 조회 결과 없을 때 -->
+    <div class="purchased_item-container">
+      <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white bg-[#99ccff] hover:bg-[#409fff] font-medium rounded-lg text-sm px-4 py-2.5 m-10 text-center inline-flex items-center" type="button">조회 기간<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+      <!-- Dropdown menu -->
+      <div id="dropdown" class="z-10 hidden bg-white divide-y rounded-lg shadow w-44">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1개월 전</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3개월 전</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">6개월 전</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">1년 전</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">2년 전</a>
+          </li>
+          <li>
+            <a href="#" class="block px-4 py-2 hover:bg-[#99ccff]">3년 전</a>
+          </li>
+        </ul>
       </div>
-    {% endfor %}
-    <section id="example-2">
-  </div>
+      <p class='text-xl text-center mb-20'>주문하신 내역이 없습니다.</p>
+    </div>
+  {% endif %}
 
 
 
   <!-- 나의 리뷰 -->
-  <div class="title-container mt-36">
-    <p class="text-4xl">나의 리뷰<span class='ms-3 me-1 text-[#99ccff]'>{{ review_list|length }}</span>개</p>
+  <div id='sec3' class="title-container mt-36">
+    <p class="text-4xl">나의 리뷰</p>
   </div>
 
 
   {% if review_list %}
     <!-- 조회 결과가 1건이라도 있을 때 -->
     <div class="purchased_item-container">
-      <button class="button-middle button-color-delivery ms-10 mt-10">
-        <p>베스트</p>
-      </button>
-      <button class="button-middle button-color-delivery ms-3 mt-10">
-        <p>최신순</p>
-      </button>
+      <a data-te-nav-link-ref class="bg-transparent px-[5px] font-semibold text-neutral-600 shadow-none" href="?sort=rating">
+        <button class="button-middle button-color-delivery ms-10 mt-10">
+          <p>별점순</p>
+        </button>
+      </a>
+      <a data-te-nav-link-ref class="bg-transparent px-[5px] font-semibold text-neutral-600 shadow-none" href="?sort=created_at">
+        <button class="button-middle button-color-delivery ms-3 mt-10">
+          <p>최신순</p>
+        </button>
+      </a>
 
       {% for review in review_list %}
         <div class="flex flex-row">
           <div class="my-10 ms-10 me-20">
             <p class="text-xl mb-2">[{{ review.product.category.brand }}] {{ review.product.name }} </p>
             <div class='flex'>
-              <p class="mb-3 me-3 stars" data-raing={{ review.rating}}>{{ review.rating }}</p>
+              <p class="mb-3 me-3 stars" data-raing={{ review.rating }}>{{ review.rating }}</p>
               <p class="text-base mb-3"> {{ review.created_at|date:'Y.m.d' }}</p>       
             </div>
             {% for image in review.images.all %}
-              <img src="{{ image.img.url }}"  alt="리뷰 사진" style="width:112px; height:112px; margin-top:10px;">
+              <img src="{{ image.img.url }}"  alt="리뷰 사진" style="width:112px; height:112px; margin-top:10px; object-fit: cover;" class='mb-5'>
             {% endfor %}
             <p class="text-lg mb-2 "> {{ review.content }} </p>
           </div>
           <div class="ms-auto me-12 flex justify-center items-center">
-            <a data-te-nav-link-ref class="bg-transparent px-[5px] menubar-content-list font-semibold text-neutral-600 shadow-none" href="/products/{{ review.product.pk }}/#example-4">
+            <a data-te-nav-link-ref class="bg-transparent px-[5px] font-semibold text-neutral-600 shadow-none" href="/products/{{ review.product.pk }}">
               <button class="button-big button-color-review mt-8">
                 <p class="text-base">리뷰 보러가기</p>
               </button>
@@ -246,18 +245,22 @@
 
   
   <!-- 나의 문의 -->
-  <div class="title-container mt-36">
-    <p class="text-4xl">나의 문의<span class='ms-3 me-1 text-[#99ccff]'>{{ inquiries|length }}</span>개</p>
+  <div id='sec4' class="title-container mt-36">
+    <p class="text-4xl">나의 문의</p>
   </div>
 
   <!-- 조회 결과가 1건이라도 있을 때 -->
   <div class="purchased_item-container mb-36">
-    <button class="button-middle button-color-delivery ms-10 mt-10">
-      <p>전체 보기</p>
-    </button>
-    <button class="button-middle button-color-delivery ms-3 mt-10">
-      <p>답변 완료</p>
-    </button>
+    <a data-te-nav-link-ref class="bg-transparent px-[5px] font-semibold text-neutral-600 shadow-none" href="{% url 'accounts:profile' username=user.username %}?sort=all">
+      <button class="button-middle button-color-delivery ms-10 mt-10">
+        <p>전체 보기</p>
+      </button>
+    </a>
+    <a data-te-nav-link-ref class="bg-transparent px-[5px] font-semibold text-neutral-600 shadow-none" href="{% url 'accounts:profile' username=user.username %}?sort=answer">
+      <button class="button-middle button-color-delivery ms-3 mt-10">
+        <p>답변 완료</p>
+      </button>
+    </a>
     {% if inquiries %}
       {% for inquiry in inquiries %}
         <div class="flex flex-row">
@@ -266,19 +269,20 @@
             <p class="text-sm mb-5"> {{ inquiry.created_at }}</p>
 
             <div class="mb-2.5">
-              <p class='ms-5 mb-5'><span class="product-inquiry-qa">Q &nbsp;</span>{{ inquiry.content }}</p>
+              <p class='mb-5'><span class="product-inquiry-qa">Q &nbsp;</span>{{ inquiry.content }}</p>
             </div>
             
             {% if inquiry.answer %}
               <div class="mb-2.5">
-                <p class='ms-5 mb-5'><span class="product-inquiry-qa">A &nbsp;</span><span style="font-weight: 700; color: #424242; font-size: 15px;">주식회사 인스토어 &nbsp;</span><span style="font-size: 12px; color: #bdbdbd;">{{ inquiry.answer.created_at }}</span></p>
-                <p class='ms-5'>{{ inquiry.answer.content }}</p>
+                <p class='mb-5'><span class="product-inquiry-qa">A &nbsp;</span><span style="font-weight: 700; color: #424242; font-size: 15px;">주식회사 인스토어 &nbsp;</span><span style="font-size: 12px; color: #bdbdbd;">{{ inquiry.answer.created_at }}</span></p>
+                <p>{{ inquiry.answer.content }}</p>
               </div>
             {% endif %}
+      
           </div>
           
           <div class="ms-auto me-12 flex justify-center items-center">
-            <a data-te-nav-link-ref class="bg-transparent px-[5px] menubar-content-list font-semibold text-neutral-600 shadow-none" href="/products/{{ inquiry.product.pk }}/#example-4">
+            <a data-te-nav-link-ref class="bg-transparent px-[5px] font-semibold text-neutral-600 shadow-none" href="/products/{{ inquiry.product.pk }}/#example-4">
               <button class="button-big button-color-review">
                 <p class="text-base">답변 보러가기</p>
               </button>
@@ -287,14 +291,14 @@
         </div>
       {% endfor %}
     {% else %}
-      <p class='text-xl text-center mb-20'>문의하신 내역이 없습니다.</p>
+      <p class='text-xl text-center my-20'>문의 내역이 없습니다.</p>
     {% endif %}
   </div>
 {% endblock content %}
 
 
 {% block script %}
-<script type="text/javascript" src="/static/JS/product_detail.js"></script>
+<script type="text/javascript" src="/static/JS/profile.js"></script>
 <script>
   const starsEl = document.querySelectorAll(".stars");
   starsEl.forEach((stars) => {
