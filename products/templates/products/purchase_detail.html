@@ -59,7 +59,7 @@
             <div class="flex flex-col justify-between ml-6">
               <p class="text-sm">{{ product.name }}</p>
               <div class="flex items-center gap-4 item-price">
-                <p class="price"><span>{{ product.price }}</span>원</p>
+                <p class="price"><span>{{ product.discounted_price }}</span>원</p>
                 <p class="text-xs text-gray-500"><span>{{ cnt }}</span>개</p>
                 <input name="cnt" type="hidden" value="{{ cnt }}" readonly>
               </div>

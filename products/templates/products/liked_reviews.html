@@ -11,7 +11,7 @@
   <h2 class="title my-5">저장한 리뷰</h2>
   <p class="report my-5">리뷰를 다시 한 번 살펴보고 키보드를 선택하세요!😄</p>
   <hr>
-  {% if not reviews %}
+  {% if not liked_reviews %}
   <p class="text-gray-400"></p>
       <div class="cart basis-2/3 px-2.5">
         <div class="no-item">
@@ -23,7 +23,7 @@
         </div>
       </div>
   {% else %}
-    {% for review in reviews %}
+    {% for review in liked_reviews %}
     <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-5">
       <div class="md:flex">
         <div class="md:shrink-0">

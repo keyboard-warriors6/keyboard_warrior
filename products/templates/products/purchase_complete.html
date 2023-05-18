@@ -17,8 +17,8 @@
       <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-5">
         <div class="md:flex">
           <div class="md:shrink-0">
-            {% if purchase_item.product.image %}
-            <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ purchase_item.product.image.url }}" alt="상품사진">
+            {% if purchase_item.product.product_img %}
+            <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ purchase_item.product.product_img.url }}" alt="상품사진">
             {% else %}
             <img class="h-48 w-full object-cover md:h-full md:w-48" src="{% static 'img/default_img.svg' %}" alt="no_image">
             {% endif %}

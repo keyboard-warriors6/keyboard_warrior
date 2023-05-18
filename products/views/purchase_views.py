@@ -240,8 +240,8 @@ class CartListView(LoginRequiredMixin, View):
         total_price = 0
 
         for item in cart_items:
-            item.price = item.cnt * item.product.price
-            total_price += item.price
+            item.discounted_price = item.cnt * item.product.discounted_price
+            total_price += item.discounted_price
 
         context = {
             'cart_items': cart_items,
