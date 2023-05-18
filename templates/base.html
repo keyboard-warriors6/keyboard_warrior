@@ -40,6 +40,11 @@
                   <img src="{% static 'img/icon_bookmark.png' %}" alt="icon_bookcart">
                 </div>
               </a>
+              <a href="{% url 'products:liked_reviews' %}">
+                <div class="w-6">
+                  <img src="{% static 'img/icon_heart.png' %}" alt="icon_heart">
+                </div>
+              </a>
               <a href="{% url 'products:cart_list' %}">
                 <div class="relative w-6">
                   <img src="{% static 'img/icon_cart.png' %}" alt="icon_bookcart">
@@ -47,7 +52,7 @@
                   <div class="absolute inline-flex items-center justify-center w-4 h-4 text-[0.625rem] font-bold text-white bg-red-400 rounded-full -top-2 -right-2 dark:border-gray-900">{{ user.cart_set.all|length }}</div>
                   {% endif %}
                 </div>
-                </a>
+              </a>
               <a href="{% url 'accounts:profile' user %}">
                 {% if user.profile_img %}
                   <div class="profile-img w-10 h-10 rounded-full overflow-hidden">

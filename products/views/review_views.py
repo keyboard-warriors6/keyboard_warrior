@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import CreateView, DeleteView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from products.models import *
 from products.forms import *
@@ -232,3 +232,13 @@ class ReviewLikeView(LoginRequiredMixin, View):
                                 })
         else:
             return JsonResponse({'error': '로그인이 필요합니다.'}, status=401)
+
+
+class LikedReviewListView(LoginRequiredMixin, ListView):
+    model = Review
+    template_name = 'products/liked_reviews.html'
+    context_object_name = 'liked_reviews'
+
+    def get_queryset(self):
+        reviews = Review.objects.filter(likes=self.request.user)
+        return reviews
