@@ -51,6 +51,11 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         inquiries = user.inquiry_set.filter(user=self.request.user)
         context['inquiries'] = inquiries
 
+        review_list = Review.objects.filter(user=self.request.user).prefetch_related('images').order_by('-created_at')
+        review_list = review_list.order_by('-created_at')
+
+        context['review_list'] = review_list
+        
         purchase_list = Purchase.objects.filter(user=self.request.user)
         purchase_list = purchase_list.order_by('-purchase_date')
         purchase_list = purchase_list.annotate(date=TruncDate('purchase_date'))
