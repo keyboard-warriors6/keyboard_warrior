@@ -122,7 +122,7 @@
         <div id="section2" class="product-review mt-12">
           <p class="text-lg font-semibold">리뷰 <span style="color:#99CCFF">{{ reviews|length }}</span></p>
           <!-- 리뷰 쓰기 -->
-          {% if can %}
+          {% if user.purchase.exists %}
             <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="font-semibold" style="color:#99CCFF;" type="button">
               리뷰 쓰기
             </button>
@@ -170,7 +170,7 @@
             <div class="flex flex-row mt-3">
               <div class="basis-1/2 product-review-header">
                 <!-- 유저 프로필 이미지 -->
-                {% if user.profile_img %}
+                {% if review.review.user.profile_img %}
                   <img src="{{ user.profile_img.url }}" alt="profile_img" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
                 {% else %}
                   <img src="https://i.pinimg.com/564x/d2/98/4e/d2984ec4b65a8568eab3dc2b640fc58e.jpg" alt="no_img" class="product-review-user_img" style="width:24px; height:24px; border-radius:50%;">
