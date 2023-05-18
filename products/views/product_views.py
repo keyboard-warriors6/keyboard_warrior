@@ -1,9 +1,9 @@
-import json, os, requests, sys, operator
-import matplotlib.pyplot as plt
+import json, os, requests, operator
 import numpy as np
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.db.models import ExpressionWrapper, FloatField, Count, F, Q, Avg
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DeleteView, DetailView, ListView, TemplateView, View
@@ -57,7 +57,7 @@ class ProductListView(TemplateView):
         if category_cox is not None:
             cox_selling_products = self.get_top_selling_products_by_brand(category_cox)
             context['cox_selling_products'] = cox_selling_products
-            cox_rating = Product.objects.filter(category=category_cox).annotate(avg_rating=Avg('reviews__rating'))
+            cox_rating = Product.objects.filter(category__brand="콕스").annotate(avg_rating=Avg('reviews__rating'))
             context['cox_rating'] = cox_rating
         else:
             context['cox_selling_products'] = None
@@ -67,7 +67,7 @@ class ProductListView(TemplateView):
         if category_corsair is not None:
             corsair_selling_products = self.get_top_selling_products_by_brand(category_corsair)
             context['corsair_selling_products'] = corsair_selling_products
-            corsair_rating = Product.objects.filter(category=category_corsair).annotate(avg_rating=Avg('reviews__rating'))
+            corsair_rating = Product.objects.filter(category__brand="커세어").annotate(avg_rating=Avg('reviews__rating'))
             context['corsair_rating'] = corsair_rating
         else:
             context['corsair_selling_products'] = None
@@ -77,7 +77,7 @@ class ProductListView(TemplateView):
         if category_leopold is not None:
             leopold_selling_products = self.get_top_selling_products_by_brand(category_leopold)
             context['leopold_selling_products'] = leopold_selling_products
-            leopold_rating = Product.objects.filter(category=category_leopold).annotate(avg_rating=Avg('reviews__rating'))
+            leopold_rating = Product.objects.filter(category__brand="레오폴드").annotate(avg_rating=Avg('reviews__rating'))
             context['leopold_rating'] = leopold_rating
         else:
             context['leopold_selling_products'] = None
@@ -93,20 +93,25 @@ class ProductListView(TemplateView):
 
         return context
         
-        
+
 class ProductCategoryView(ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'products/category.html'  
     # paginate_by = 12  # pagination이 필요한 경우 사용
-
+    
     def get_queryset(self):
+        query = self.request.GET.get('query')
         queryset = super().get_queryset()
         filter_option = self.request.GET.get('filter')
+        if query:
+            queryset = queryset.filter(name__icontains=query)
             # 필터 옵션에 따라 쿼리셋 필터링
         if filter_option == 'purchased':
             # 구매를 많이 한 순으로 정렬
             queryset = queryset.annotate(num_purchases=Count('purchaseitem')).order_by('-num_purchases')
+        elif filter_option == 'rating':
+            queryset = queryset.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')     
         elif filter_option == 'popular':
             # 후기 많은 순으로 정렬
             queryset = queryset.annotate(num_reviews=Count('reviews')).order_by('-num_reviews')
@@ -127,7 +132,7 @@ class ProductCategoryView(ListView):
         pressure = self.request.GET.getlist('pressure')
         tenkey = self.request.GET.getlist('tenkey')
 
-        # 필터링 조건에 해당하는 Q 객체 생성
+    # 필터링 조건에 해당하는 Q 객체 생성
         filter_conditions = Q()
 
         if brand:
@@ -368,7 +373,7 @@ class ProductBookmarkView(LoginRequiredMixin, View):
         return JsonResponse(context)
     
 
-class KeyboardTrendView(UserPassesTestMixin, PermissionRequiredMixin, TemplateView):
+class KeyboardTrendView(UserPassesTestMixin, TemplateView):
     template_name = 'products/keyboard_trend.html'  # 템플릿 파일 경로
     raise_exception = True
 
@@ -392,7 +397,7 @@ class KeyboardTrendView(UserPassesTestMixin, PermissionRequiredMixin, TemplateVi
             total_ratio = sum(ratios)
             result[title] = int(total_ratio)
         sorted_result = dict(sorted(result.items(), key=operator.itemgetter(1), reverse=True))
-        image1_path = os.path.join(os.path.dirname(__file__), 'trend.png')
+        image1_path = os.path.join(settings.BASE_DIR, 'static', 'img', 'trend.png')
         trend_mask=np.array(Image.open(image1_path))
         wordcloud = WordCloud(
                             background_color="grey",
@@ -406,7 +411,7 @@ class KeyboardTrendView(UserPassesTestMixin, PermissionRequiredMixin, TemplateVi
                             ).generate_from_frequencies(sorted_result)
         wordcloud = wordcloud.fit_words(sorted_result)
 
-        font_path = os.path.join(os.path.dirname(__file__), 'NanumSquareNeo-eHv.ttf')
+        font_path = os.path.join(settings.BASE_DIR, 'static', 'etc', 'NanumSquareNeo-eHv.ttf')
         fontprop = font_manager.FontProperties(fname=font_path)
         wordcloud.font_path = font_path
         # plt.imshow(wordcloud,interpolation='bilinear')
@@ -486,4 +491,11 @@ class KeyboardTrendView(UserPassesTestMixin, PermissionRequiredMixin, TemplateVi
         return result
     
 
-
+class BookmarkedProductListView(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = 'products/my_bookmark.html'
+    context_object_name = 'bookmarked_products'
+    
+    def get_queryset(self):
+        # 현재 로그인한 사용자의 북마크한 상품들만 조회합니다.
+        return self.request.user.bookmark.all()
