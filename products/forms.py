@@ -1,7 +1,6 @@
 from django import forms
 from .models import *
-from django.forms import inlineformset_factory, HiddenInput
-from django.urls import reverse_lazy
+
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -34,6 +33,7 @@ class CategoryForm(forms.ModelForm):
     pressure: 키압
     tenkey: True일 때 텐키리스, False일 때 풀배열
     """
+
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -72,7 +72,8 @@ class ProductForm(forms.ModelForm):
     price: 제품 가격
     discount_rate: 할인율
     """
-        
+
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
@@ -80,7 +81,7 @@ class ReviewForm(forms.ModelForm):
 
 
 class ReviewImageForm(forms.ModelForm):
-    img = forms.ImageField(widget=forms.FileInput(attrs={'multiple': True}))
+    img = forms.ImageField(widget=forms.FileInput)
     class Meta:
         model = ReviewImages
         fields = ('img',)
@@ -102,6 +103,7 @@ class InquiryForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         
         self.fields['content'].label = '문의 내용'
+
 
 class AnswerForm(forms.ModelForm):
     class Meta:
