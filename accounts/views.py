@@ -90,7 +90,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         else:
             time_range = None
 
-        
+    
         # 날짜와 시간을 구분하여 묶어주기
         grouped_purchases = []
         for purchase in purchases:
