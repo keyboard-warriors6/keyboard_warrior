@@ -42,7 +42,7 @@ class LogoutView(RedirectView):
     
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
-    template_name = 'accounts/profile2.html'
+    template_name = 'accounts/profile.html'
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
@@ -68,7 +68,8 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         context['purchases'] = grouped_purchases_by_date
 
         return context
-    
+
+
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = CustomUserChangeForm
@@ -106,29 +107,6 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
 def permission_denied_view(request, exception):
     return render(request, '403.html', status=403)
-
-
-# class ProfileDetailView(LoginRequiredMixin, DetailView):
-#     model = get_user_model()
-#     template_name = 'accounts/profile2.html'
-#     slug_field = 'username'
-#     slug_url_kwarg = 'username'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         user = self.object
-#         inquiries = user.inquiry_set.filter(user=self.request.user)
-#         context['inquiries'] = inquiries
-
-#         # 주문 현황 가져오기
-#         purchases = Purchase.objects.filter(user=user).annotate(item_count=Count('products')).order_by('-purchase_date')
-#         context['purchases'] = purchases
-
-#         # 날짜별 구매한 상품 가져오기
-#         purchase_items_by_date = {}
-#         for purchase in purchases:
-#             purchase_items = PurchaseItem.objects.filter(purchase=purchase)
-#             purchase_items_by_date[purchase.purchase_date] = purchase_items
 
 #         context['purchase_items_by_date'] = purchase_items_by_date
 
