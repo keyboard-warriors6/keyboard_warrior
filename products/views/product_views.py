@@ -35,7 +35,7 @@ class ProductListView(TemplateView):
 
         # 가성비 좋은 순으로 상위 5개 제품 가져오기
         affordable_products = Product.objects.annotate(affordability=ExpressionWrapper(
-        Count('purchaseitem') / F('price'),
+        Count('purchaseitem') / F('discounted_price'),
         output_field=FloatField()
         )).order_by('-affordability')[:12]
         context['affordable_products'] = affordable_products
@@ -84,7 +84,7 @@ class ProductListView(TemplateView):
             context['leopold_rating'] = None
 
         # 가격이 낮은 순으로 상위 12개 제품 가져오기
-        low_price_products = Product.objects.order_by('price')[:12]
+        low_price_products = Product.objects.order_by('discounted_price')[:12]
         context['low_price_products'] = low_price_products
 
         # 가격이 낮은 순으로 상위 12개 제품의 별점 평균
@@ -118,11 +118,11 @@ class ProductCategoryView(ListView):
         elif filter_option == 'affordable':
             # 가성비 좋은 순으로 정렬 (구매량/가격)
             queryset = queryset.annotate(affordability=ExpressionWrapper(
-            Count('purchaseitem') / F('price'),
+            Count('purchaseitem') / F('discounted_price'),
             output_field=FloatField())).order_by('-affordability')
         elif filter_option == 'low_price':
             # Sort by low price
-            queryset = queryset.order_by('price')
+            queryset = queryset.order_by('discounted_price')
         elif filter_option == 'all':
             queryset = queryset   
 
