@@ -76,7 +76,7 @@
 
 
 
-          <div class="flex product-price mb-6">
+          <div class="flex product-price mb-6 mt-6">
             <span>주문금액</span>
             <p><span class="counted-price">{{ product.discounted_price }}</span> 원</p>
           </div>
@@ -122,9 +122,15 @@
         <div id="section2" class="product-review mt-12">
           <p class="text-lg font-semibold">리뷰 <span style="color:#99CCFF">{{ reviews|length }}</span></p>
           <!-- 리뷰 쓰기 -->
-          <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="font-semibold" style="color:#99CCFF;" type="button">
-            리뷰 쓰기
-          </button>
+          {% if can %}
+            <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="font-semibold" style="color:#99CCFF;" type="button">
+              리뷰 쓰기
+            </button>
+          {% else %}
+            <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="font-semibold" style="color:#99CCFF;" type="button" disabled>
+              리뷰 쓰기
+            </button>
+          {% endif %}
         </div>
 
         <!-- Main modal -->
@@ -262,7 +268,7 @@
               </form> {% endcomment %}
 
               <div class="flex">
-                <input type="button" value="수정" class="review-edit-btn review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" style="cursor: pointer; height: 32px;">
+                {% comment %} <input type="button" value="수정" class="review-edit-btn review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" style="cursor: pointer; height: 32px;"> {% endcomment %}
 
                 <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
                   {% csrf_token %}
@@ -279,14 +285,14 @@
                 </form>
               </div>
               </div>
-              <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
+              {% comment %} <form class="review-edit-form" id="review-edit-form-{{ review.review.pk }}" data-product-id="{{ product.pk }}" data-review-id="{{ review.review.pk }}" hidden>
                 {% csrf_token %}
                 <div id="review-content-{{ review.review.pk }}">
                   {{review_form}} &nbsp; &nbsp;
                   {{review_image_form}}
                 </div>
                 <input type="submit" value="수정하기" class="mt-3 review-edit-btn review-edit-btn mr-3 bg-white hover:bg-gray-100 text-gray-800 font-semibold  px-4 border border-gray-400 rounded shadow" style="cursor: pointer; height: 32px;">
-              </form>
+              </form> {% endcomment %}
 
 
               {% comment %} <form action="{% url 'products:review_delete' product_pk=product.pk review_pk=review.review.pk %}" method="post">
@@ -524,7 +530,7 @@
               </div>
             </div>
           </div>
-          <div class="flex product-price mb-6">
+          <div class="flex product-price mb-6 mt-6">
             <span>주문금액</span>
             <p><span class="counted-price2">{{ product.discounted_price }}</span> 원</p>
           </div>
