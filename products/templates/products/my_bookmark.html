@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}내가 찜한 상품{% endblock title %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/my_bookmark.css' %}">
+{% endblock head %}
+
+{% block content %}
+    <h2 class="title my-5">내가 찜한 상품</h2>
+    <p class="report my-5">다시 한 번 둘러보시고 나만의 멋진 키보드를 구매하세요!😄</p>
+    <hr>
+    {% if bookmarked_products %}
+      {% for product in bookmarked_products %}
+        <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-5">
+          <div class="md:flex">
+            <div class="md:shrink-0">
+              {% if product.image %}
+              <img class="h-48 w-full object-cover md:h-full md:w-48" src="{{ product.image.url }}" alt="상품사진">
+              {% else %}
+              <img class="h-48 w-full object-cover md:h-full md:w-48" src="{% static 'img/default_img.svg' %}" alt="no_image">
+              {% endif %}
+            </div>
+            <div class="p-10">
+              <div class="uppercase tracking-wide text-sm text-500 main-color font-semibold">{{ product.category.brand }}</div>
+              <a href="{% url 'products:product_detail' purchase_item.product.pk %}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{ product.name }}</a>
+              <p class="mt-2 text-slate-500">{{ product.price|intcomma }}원</p>
+            </div>
+          </div>
+        </div> 
+      {% endfor %}
+    {% endif %}
+      
+      <p class="text-gray-400"></p>
+      <div class="cart basis-2/3 px-2.5">
+        <div class="no-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1" stroke="currentColor" class="w-20 h-20 text-gray-400">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+          </svg>
+          <p class="text-gray-400">내가 찜한 상품이 없어요😢</p>          
+        </div>
+      </div>
+{% endblock content %}
+
