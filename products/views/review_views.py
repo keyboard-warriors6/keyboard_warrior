@@ -21,7 +21,18 @@ class ReviewCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     
     def test_func(self):
-        return self.request.user.purchase.exists()
+        target = Product.objects.get(pk=self.kwargs['product_pk'])
+        user = self.request.user
+        if user.purchase.exists():
+            purchases = user.purchase.all()
+            for purchase in purchases:
+                products = purchase.products.all()
+                for product in products:
+                    if product == target:
+                        return True
+            return False
+        else:
+            return False
 
     def get_success_url(self):
         return reverse('products:product_detail', args=(self.object.product.pk,))
