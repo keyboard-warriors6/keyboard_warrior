@@ -12,12 +12,16 @@ from products.models import *
 from products.forms import *
 
 
-class ReviewCreateView(LoginRequiredMixin, CreateView):
+class ReviewCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Review
     second_model = ReviewImages
     form_class = ReviewForm
     second_form_class = ReviewImageForm
     template_name = 'products/product_detail.html'
+
+    
+    def test_func(self):
+        return self.request.user.purchase.exists()
 
     def get_success_url(self):
         return reverse('products:product_detail', args=(self.object.product.pk,))
