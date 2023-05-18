@@ -5,12 +5,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.db.models import F, Sum, DateTimeField, Count
-from django.db.models.functions import TruncDate, Trunc
+from django.db.models import F, Sum, Count
+from django.db.models.functions import TruncDate
 from django.views.generic import FormView, RedirectView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from products.models import *
+from itertools import groupby
+from operator import itemgetter
 
 
 class SignupView(CreateView):
@@ -38,7 +40,6 @@ class LogoutView(RedirectView):
         logout(request)
         return super().get(request, *args, **kwargs)
     
-
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'accounts/profile.html'
@@ -51,18 +52,24 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         inquiries = user.inquiry_set.filter(user=self.request.user)
         context['inquiries'] = inquiries
 
-        purchase_list = Purchase.objects.filter(user=self.request.user)
-        purchase_list = purchase_list.order_by('-purchase_date')
-        purchase_list = purchase_list.annotate(date=TruncDate('purchase_date'))
+        # 주문 현황 가져오기
+        purchases = Purchase.objects.filter(user=user).annotate(item_count=Count('products')).order_by('-purchase_date')
 
-        for purchase in purchase_list:
-            purchase_items = PurchaseItem.objects.filter(purchase__user=self.request.user, purchase__purchase_date__date=purchase.date)
-            purchase.purchase_items = purchase_items
+        # 날짜와 시간을 구분하여 묶어주기
+        grouped_purchases = []
+        for purchase in purchases:
+            grouped_purchases.append((purchase.purchase_date.date(), purchase))
 
-        context['purchase_list'] = purchase_list
+        grouped_purchases.sort(key=itemgetter(0), reverse=True)
+        grouped_purchases_by_date = {
+            date: [purchase for _, purchase in group]
+            for date, group in groupby(grouped_purchases, key=itemgetter(0))
+        }
+        context['purchases'] = grouped_purchases_by_date
+
         return context
 
-        
+
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = CustomUserChangeForm
@@ -100,3 +107,8 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
 
 def permission_denied_view(request, exception):
     return render(request, '403.html', status=403)
+
+#         context['purchase_items_by_date'] = purchase_items_by_date
+
+#         return context
+    
