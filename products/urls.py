@@ -14,6 +14,7 @@ urlpatterns = [
     path('<int:product_pk>/bookmark/', ProductBookmarkView.as_view(), name='product_bookmark'),
     path('keyboard_trend/', KeyboardTrendView.as_view(), name='keyboard_trend'),
     path('my_bookmark/', BookmarkedProductListView.as_view(), name='bookmarked_products'),
+    path('liked_reviews/', LikedReviewListView.as_view(), name='liked_reviews'),
     
     # 후기
     path('<int:product_pk>/review/', ReviewCreateView.as_view(), name='review_create'),
