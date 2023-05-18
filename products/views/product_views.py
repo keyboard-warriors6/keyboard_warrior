@@ -57,7 +57,7 @@ class ProductListView(TemplateView):
         if category_cox is not None:
             cox_selling_products = self.get_top_selling_products_by_brand(category_cox)
             context['cox_selling_products'] = cox_selling_products
-            cox_rating = Product.objects.filter(category=category_cox).annotate(avg_rating=Avg('reviews__rating'))
+            cox_rating = Product.objects.filter(category__brand="콕스").annotate(avg_rating=Avg('reviews__rating'))
             context['cox_rating'] = cox_rating
         else:
             context['cox_selling_products'] = None
@@ -67,7 +67,7 @@ class ProductListView(TemplateView):
         if category_corsair is not None:
             corsair_selling_products = self.get_top_selling_products_by_brand(category_corsair)
             context['corsair_selling_products'] = corsair_selling_products
-            corsair_rating = Product.objects.filter(category=category_corsair).annotate(avg_rating=Avg('reviews__rating'))
+            corsair_rating = Product.objects.filter(category__brand="커세어").annotate(avg_rating=Avg('reviews__rating'))
             context['corsair_rating'] = corsair_rating
         else:
             context['corsair_selling_products'] = None
@@ -77,7 +77,7 @@ class ProductListView(TemplateView):
         if category_leopold is not None:
             leopold_selling_products = self.get_top_selling_products_by_brand(category_leopold)
             context['leopold_selling_products'] = leopold_selling_products
-            leopold_rating = Product.objects.filter(category=category_leopold).annotate(avg_rating=Avg('reviews__rating'))
+            leopold_rating = Product.objects.filter(category__brand="레오폴드").annotate(avg_rating=Avg('reviews__rating'))
             context['leopold_rating'] = leopold_rating
         else:
             context['leopold_selling_products'] = None
