@@ -38,9 +38,21 @@ class ReviewCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return reverse('products:product_detail', args=(self.object.product.pk,))
     
     def get_context_data(self, **kwargs):
+        target = Product.objects.get(pk=self.kwargs['product_pk'])
+        user = self.request.user
+        can = False
+
+        if user.purchase.exists():
+            purchases = user.purchase.all()
+            for purchase in purchases:
+                products = purchase.products.all()
+                for product in products:
+                    if product == target:
+                        can = True
         context = super().get_context_data(**kwargs)
         context['review_form'] = self.get_form(self.form_class)
         context['review_image_form'] = self.get_form(self.second_form_class)
+        context['can'] = can
         return context
     
     def post(self, request, *args, **kwargs):
