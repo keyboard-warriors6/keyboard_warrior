@@ -199,6 +199,65 @@ optionsContainer.classList.remove('hidden');
 
 // 리뷰 수정
 // const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+// const reviewUpdate = document.querySelectorAll('.review-edit-btn')
+
+// reviewUpdate.forEach((review) => {
+//   review.addEventListener('click', (event) => {
+//     const reviewId = event.target.dataset.reviewId
+//     // console.log(reviewId)
+//     const reviewUpdateDiv = document.querySelector(`#review-edit-form-${reviewId}`)
+//     // console.log(reviewUpdateDiv)
+//     if (reviewUpdateDiv.hidden == true) {
+//       reviewUpdateDiv.hidden = false
+//     } else {
+//       reviewUpdateDiv.hidden = true
+//     }
+//   })
+// })
+
+// const reviewUpdateConfirm = document.querySelectorAll('.review-edit-form')
+
+// reviewUpdateConfirm.forEach((updateBtn) => {
+//   updateBtn.addEventListener('submit', (event) => {
+//     event.preventDefault()
+//     const productId = event.target.dataset.productId
+//     console.log(productId)
+//     const reviewId = event.target.dataset.reviewId
+//     console.log(reviewId)
+
+
+//     const reviewContentTag = document.getElementById(`review-content-${reviewId}`)
+
+//     const reviewContent = reviewContentTag.children[0].children[1].value
+
+//     const reviewRating = reviewContentTag.children[1].children[1].value
+
+//     console.log(reviewRating)
+
+//     const form = new FormData()
+//     form.append('content', reviewContent)
+//     form.append('rating', reviewRating)
+    
+
+//     axios({
+//       method: 'post',
+//       url: `http://127.0.0.1:8000/products/${productId}/review/${reviewId}/update/`,
+//       headers:{'X-CSRFToken': csrftoken},   
+//       data: form,
+//     })
+//     .then((response) => {
+//       updateBtn.hidden = true
+//       location.reload()
+
+//     })
+//     .catch((error) => {
+//       console.log(error.response)
+//     })
+//   })
+// })
+
+// 리뷰 수정
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 const reviewUpdate = document.querySelectorAll('.review-edit-btn')
 
 reviewUpdate.forEach((review) => {
@@ -221,40 +280,42 @@ reviewUpdateConfirm.forEach((updateBtn) => {
   updateBtn.addEventListener('submit', (event) => {
     event.preventDefault()
     const productId = event.target.dataset.productId
-    console.log(productId)
+    // console.log(productId)
     const reviewId = event.target.dataset.reviewId
-    console.log(reviewId)
-
+    // console.log(reviewId)
 
     const reviewContentTag = document.getElementById(`review-content-${reviewId}`)
+    console.log(reviewContentTag);
+    // console.log(reviewContentTag.parentNode);
+    // console.log(reviewContentTag.parentNode.children);
+    const reviewContent = reviewContentTag.children[1].value
+    const reviewRating = reviewContentTag.children[3].value
+    const reviewImg = event.target.img.files[0]
 
-    const reviewContent = reviewContentTag.children[0].children[1].value
-
-    const reviewRating = reviewContentTag.children[1].children[1].children[0].children[0].value
-
-    console.log(reviewRating)
-
-    const form = new FormData()
-    form.append('content', reviewContent)
-    form.append('rating', reviewRating)
-    
+    const formData = new FormData()
+    formData.append('content', reviewContent)
+    formData.append('rating', reviewRating)
+    formData.append('img', reviewImg)
 
     axios({
       method: 'post',
       url: `http://127.0.0.1:8000/products/${productId}/review/${reviewId}/update/`,
-      headers:{'X-CSRFToken': csrftoken},   
-      data: form,
+      headers:{
+        'X-CSRFToken': csrftoken,
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
     })
     .then((response) => {
       updateBtn.hidden = true
       location.reload()
-
     })
     .catch((error) => {
       console.log(error.response)
     })
   })
 })
+
 
 const button1 = document.getElementById('button1');
 const section1 = document.getElementById('section1');
